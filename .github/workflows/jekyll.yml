@@ -67,14 +67,20 @@ jobs:
         id: pages
         uses: actions/configure-pages@v4
       
-      - name: Create .nojekyll
+      - name: Prepare directories and files
         run: |
+          # Create root .nojekyll
           touch .nojekyll
-          touch _site/.nojekyll
-      
-      - name: Prepare _site directory
-        run: |
+          
+          # Create _site directory and its subdirectories
           mkdir -p _site/assets/{css,js,images,fonts}
+          
+          # Create _site .nojekyll
+          touch _site/.nojekyll
+          
+          # Debug output
+          echo "Created directories:"
+          ls -la _site/assets/
           
       - name: Copy assets to _site
         run: |
