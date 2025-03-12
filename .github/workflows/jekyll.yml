@@ -41,10 +41,6 @@ jobs:
       
       - name: Build with Jekyll
         run: |
-          # Set the correct base URL for GitHub Pages
-          echo "baseurl: /portfolio" >> _config.yml
-          echo "url: https://alvaropanizo.github.io" >> _config.yml
-          
           # Build the site
           JEKYLL_ENV=production bundle exec jekyll build --trace --verbose
           

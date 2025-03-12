@@ -54,5 +54,5 @@ defaults:
       js: true
 
 # Theme specific settings
-logo: /assets/img/logo.png
+logo: "/assets/img/logo.png"
 show_downloads: false 
