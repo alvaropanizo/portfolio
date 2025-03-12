@@ -42,8 +42,10 @@ jobs:
         uses: actions/configure-pages@v4
       
       - name: Build with Jekyll
+        env:
+          JEKYLL_ENV: production
         run: |
-          bundle exec jekyll build --config _config.yml --trace --verbose
+          bundle exec jekyll build --baseurl "/portfolio" --trace --verbose
           
       - name: Run Build Script
         run: |
