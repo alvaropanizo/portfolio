@@ -9,18 +9,18 @@ const config = {
         {
             files: ['_site/index.html'],
             replacements: [
-                { from: 'href="/', to: 'href="/portfolio/' },
-                { from: 'src="/', to: 'src="/portfolio/' },
-                { from: 'href="http://localhost:4000"', to: 'href="https://alvaropanizo.github.io/portfolio"' },
-                { from: 'content="http://localhost:4000"', to: 'content="https://alvaropanizo.github.io/portfolio"' }
+                // Base paths
+                { from: /(href|src)=["']\//g, to: '$1="/portfolio/' },
+                // Full URLs
+                { from: /https?:\/\/alvaropanizo\.github\.io(?!\/portfolio)/g, to: 'https://alvaropanizo.github.io/portfolio' },
+                { from: /http:\/\/localhost:4000/g, to: 'https://alvaropanizo.github.io/portfolio' }
             ]
         },
         // CSS file patterns
         {
             files: ['_site/assets/css/theme.css', '_site/assets/css/basecamp.css'],
             replacements: [
-                { from: 'url\\([\'"]/assets/', to: 'url(\'/portfolio/assets/' },
-                { from: 'url\\(/assets/', to: 'url(/portfolio/assets/' }
+                { from: /url\(['"]?\/assets\//g, to: 'url(\'/portfolio/assets/' }
             ]
         }
     ]
@@ -39,7 +39,8 @@ config.patterns.forEach(pattern => {
 
         // Apply all replacements for this file type
         pattern.replacements.forEach(replacement => {
-            content = content.replace(new RegExp(replacement.from, 'g'), replacement.to);
+            const regex = replacement.from instanceof RegExp ? replacement.from : new RegExp(replacement.from, 'g');
+            content = content.replace(regex, replacement.to);
         });
 
         // Write back the file
@@ -48,4 +49,22 @@ config.patterns.forEach(pattern => {
     });
 });
 
-console.log('Build script completed successfully!'); 
+// Verify critical paths after processing
+const criticalPaths = [
+    '_site/assets/css/basecamp.css',
+    '_site/assets/css/theme.css',
+    '_site/assets/images/headshot.png',
+    '_site/assets/js/navigation.js',
+    '_site/assets/js/scrolltext.js'
+];
+
+console.log('\nVerifying critical assets:');
+criticalPaths.forEach(assetPath => {
+    if (fs.existsSync(assetPath)) {
+        console.log(`✓ Found: ${assetPath}`);
+    } else {
+        console.log(`✗ Missing: ${assetPath}`);
+    }
+});
+
+console.log('\nBuild script completed successfully!'); 
