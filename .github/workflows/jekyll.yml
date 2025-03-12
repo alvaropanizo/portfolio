@@ -27,6 +27,11 @@ jobs:
           ruby-version: '3.2'
           bundler-cache: true
       
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
       - name: Install Dependencies
         run: |
           bundle config set --local path 'vendor/bundle'
@@ -36,28 +41,18 @@ jobs:
         id: pages
         uses: actions/configure-pages@v4
       
-      - name: Create .nojekyll
-        run: touch .nojekyll
-      
       - name: Build with Jekyll
         run: |
-          # Build the site
-          JEKYLL_ENV=production bundle exec jekyll build --trace --verbose
+          bundle exec jekyll build --config _config.yml --trace --verbose
           
-          # Create .nojekyll in _site
-          touch _site/.nojekyll
+      - name: Run Build Script
+        run: |
+          mkdir -p scripts
+          node scripts/build.js
           
-          # Debug output
-          echo "Contents of _site/assets:"
-          ls -R _site/assets/
-        env:
-          JEKYLL_ENV: production
-      
       - name: Verify built assets
         run: |
           echo "Verifying built assets..."
-          
-          # Define required files in _site
           required_files=(
             "_site/assets/css/basecamp.css"
             "_site/assets/css/theme.css"
@@ -66,38 +61,20 @@ jobs:
             "_site/assets/images/headshot.png"
           )
           
-          # First, show the complete directory structure
-          echo -e "\nComplete _site directory structure:"
-          tree _site/ || ls -R _site/
-          
           # Check each required file
           missing_files=()
           for file in "${required_files[@]}"; do
             if [ -f "$file" ]; then
               echo "✓ Found built file: $file"
-              echo "File size: $(ls -lh $file | awk '{print $5}')"
-              echo "File content type: $(file -b --mime-type $file)"
             else
               echo "✗ Missing built file: $file"
               missing_files+=("$file")
             fi
           done
           
-          # Show source directory structure for comparison
-          echo -e "\nSource directory structure:"
-          tree assets/ || ls -R assets/
-          
-          # If any files are missing, show detailed information
           if [ ${#missing_files[@]} -ne 0 ]; then
-            echo -e "\nError: Missing required built files:"
+            echo "Error: Missing required built files:"
             printf '%s\n' "${missing_files[@]}"
-            
-            echo -e "\nContents of _site/assets (if it exists):"
-            ls -la _site/assets/ || echo "_site/assets directory not found"
-            
-            echo -e "\nContents of source assets:"
-            ls -la assets/ || echo "assets directory not found"
-            
             exit 1
           fi
       
