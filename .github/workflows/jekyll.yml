@@ -21,6 +21,37 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
+      - name: Verify source assets
+        run: |
+          echo "Verifying source assets..."
+          
+          # Define required files
+          required_files=(
+            "assets/css/basecamp.css"
+            "assets/css/theme.css"
+            "assets/js/navigation.js"
+            "assets/js/scrolltext.js"
+            "assets/images/headshot.png"
+          )
+          
+          # Check each required file
+          missing_files=()
+          for file in "${required_files[@]}"; do
+            if [ -f "$file" ]; then
+              echo "✓ Found source file: $file"
+            else
+              echo "✗ Missing source file: $file"
+              missing_files+=("$file")
+            fi
+          done
+          
+          # Fail if any files are missing
+          if [ ${#missing_files[@]} -ne 0 ]; then
+            echo "Error: Missing required source files:"
+            printf '%s\n' "${missing_files[@]}"
+            exit 1
+          fi
+      
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -37,12 +68,24 @@ jobs:
         uses: actions/configure-pages@v4
       
       - name: Create .nojekyll
-        run: touch .nojekyll
+        run: |
+          touch .nojekyll
+          touch _site/.nojekyll
       
+      - name: Prepare _site directory
+        run: |
+          mkdir -p _site/assets/{css,js,images,fonts}
+          
       - name: Copy assets to _site
         run: |
-          mkdir -p _site/assets
-          cp -r assets/* _site/assets/
+          echo "Copying assets to _site..."
+          cp -rv assets/css/* _site/assets/css/ || echo "No CSS files to copy"
+          cp -rv assets/js/* _site/assets/js/ || echo "No JS files to copy"
+          cp -rv assets/images/* _site/assets/images/ || echo "No image files to copy"
+          cp -rv assets/fonts/* _site/assets/fonts/ || echo "No font files to copy"
+          
+          echo "Contents of _site/assets after copy:"
+          ls -R _site/assets/
           
       - name: Build with Jekyll
         run: |
@@ -50,19 +93,42 @@ jobs:
         env:
           JEKYLL_ENV: production
       
-      - name: Verify assets
+      - name: Verify built assets
         run: |
-          echo "Checking if assets were preserved:"
-          ls -R _site/assets/
+          echo "Verifying built assets..."
           
-          # Check specific files
-          for file in css/basecamp.css css/theme.css js/navigation.js js/scrolltext.js; do
-            if [ -f "_site/assets/$file" ]; then
-              echo "✓ Found: $file"
+          # Define required files in _site
+          required_files=(
+            "_site/assets/css/basecamp.css"
+            "_site/assets/css/theme.css"
+            "_site/assets/js/navigation.js"
+            "_site/assets/js/scrolltext.js"
+            "_site/assets/images/headshot.png"
+          )
+          
+          # Check each required file
+          missing_files=()
+          for file in "${required_files[@]}"; do
+            if [ -f "$file" ]; then
+              echo "✓ Found built file: $file"
+              echo "File size: $(ls -lh $file | awk '{print $5}')"
+              echo "File permissions: $(ls -l $file | awk '{print $1}')"
             else
-              echo "✗ Missing: $file"
+              echo "✗ Missing built file: $file"
+              missing_files+=("$file")
             fi
           done
+          
+          # Show directory structure
+          echo -e "\nFinal _site directory structure:"
+          ls -R _site/
+          
+          # Fail if any files are missing
+          if [ ${#missing_files[@]} -ne 0 ]; then
+            echo "Error: Missing required built files:"
+            printf '%s\n' "${missing_files[@]}"
+            exit 1
+          fi
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
