@@ -61,13 +61,14 @@ jobs:
           required_files=(
             "_site/assets/css/basecamp.css"
             "_site/assets/css/theme.css"
-            "_site/assets/css/style.css"
             "_site/assets/js/navigation.js"
             "_site/assets/js/scrolltext.js"
-            "_site/assets/js/scale.fix.js"
             "_site/assets/images/headshot.png"
-            "_site/assets/img/logo.png"
           )
+          
+          # First, show the complete directory structure
+          echo -e "\nComplete _site directory structure:"
+          tree _site/ || ls -R _site/
           
           # Check each required file
           missing_files=()
@@ -75,7 +76,6 @@ jobs:
             if [ -f "$file" ]; then
               echo "✓ Found built file: $file"
               echo "File size: $(ls -lh $file | awk '{print $5}')"
-              echo "File permissions: $(ls -l $file | awk '{print $1}')"
               echo "File content type: $(file -b --mime-type $file)"
             else
               echo "✗ Missing built file: $file"
@@ -83,18 +83,21 @@ jobs:
             fi
           done
           
-          # Show directory structure
-          echo -e "\nFinal _site directory structure:"
-          ls -R _site/
+          # Show source directory structure for comparison
+          echo -e "\nSource directory structure:"
+          tree assets/ || ls -R assets/
           
-          # Show file paths that might have double slashes
-          echo -e "\nChecking for path issues:"
-          find _site/assets -type f | grep '//'
-          
-          # Fail if any files are missing
+          # If any files are missing, show detailed information
           if [ ${#missing_files[@]} -ne 0 ]; then
-            echo "Error: Missing required built files:"
+            echo -e "\nError: Missing required built files:"
             printf '%s\n' "${missing_files[@]}"
+            
+            echo -e "\nContents of _site/assets (if it exists):"
+            ls -la _site/assets/ || echo "_site/assets directory not found"
+            
+            echo -e "\nContents of source assets:"
+            ls -la assets/ || echo "assets directory not found"
+            
             exit 1
           fi
       

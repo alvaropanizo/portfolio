@@ -1,7 +1,7 @@
 title: A. Panizo
 description: Senior Product Engineer and Product Manager
-baseurl: "/portfolio" # the subpath of your site, e.g. /blog
-url: "https://alvaropanizo.github.io" # Replace with your GitHub Pages URL
+baseurl: "/portfolio"
+url: "https://alvaropanizo.github.io"
 
 # Build settings
 markdown: kramdown
@@ -13,9 +13,9 @@ plugins:
 # Asset settings
 defaults:
   - scope:
-      path: ""
+      path: "assets"
     values:
-      layout: "default"
+      path: true
   - scope:
       path: "assets/css"
     values:
@@ -28,18 +28,14 @@ defaults:
       path: "assets/images"
     values:
       image: true
-  - scope:
-      path: "assets/fonts"
-    values:
-      font: true
 
 # Include settings
 include:
+  - "_site"
   - "assets"
   - "assets/css"
   - "assets/js"
   - "assets/images"
-  - "assets/fonts"
   - ".nojekyll"
 
 # Keep files
@@ -49,11 +45,11 @@ keep_files:
 
 # Exclude from processing
 exclude:
-  - Gemfile
-  - Gemfile.lock
-  - node_modules
-  - vendor/bundle/
-  - vendor/cache/
-  - vendor/gems/
-  - vendor/ruby/
-  - README.md 
+  - "Gemfile"
+  - "Gemfile.lock"
+  - "node_modules"
+  - "vendor/bundle/"
+  - "vendor/cache/"
+  - "vendor/gems/"
+  - "vendor/ruby/"
+  - "README.md" 
