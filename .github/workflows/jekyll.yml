@@ -20,20 +20,43 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
           bundler-cache: true
+      
+      - name: Install Dependencies
+        run: |
+          bundle config set --local path 'vendor/bundle'
+          bundle install
+          
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
+      
+      - name: Ensure SASS directory exists
+        run: mkdir -p ./_sass
+      
+      - name: Copy SASS files
+        run: |
+          cp -r assets/sass/* ./_sass/ || true
+          mkdir -p ./assets/css
+          
       - name: Build with Jekyll
-        run: bundle exec jekyll build
+        run: JEKYLL_ENV=production bundle exec jekyll build --trace
         env:
           JEKYLL_ENV: production
+      
+      - name: Copy additional assets
+        run: |
+          cp -r assets/* ./_site/assets/ || true
+          
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site
 
   deploy:
     environment:
