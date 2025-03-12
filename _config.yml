@@ -1,6 +1,6 @@
 title: A. Panizo
 description: Senior Product Engineer and Product Manager
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/portfolio" # the subpath of your site, e.g. /blog
 url: "https://alvaropanizo.github.io" # Replace with your GitHub Pages URL
 
 # Build settings
