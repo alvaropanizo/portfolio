@@ -13,9 +13,9 @@ plugins:
 # Asset settings
 defaults:
   - scope:
-      path: "assets/images"
+      path: ""
     values:
-      image: true
+      layout: "default"
   - scope:
       path: "assets/css"
     values:
@@ -25,13 +25,27 @@ defaults:
     values:
       js: true
   - scope:
+      path: "assets/images"
+    values:
+      image: true
+  - scope:
       path: "assets/fonts"
     values:
       font: true
 
 # Include settings
 include:
-  - assets
+  - "assets"
+  - "assets/css"
+  - "assets/js"
+  - "assets/images"
+  - "assets/fonts"
+  - ".nojekyll"
+
+# Keep files
+keep_files:
+  - "assets"
+  - ".nojekyll"
 
 # Exclude from processing
 exclude:

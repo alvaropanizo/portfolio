@@ -36,16 +36,33 @@ jobs:
         id: pages
         uses: actions/configure-pages@v4
       
+      - name: Create .nojekyll
+        run: touch .nojekyll
+      
+      - name: Copy assets to _site
+        run: |
+          mkdir -p _site/assets
+          cp -r assets/* _site/assets/
+          
       - name: Build with Jekyll
         run: |
           JEKYLL_ENV=production bundle exec jekyll build --trace --verbose
         env:
           JEKYLL_ENV: production
       
-      - name: Post-build asset check
+      - name: Verify assets
         run: |
-          echo "Checking final _site contents:"
-          ls -R _site/assets
+          echo "Checking if assets were preserved:"
+          ls -R _site/assets/
+          
+          # Check specific files
+          for file in css/basecamp.css css/theme.css js/navigation.js js/scrolltext.js; do
+            if [ -f "_site/assets/$file" ]; then
+              echo "✓ Found: $file"
+            else
+              echo "✗ Missing: $file"
+            fi
+          done
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
