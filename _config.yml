@@ -11,11 +11,39 @@ plugins:
   - jekyll-seo-tag
 
 # Asset settings
+sass:
+  sass_dir: _sass
+  style: compressed
+
+# Include settings
+include:
+  - assets
+  - .nojekyll
+  - _sass
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - README.md
+
+# Collections
+collections:
+  experience:
+    output: true
+  education:
+    output: true
+  projects:
+    output: true
+
+# Asset paths
 defaults:
   - scope:
-      path: "assets"
+      path: "assets/images"
     values:
-      path: true
+      image: true
   - scope:
       path: "assets/css"
     values:
@@ -24,32 +52,7 @@ defaults:
       path: "assets/js"
     values:
       js: true
-  - scope:
-      path: "assets/images"
-    values:
-      image: true
 
-# Include settings
-include:
-  - "_site"
-  - "assets"
-  - "assets/css"
-  - "assets/js"
-  - "assets/images"
-  - ".nojekyll"
-
-# Keep files
-keep_files:
-  - "assets"
-  - ".nojekyll"
-
-# Exclude from processing
-exclude:
-  - "Gemfile"
-  - "Gemfile.lock"
-  - "node_modules"
-  - "vendor/bundle/"
-  - "vendor/cache/"
-  - "vendor/gems/"
-  - "vendor/ruby/"
-  - "README.md" 
+# Theme specific settings
+logo: /assets/img/logo.png
+show_downloads: false 
