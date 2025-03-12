@@ -1,0 +1,41 @@
+title: Your Portfolio
+email: your-email@example.com
+description: >-
+  Welcome to my portfolio! Here you'll find information about my professional 
+  experience, education, and projects.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+
+# Build settings
+markdown: kramdown
+theme: jekyll-theme-minimal
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Theme specific settings
+logo: /assets/img/logo.png
+show_downloads: false
+
+# Collections for different sections
+collections:
+  experience:
+    output: true
+  education:
+    output: true
+  projects:
+    output: true
+
+# Exclude from processing
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/ 

@@ -1,0 +1,30 @@
+# Jekyll
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+_drafts/
+
+# Ruby
+.bundle/
+vendor/
+Gemfile.lock
+
+# Mac
+.DS_Store
+**/.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+.log/
+
+# Environment
+.env
+.env.local
+.env.* 
