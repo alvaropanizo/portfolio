@@ -36,32 +36,16 @@ jobs:
         id: pages
         uses: actions/configure-pages@v4
       
-      - name: Setup asset directories
-        run: |
-          mkdir -p _site/assets/{css,js,images,fonts}
-          mkdir -p _sass
-          
-      - name: Copy assets to build locations
-        run: |
-          # Copy SASS files to _sass
-          cp -r assets/sass/* _sass/ || true
-          
-          # Copy CSS files
-          cp -r assets/css/* _site/assets/css/ || true
-          
-          # Copy JavaScript files
-          cp -r assets/js/* _site/assets/js/ || true
-          
-          # Copy images
-          cp -r assets/images/* _site/assets/images/ || true
-          
-          # Copy fonts
-          cp -r assets/fonts/* _site/assets/fonts/ || true
-          
       - name: Build with Jekyll
-        run: bundle exec jekyll build --trace
+        run: |
+          JEKYLL_ENV=production bundle exec jekyll build --trace --verbose
         env:
           JEKYLL_ENV: production
+      
+      - name: Post-build asset check
+        run: |
+          echo "Checking final _site contents:"
+          ls -R _site/assets
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

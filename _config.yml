@@ -9,15 +9,6 @@ theme: jekyll-theme-minimal
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
-  - jekyll-sass-converter
-
-# SASS settings
-sass:
-  style: compressed
-  sass_dir: _sass
-  load_paths:
-    - _sass
-    - assets/sass
 
 # Asset settings
 defaults:
@@ -26,9 +17,21 @@ defaults:
     values:
       image: true
   - scope:
-      path: "assets/sass"
+      path: "assets/css"
     values:
-      sass: true
+      css: true
+  - scope:
+      path: "assets/js"
+    values:
+      js: true
+  - scope:
+      path: "assets/fonts"
+    values:
+      font: true
+
+# Include settings
+include:
+  - assets
 
 # Exclude from processing
 exclude:
