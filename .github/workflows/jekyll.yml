@@ -61,6 +61,11 @@ jobs:
             "_site/assets/js/navigation.js"
             "_site/assets/js/scrolltext.js"
             "_site/assets/images/headshot.png"
+            "_site/assets/fonts/Humane-Light.woff2"
+            "_site/assets/fonts/Humane-Light.woff"
+            "_site/assets/fonts/Humane-Light.ttf"
+            "_site/assets/fonts/Humane-Light.eot"
+            "_site/assets/fonts/Humane-Light.svg"
           )
           
           # Check each required file

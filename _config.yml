@@ -20,6 +20,7 @@ include:
   - assets
   - .nojekyll
   - _sass
+  - assets/fonts
 
 # Exclude from processing
 exclude:
@@ -53,6 +54,10 @@ defaults:
       path: "assets/js"
     values:
       js: true
+  - scope:
+      path: "assets/fonts"
+    values:
+      font: true
 
 # Theme specific settings
 logo: "/assets/img/logo.png"

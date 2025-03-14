@@ -1,7 +1,7 @@
 @font-face {
   font-family: "Mango Grotesque";
-  src: url("/assets/fonts/Humane-Light.eot");
-  src: url("/assets/fonts/Humane-Light.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/Humane-Light.woff2") format("woff2"), url("/assets/fonts/Humane-Light.woff") format("woff"), url("/assets/fonts/Humane-Light.ttf") format("truetype"), url("/assets/fonts/Humane-Light.svg#Humane-Light") format("svg");
+  src: url("../fonts/Humane-Light.eot");
+  src: url("../fonts/Humane-Light.eot?#iefix") format("embedded-opentype"), url("../fonts/Humane-Light.woff2") format("woff2"), url("../fonts/Humane-Light.woff") format("woff"), url("../fonts/Humane-Light.ttf") format("truetype"), url("../fonts/Humane-Light.svg#Humane-Light") format("svg");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
