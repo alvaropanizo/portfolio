@@ -41,9 +41,15 @@ jobs:
         id: pages
         uses: actions/configure-pages@v4
       
+      - name: Copy Assets
+        run: |
+          mkdir -p _site/assets
+          cp -r assets/* _site/assets/
+          
       - name: Build with Jekyll
         env:
           JEKYLL_ENV: production
+          GITHUB_PAGES: true
         run: |
           bundle exec jekyll build --baseurl "/portfolio" --trace --verbose
           
@@ -73,6 +79,7 @@ jobs:
           for file in "${required_files[@]}"; do
             if [ -f "$file" ]; then
               echo "✓ Found built file: $file"
+              ls -l "$file"
             else
               echo "✗ Missing built file: $file"
               missing_files+=("$file")
@@ -84,6 +91,9 @@ jobs:
             printf '%s\n' "${missing_files[@]}"
             exit 1
           fi
+          
+          echo "Listing all files in _site/assets:"
+          find _site/assets -type f
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

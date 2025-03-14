@@ -21,6 +21,23 @@ include:
   - .nojekyll
   - _sass
   - assets/fonts
+  - assets/css
+  - assets/js
+  - assets/images
+  - "*.css"
+  - "*.js"
+  - "*.png"
+  - "*.jpg"
+  - "*.svg"
+  - "*.eot"
+  - "*.ttf"
+  - "*.woff"
+  - "*.woff2"
+
+# Keep files
+keep_files:
+  - assets
+  - .nojekyll
 
 # Exclude from processing
 exclude:
@@ -30,6 +47,7 @@ exclude:
   - vendor
   - README.md
   - _config_local.yml
+  - scripts
 
 # Collections
 collections:
