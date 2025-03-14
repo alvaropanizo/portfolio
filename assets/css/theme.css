@@ -905,4 +905,10 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   }
 }
 
+.footertext {
+  font-size: 2rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
 /*# sourceMappingURL=theme.css.map */
