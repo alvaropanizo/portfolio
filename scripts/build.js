@@ -4,10 +4,10 @@ const path = require('path');
 // Configuration
 const config = {
     baseUrl: '/portfolio',
-    sourceFile: '_site/index.html',
+    sourceDir: '_site',
     patterns: [
-        // Handle absolute paths in href and src attributes
-        { from: /(href|src)=["']\//g, to: '$1="/portfolio/' },
+        // Handle absolute paths in href and src attributes, but only if they start with /assets/
+        { from: /(href|src)=["']\/assets\//g, to: '$1="/portfolio/assets/' },
         
         // Handle meta tags and canonical URLs
         { from: /(href|content)="http:\/\/localhost:4000/g, to: '$1="https://alvaropanizo.github.io/portfolio' },
@@ -16,27 +16,59 @@ const config = {
         { from: /\/portfolio\/portfolio/g, to: '/portfolio' },
         
         // Handle any remaining absolute URLs to alvaropanizo.github.io
-        { from: /https:\/\/alvaropanizo\.github\.io\/assets\//g, to: 'https://alvaropanizo.github.io/portfolio/assets/' },
-        { from: /"https:\/\/alvaropanizo\.github\.io\//g, to: '"https://alvaropanizo.github.io/portfolio/' }
+        { from: /https:\/\/alvaropanizo\.github\.io\/assets\//g, to: 'https://alvaropanizo.github.io/portfolio/assets/' }
     ]
 };
 
-// Read the file
-console.log('Reading file:', config.sourceFile);
-let content = fs.readFileSync(config.sourceFile, 'utf8');
+// Function to process a single file
+function processFile(filePath) {
+    console.log('Processing file:', filePath);
+    let content = fs.readFileSync(filePath, 'utf8');
+    let modified = false;
 
-// Apply replacements
-config.patterns.forEach(pattern => {
-    const matches = content.match(pattern.from);
-    if (matches) {
-        console.log(`Found ${matches.length} matches for pattern: ${pattern.from}`);
+    // Apply replacements
+    config.patterns.forEach(pattern => {
+        const matches = content.match(pattern.from);
+        if (matches) {
+            console.log(`Found ${matches.length} matches in ${filePath} for pattern: ${pattern.from}`);
+            content = content.replace(pattern.from, pattern.to);
+            modified = true;
+        }
+    });
+
+    if (modified) {
+        console.log('Writing modified file:', filePath);
+        fs.writeFileSync(filePath, content, 'utf8');
     }
-    content = content.replace(pattern.from, pattern.to);
-});
 
-// Write back the file
-console.log('Writing modified file...');
-fs.writeFileSync(config.sourceFile, content, 'utf8');
+    return modified;
+}
+
+// Function to walk through directory
+function processDirectory(dir) {
+    const files = fs.readdirSync(dir);
+    let modifiedFiles = 0;
+
+    files.forEach(file => {
+        const filePath = path.join(dir, file);
+        const stat = fs.statSync(filePath);
+
+        if (stat.isDirectory()) {
+            modifiedFiles += processDirectory(filePath);
+        } else if (file.endsWith('.html')) {
+            if (processFile(filePath)) {
+                modifiedFiles++;
+            }
+        }
+    });
+
+    return modifiedFiles;
+}
+
+// Process all files
+console.log('Starting to process files in:', config.sourceDir);
+const totalModified = processDirectory(config.sourceDir);
+console.log(`Build script completed successfully! Modified ${totalModified} files.`);
 
 // Verify replacements
 console.log('\nVerifying final content...');
@@ -60,6 +92,4 @@ verifyPatterns.forEach(({ pattern, description }) => {
 
 if (!hasIssues) {
     console.log('All URLs have been correctly modified!');
-}
-
-console.log('Build script completed successfully!'); 
+} 
