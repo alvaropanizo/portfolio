@@ -6,8 +6,11 @@ const config = {
     baseUrl: '/portfolio',
     sourceDir: '_site',
     patterns: [
-        // Handle absolute paths in href and src attributes, but only if they start with /assets/
-        { from: /(href|src)=["']\/assets\//g, to: '$1="/portfolio/assets/' },
+        // Handle all absolute paths in href and src attributes
+        { from: /(href|src)=["']\//g, to: '$1="/portfolio/' },
+        
+        // But fix double portfolio in asset paths
+        { from: /\/portfolio\/portfolio\/assets\//g, to: '/portfolio/assets/' },
         
         // Handle meta tags and canonical URLs
         { from: /(href|content)="http:\/\/localhost:4000/g, to: '$1="https://alvaropanizo.github.io/portfolio' },
@@ -19,6 +22,33 @@ const config = {
         { from: /https:\/\/alvaropanizo\.github\.io\/assets\//g, to: 'https://alvaropanizo.github.io/portfolio/assets/' }
     ]
 };
+
+// Verification patterns
+const verifyPatterns = [
+    { pattern: /href="\/(?!portfolio)/g, description: 'absolute URLs without /portfolio prefix' },
+    { pattern: /src="\/(?!portfolio)/g, description: 'asset URLs without /portfolio prefix' },
+    { pattern: /http:\/\/localhost:4000/g, description: 'localhost URLs' },
+    { pattern: /\/portfolio\/portfolio/g, description: 'double portfolio in URLs' },
+    { pattern: /https:\/\/alvaropanizo\.github\.io\/(?!portfolio)/g, description: 'GitHub Pages URLs without portfolio prefix' }
+];
+
+// Function to verify a single file
+function verifyFile(filePath) {
+    console.log('Verifying file:', filePath);
+    const content = fs.readFileSync(filePath, 'utf8');
+    let hasIssues = false;
+
+    verifyPatterns.forEach(({ pattern, description }) => {
+        const matches = content.match(pattern);
+        if (matches) {
+            console.warn(`Warning: Found ${matches.length} ${description} in ${filePath}:`);
+            console.warn(matches);
+            hasIssues = true;
+        }
+    });
+
+    return hasIssues;
+}
 
 // Function to process a single file
 function processFile(filePath) {
@@ -65,31 +95,37 @@ function processDirectory(dir) {
     return modifiedFiles;
 }
 
+// Function to verify all HTML files in directory
+function verifyDirectory(dir) {
+    const files = fs.readdirSync(dir);
+    let hasIssues = false;
+
+    files.forEach(file => {
+        const filePath = path.join(dir, file);
+        const stat = fs.statSync(filePath);
+
+        if (stat.isDirectory()) {
+            hasIssues = verifyDirectory(filePath) || hasIssues;
+        } else if (file.endsWith('.html')) {
+            hasIssues = verifyFile(filePath) || hasIssues;
+        }
+    });
+
+    return hasIssues;
+}
+
 // Process all files
 console.log('Starting to process files in:', config.sourceDir);
 const totalModified = processDirectory(config.sourceDir);
 console.log(`Build script completed successfully! Modified ${totalModified} files.`);
 
-// Verify replacements
-console.log('\nVerifying final content...');
-const verifyPatterns = [
-    { pattern: /href="\/(?!portfolio)/g, description: 'absolute URLs without /portfolio prefix' },
-    { pattern: /src="\/(?!portfolio)/g, description: 'asset URLs without /portfolio prefix' },
-    { pattern: /http:\/\/localhost:4000/g, description: 'localhost URLs' },
-    { pattern: /\/portfolio\/portfolio/g, description: 'double portfolio in URLs' },
-    { pattern: /https:\/\/alvaropanizo\.github\.io\/(?!portfolio)/g, description: 'GitHub Pages URLs without portfolio prefix' }
-];
-
-let hasIssues = false;
-verifyPatterns.forEach(({ pattern, description }) => {
-    const matches = content.match(pattern);
-    if (matches) {
-        console.warn(`Warning: Found ${matches.length} ${description}:`);
-        console.warn(matches);
-        hasIssues = true;
-    }
-});
+// Verify all files
+console.log('\nVerifying all HTML files...');
+const hasIssues = verifyDirectory(config.sourceDir);
 
 if (!hasIssues) {
-    console.log('All URLs have been correctly modified!');
+    console.log('All files have been verified and are correct!');
+} else {
+    console.error('Issues found during verification. Please check the warnings above.');
+    process.exit(1);
 } 
