@@ -1,17 +1,38 @@
 // Register GSAP and ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
-// Function to wrap each word in the target element with a span
 function wrapWords() {
   const scrollTexts = document.querySelectorAll('.scrolltext');
   
-  if (!scrollTexts.length) return; // Exit if there are no elements with the class .scrolltext
+  if (!scrollTexts.length) return;
 
   scrollTexts.forEach(scrollText => {
-    const text = scrollText.innerHTML;
-    const words = text.split(' ');
-    const wrappedWords = words.map(word => `<span class="word">${word}</span>`).join(' ');
-    scrollText.innerHTML = wrappedWords;
+    // Create a temporary container
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = scrollText.innerHTML;
+    
+    // Function to process text nodes only
+    function processNode(node) {
+      if (node.nodeType === 3) { // Text node
+        const words = node.textContent.trim().split(/\s+/);
+        const wrappedWords = words.map(word => {
+          if (word) {
+            return `<span class="word">${word}</span>`;
+          }
+          return '';
+        }).join(' ');
+        
+        const span = document.createElement('span');
+        span.innerHTML = wrappedWords;
+        node.parentNode.replaceChild(span, node);
+      } else if (node.nodeType === 1) { // Element node
+        Array.from(node.childNodes).forEach(child => processNode(child));
+      }
+    }
+
+    // Process all nodes
+    Array.from(tempDiv.childNodes).forEach(node => processNode(node));
+    scrollText.innerHTML = tempDiv.innerHTML;
   });
 }
 
@@ -24,21 +45,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Apply the GSAP animation for each word
   words.forEach((word, index) => {
-    gsap.fromTo(word, {
-      opacity: 0.1,      // Start with lower opacity
-      y: 30,             // Start with a larger downward offset
-    }, {
-      opacity: 1,        // Animate to full opacity
-      y: 0,              // Animate to the original position
-      duration: 1.5,     // Longer animation duration
-      delay: index * 0.15, // Longer stagger delay for each word
+    // Set initial state
+    gsap.set(word, {
+      opacity: 0,
+      y: 100,
+      scale: 0.5,
+      filter: "blur(10px)",
+      transformOrigin: "50% 50%",
+      cursor: "pointer"
+    });
+
+    // Create the scroll-based reveal animation
+    gsap.to(word, {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      filter: "blur(0px)",
+      duration: 1,
+      delay: index * 0.15,
+      ease: "power3.out",
       scrollTrigger: {
-        trigger: word,    // Trigger animation on each word
-        start: 'top 85%', // Start animation earlier
-        end: 'top 15%',   // End animation later
-        scrub: 1.5,       // Smoother scrubbing with a delay
-        markers: false,   // Disable markers for debugging
+        trigger: word,
+        start: "top 80%",
+        end: "top 20%",
+        scrub: 2,
+        markers: false
       }
+    });
+
+    // Add hover effect with color transition
+    word.addEventListener('mouseenter', () => {
+      gsap.to(word, {
+        scale: 1.05,
+        color: "#c8ff32", // Lime color
+        duration: 0.6,
+        ease: "power2.out"
+      });
+    });
+
+    word.addEventListener('mouseleave', () => {
+      gsap.to(word, {
+        scale: 1,
+        color: "inherit",
+        duration: 0.6,
+        ease: "power2.out"
+      });
     });
   });
 });

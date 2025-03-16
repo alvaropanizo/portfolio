@@ -62,6 +62,8 @@
   --color-white: #ffffff;
   --color-black: #121417;
   --color-subtle: #c4c4c4;
+  --color-blue: #4a56ff;
+  --color-lime: #c8ff32;
   --text-primary: var(--color-primary);
   --text-text-black: var(--color-text-black);
   --text-muted: var(--color-muted);
@@ -192,6 +194,36 @@ p {
   color: var(--body-text);
 }
 
+/* Remove old scrolltext spacing rules */
+.scrolltext span,
+.scrolltext strong,
+.scrolltext b {
+  display: inline;
+  margin-right: 0.05em;
+}
+
+.scrolltext .word {
+  margin-right: 0.1em;
+}
+
+.scrolltext .word {
+  display: inline;
+}
+
+.scrolltext b,
+.scrolltext strong {
+  font-weight: 600;
+}
+
+.scrolltext .word {
+  display: inline;
+}
+
+.scrolltext b,
+.scrolltext strong {
+  font-weight: 600;
+}
+
 a {
   text-decoration: none;
 }
@@ -247,6 +279,29 @@ h3, h4, h5, h6, .h3, .h4, .h5, .h6, .fontsize\:3, .fontsize\:4, .fontsize\:5, .f
   font-weight: 300;
   font-family: var(--font-headline);
   color: var(--texture-text-color);
+  font-size: 40vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 0;
+  opacity: 0;
+  animation: titleTexture 1s forwards;
+}
+
+.title\:texture2 {
+  line-height: 0.8;
+  margin-bottom: 0;
+  font-weight: 300;
+  font-family: var(--font-headline);
+  color: var(--texture-text-color);
+  font-size: 30vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 0;
+  opacity: 1;
 }
 
 @media screen and (max-width: 768px) {
@@ -623,8 +678,19 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   list-style: none;
   width: 100%;
 }
+.nav\:panel li {
+  width: 100%;
+}
 .nav\:panel a {
   text-decoration: none;
+  display: block;
+  width: 100%;
+  padding: 1rem 2rem;
+  transition: all 0.3s ease-in-out;
+  color: var(--heading-text);
+}
+.nav\:panel a:hover {
+  color: var(--color-blue);
 }
 
 @media screen and (max-width: 768px) {
@@ -1031,6 +1097,69 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   font-size: 2rem;
   line-height: 1.5;
   margin-bottom: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .footertext {
+    font-size: 1.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+.text\:blue {
+  color: var(--color-blue);
+  font-weight: 650;
+  margin: 0 0.25em;
+}
+
+.text\:lime {
+  color: var(--color-lime);
+  font-weight: 650;
+  background-color: var(--color-primary);
+  padding: 0em 0.4em;
+  border-radius: 0.1em;
+}
+
+.block {
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+.scroll\:image {
+    position: fixed;
+    right: 8rem;
+    bottom: 0;
+    width: 40vw;
+    height: 40vw;
+    max-width: 600px;
+    max-height: 600px;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    transform-origin: center center;
+    transform: translateY(100%) rotate(5deg);
+    filter: blur(2px);
+}
+
+.scroll\:image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+@media screen and (max-width: 768px) {
+    .scroll\:image {
+        right: 4rem;
+        width: 60vw;
+        height: 60vw;
+        max-width: 400px;
+        max-height: 400px;
+    }
 }
 
 /*# sourceMappingURL=theme.css.map */
