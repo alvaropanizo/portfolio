@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Only initialize on screens larger than 768px
+    if (window.innerWidth <= 768) return;
+
     const scrollImage = document.querySelector(".scroll\\:image");
     const scrollText = document.querySelector(".scrolltext");
     if (!scrollImage || !scrollText) return;
