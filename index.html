@@ -37,65 +37,15 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 <body class="blocks bg:white">
-<nav class="nav:bar">
-    <button id="nav:panel:toggle">
-        <span class="hamburger">
-            <span class="line line-1"></span>
-            <span class="line line-2"></span>
-            <span class="line line-3"></span>
-        </span>
-    </button>
-    <span class="nav:title">Alvaro Panizo</span>
-    <a href="/" class="nav:logo">
-        <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1ZM0 8C0 3.58172 3.58172 0 8 0C12.4183 0 34 3.58172 34 8C16 12.4183 12.4183 34 8 16C3.58172 34 0 12.4183 0 8Z" fill="black"/>
-            <path d="M8.5 4.5C8.5 4.77614 8.27614 5 8 5C7.72386 5 7.5 4.77614 7.5 4.5C7.5 4.22386 7.72386 4 8 4C8.27614 4 8.5 4.22386 8.5 4.5Z" fill="black"/>
-            <path d="M8.5 11.5C8.5 11.7761 8.27614 12 8 12C7.72386 12 7.5 11.7761 7.5 11.5C7.5 11.2239 7.72386 11 8 11C8.27614 11 8.5 11.2239 8.5 11.5Z" fill="black"/>
-            <path d="M10.183 5.2189C10.045 5.45805 9.73918 5.53999 9.50003 5.40191C9.26088 5.26384 9.17895 4.95805 9.31702 4.7189C9.45509 4.47975 9.76088 4.39782 10 4.53589C10.2392 4.67396 10.3211 4.97975 10.183 5.2189Z" fill="black"/>
-            <path d="M6.68304 11.2811C6.54497 11.5202 6.23918 11.6022 6.00003 11.4641C5.76088 11.326 5.67895 11.0202 5.81702 10.7811C5.95509 10.5419 6.26088 10.46 6.50003 10.5981C6.73918 10.7361 6.82111 11.0419 6.68304 11.2811Z" fill="black"/>
-            <path d="M11.2811 6.68304C11.042 6.82111 10.7362 6.73918 10.5981 6.50003C10.46 6.26088 10.542 5.95509 10.7811 5.81702C11.0202 5.67895 11.326 5.76088 11.4641 6.00003C11.6022 6.23918 11.5202 6.54497 11.2811 6.68304Z" fill="black"/>
-            <path d="M5.21892 10.183C4.97977 10.3211 4.67398 10.2392 4.53591 10C4.39784 9.76088 4.47977 9.45509 4.71892 9.31702C4.95807 9.17895 5.26386 9.26088 5.40193 9.50003C5.54 9.73917 5.45807 10.045 5.21892 10.183Z" fill="black"/>
-            <path d="M11.5 8.5C11.2239 8.5 11 8.27614 11 8C11 7.72386 11.2239 7.5 11.5 7.5C11.7761 7.5 12 7.72386 12 8C12 8.27614 11.7761 8.5 11.5 8.5Z" fill="black"/>
-            <path d="M4.5 8.5C4.22386 8.5 4 8.27614 4 8C4 7.72386 4.22386 7.5 4.5 7.5C4.77614 7.5 5 7.72386 5 8C5 8.27614 4.77614 8.5 4.5 8.5Z" fill="black"/>
-            <path d="M10.7811 10.183C10.542 10.045 10.46 9.73918 10.5981 9.50003C10.7362 9.26088 11.042 9.17895 11.2811 9.31702C11.5202 9.45509 11.6022 9.76088 11.4641 10C11.326 10.2392 11.0202 10.3211 10.7811 10.183Z" fill="black"/>
-            <path d="M4.71892 6.68304C4.47977 6.54497 4.39784 6.23917 4.53591 6.00003C4.67398 5.76088 4.97977 5.67895 5.21892 5.81702C5.45807 5.95509 5.54 6.26088 5.40193 6.50003C5.26386 6.73918 4.95807 6.82111 4.71892 6.68304Z" fill="black"/>
-            <path d="M9.31696 11.2811C9.17889 11.042 9.26082 10.7362 9.49997 10.5981C9.73912 10.46 10.0449 10.542 10.183 10.7811C10.3211 11.0202 10.2391 11.326 9.99997 11.4641C9.76082 11.6022 9.45503 11.5202 9.31696 11.2811Z" fill="black"/>
-            <path d="M5.81696 5.21892C5.67889 4.97977 5.76082 4.67398 5.99997 4.53591C6.23912 4.39784 6.54491 4.47977 6.68298 4.71892C6.82105 4.95807 6.73912 5.26386 6.49997 5.40193C6.26082 5.54 5.95503 5.45807 5.81696 5.21892Z" fill="black"/>
-        </svg>
-    </a>
-</nav>
-<nav class="nav:panel">
-    <ul class="list:unstyled">
-        <li>
-            <a href="/" class="fontsize:1">
-                Home
-            </a>
-        </li>
-        <li>
-            <a href="/about/" class="fontsize:1">
-                Who
-            </a>
-        </li>
-        <li>
-            <a href="/work/" class="fontsize:1">
-                Work
-            </a>
-        </li>
-        <li>
-            <a href="/certifications.html" class="fontsize:1">
-                Certified
-            </a>
-        </li>
-    </ul>
-</nav>
-<main class="bg:white">
+    <main class="bg:white">
     <header class="jumbotron:home" id="home-introduction">
         <div class="title:texture">
             Panizo    
         </div>
         <div class="current-position">
-            <div class="status">
-                <span class="label">Current</span>
+            <div class="status" id="live-status" aria-live="polite">
+                <span class="label">—</span>
+                <span class="status-cet" aria-hidden="true"></span>
             </div>
             <div class="position">
                 <img src="/assets/images/logo-actual.png" alt="Oracle NetSuite logo" />
@@ -112,44 +62,55 @@
                     Explainability and reasoning in AI integrations
                 </a>
             </div>
-        </div>
-        <div class="grid">
-            <div class="grid:row">
-                <div class="column:12">
-                    <h1 class="display:flex">
-                        <span class="line:one">
-                            Senior Product Engineer                
-                        </span>
-                        <span class="image:wrapper">
+    </div>
+    <div class="grid">
+        <div class="grid:row">
+            <div class="column:12">
+                <h1 class="display:flex">
+                    <span class="line:one">
+                        Senior Product Engineer                
+                    </span>
+                    <span class="image:wrapper">
                             <img src="/assets/images/headshot.png" alt="@alvaropanizo">
-                        </span>
-                        <span class="line:two">
-                            Product Manager       
-                        </span>
-                    </h1>
-                </div>
-                <div class="column:md:7 margin:horizontal:auto">
-                    <p class="h5 text:center">
+                    </span>
+                    <span class="line:two">
+                        Product Manager       
+                    </span>
+                </h1>
+            </div>
+            <div class="column:md:7 margin:horizontal:auto">
+                <p class="h5 text:center">
                         Product Engineer with a <span class="text:lime">data-driven</span> soul.
-                    </p>
-                </div>
+                </p>
             </div>
         </div>
-    </header>
+    </div>
+</header>
     <section class=" padding:vertical:4" id="home-about">
         <div class="grid">
             <div class="grid:row">
-                <div class="column:md:8">
+                <div class="column:md:8 glass-blur">
                     <p class="h4 scrolltext">Hi! I'm<span class="text:blue">Alvaro Panizo </span></p>
-                    <p class="h4 scrolltext">Having evolved from hands-on engineering to <strong>leading high-performance teams,</strong> I bring a unique blend of<strong>technical depth</strong>and<strong> product thinking </strong> to every challenge.</p>
-                    <p class="h4 scrolltext">Think of me as the bridge between deep tech expertise and product vision — because great products need more than just<strong>good vibes</strong>.</p>
+                    <p class="h4 scrolltext">Think of me as the bridge between deep tech expertise and product strategy.</p>
+                    <p class="h4 scrolltext">Having evolved from hands-on Software Engineering to <strong>leading high-performing teams,</strong>I bring a unique blend of<strong>technical depth</strong>and<strong> product thinking </strong> to every challenge.</p>
+                    <br>
+                    <p class="h4 scrolltext">Because great products need more than just<strong>good vibes.</strong></p>
                 </div>
             </div>
         </div>
     </section>
-    <section class=" padding:vertical:4" id="home-about-image">
-        <div class="scroll:image">
-            <img src="assets/images/myselfbig.png" alt="myself">
+    <section class="padding:vertical:4 section-blue" id="home-about-summary">
+        <div class="grid">
+            <div class="grid:row align-items:center">
+                <div class="column:md:4 summary-content">
+                    <p class="h4"><span class="text:lime">Product thinking</span></p>
+                    <p class="h4"><span class="text:lime">Technical depth</span></p>
+                    <p class="h4"><span class="text:lime">Leadership</span></p>
+                </div>
+                <div class="column:md:8 summary-media">
+                    <img src="assets/images/speaker-image.png" alt="Speaker" class="speaker-image" loading="lazy" decoding="async">
+                </div>
+            </div>
         </div>
     </section>
     <section class=" padding:vertical:4 section-title" id="tenet-leader">
@@ -157,76 +118,245 @@
             Experience
         </h2>
         <h2 class="h1">
-            Core values
+            Experience & Core values
         </h2>
     </section>
     <section class=" work" id="home-work">
-        <div class="grid">
-            <a href="https://takenot-es.github.io/basecamp/" target="_blank" class="grid:row border:top padding:vertical:4 project:featured align-items:center">
-                <div class="column:auto">
-                    <p class="number:marker">
-                        01                  
-                    </p>
-                </div>
-                <div class="column:md:3">
-                    <h2 class="text:headline">
-                        Leading high-performance teams                    
-                    </h2>
-                </div>
-                <div class="column:md:auto">
-                    <figure class="image:pill">
-                        <img src="/assets/uploads/basecamp/basecamp.jpg" alt="Basecamp">
-                    </figure>
-                </div>
-                <div class="column:md:4">
-                    <p class="fontweight:4">
-                        Product Owner / Product Manager                   
-                    </p>
-                </div>
-                <div class="column:md:auto margin:left:auto">
-                    <div class="icon:arrow">
-                        <div class="icon:arrow:inner">
-                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0.736542 28.435L3.56497 31.2635L31.8492 2.97919L29.0208 0.15076L0.736542 28.435Z"></path>
-                            <path d="M28 1.54972e-06V30H32V1.54972e-06H28Z"></path>
-                            <path d="M2 0V4H32L32 1.54972e-06L2 0Z"></path>
-                            </svg>
-                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M0.736542 28.435L3.56497 31.2635L31.8492 2.97919L29.0208 0.15076L0.736542 28.435Z"></path>
-                                <path d="M28 1.54972e-06V30H32V1.54972e-06H28Z"></path>
-                                <path d="M2 0V4H32L32 1.54972e-06L2 0Z"></path>
-                                </svg>
+    <div class="grid">
+            <div class="project:featured-wrapper">
+                    <div class="grid:row border:top padding:vertical:4 project:featured align-items:center project:trigger" role="button" tabindex="0" aria-expanded="false" aria-controls="project-details-01" id="project-trigger-01">
+                        <div class="column:auto">
+                            <p class="number:marker">01</p>
+                        </div>
+                        <div class="column:md:3">
+                            <h2 class="text:headline">Leading high-performaning teams</h2>
+                        </div>
+                        <div class="column:md:4">
+                            <p class="fontweight:4">Product Owner / Team Leader</p>
+                        </div>
+                        <div class="column:md:auto margin:left:auto">
+                            <div class="icon:arrow">
+                                <div class="icon:arrow:inner">
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0.736542 28.435L3.56497 31.2635L31.8492 2.97919L29.0208 0.15076L0.736542 28.435Z"></path>
+                                    <path d="M28 1.54972e-06V30H32V1.54972e-06H28Z"></path>
+                                    <path d="M2 0V4H32L32 1.54972e-06L2 0Z"></path>
+                                    </svg>
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0.736542 28.435L3.56497 31.2635L31.8492 2.97919L29.0208 0.15076L0.736542 28.435Z"></path>
+                                        <path d="M28 1.54972e-06V30H32V1.54972e-06H28Z"></path>
+                                        <path d="M2 0V4H32L32 1.54972e-06L2 0Z"></path>
+                                    </svg>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </a>
-        </div>
-    </section>
+                    <div class="project:details" id="project-details-01" hidden>
+                        <div class="grid:row padding:vertical:3">
+                            <div class="column:12">
+                                <p>As a <strong>Product Owner and Team Leader</strong> I have kept teams unblocked and shipping in product-led, consultancy, and R&amp;D settings. Whether the work is B2B, SaaS, internal tooling, or ad-hoc client software, I align backlog and technical direction with stakeholder expectations so that scope creep and ambiguity don’t get in the way of delivery.</p>
+                            </div>
+                        </div>
+                        <div class="content-slider" data-content-slider>
+                            <h3 class="content-slider-title">Actions speak better than words</h3>
+                            <div class="content-slider-track">
+                                <div class="content-slider-inner">
+                                    <div class="content-slider-slide">
+                                        <a href="https://www.youtube.com/watch?v=wK01Fpp6L6k&t=1s" target="_blank" rel="noopener" class="content-slider-youtube">
+                                            <img src="https://img.youtube.com/vi/wK01Fpp6L6k/mqdefault.jpg" alt="Video thumbnail" loading="lazy">
+                                            <span class="content-slider-play" aria-hidden="true"></span>
+                                        </a>
+                                        <p class="content-slider-slide-caption">Conference talk</p>
+                                        <p class="content-slider-slide-desc">Leadership in tech</p>
+                                    </div>
+                                    <div class="content-slider-slide">
+                                        <figure class="content-slider-image">
+                                            <img src="/assets/images/leading.jpg" alt="Work sample" loading="lazy">
+                                        </figure>
+                                        <p class="content-slider-slide-caption">Work sample</p>
+                                        <p class="content-slider-slide-desc">Team delivery</p>
+                                    </div>
+                                    <div class="content-slider-slide">
+                                        <div class="content-slider-recommendation">
+                                            <div class="content-slider-recommendation-avatar" style="--rec-image: url('/assets/images/myselfbig.png');"></div>
+                                            <p class="content-slider-recommendation-quote">"Alvaro keeps the team focused and delivery on track."</p>
+                                            <span class="content-slider-recommendation-initials">A. P.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content-slider-controls">
+                                <button type="button" class="content-slider-prev" aria-label="Previous slide">&larr;</button>
+                                <button type="button" class="content-slider-next" aria-label="Next slide">&rarr;</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="project:featured-wrapper">
+                    <div class="grid:row border:top padding:vertical:4 project:featured align-items:center project:trigger" role="button" tabindex="0" aria-expanded="false" aria-controls="project-details-02" id="project-trigger-02">
+                        <div class="column:auto">
+                            <p class="number:marker">02</p>
+                        </div>
+                        <div class="column:md:3">
+                            <h2 class="text:headline">Technical depth</h2>
+                        </div>
+                        <div class="column:md:4">
+                            <p class="fontweight:4">Senior Software Engineer / Data and Search </p>
+                        </div>
+                        <div class="column:md:auto margin:left:auto">
+                            <div class="icon:arrow">
+                                <div class="icon:arrow:inner">
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0.736542 28.435L3.56497 31.2635L31.8492 2.97919L29.0208 0.15076L0.736542 28.435Z"></path>
+                                    <path d="M28 1.54972e-06V30H32V1.54972e-06H28Z"></path>
+                                    <path d="M2 0V4H32L32 1.54972e-06L2 0Z"></path>
+                                    </svg>
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0.736542 28.435L3.56497 31.2635L31.8492 2.97919L29.0208 0.15076L0.736542 28.435Z"></path>
+                                        <path d="M28 1.54972e-06V30H32V1.54972e-06H28Z"></path>
+                                        <path d="M2 0V4H32L32 1.54972e-06L2 0Z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project:details" id="project-details-02" hidden>
+                        <div class="grid:row padding:vertical:3">
+                            <div class="column:12">
+                                <p>As a <strong>Product Engineer and Senior Software Engineer</strong> I have built and run backend and data systems that stay understandable and maintainable. That work has spanned systems global design and information architecture, search and data platforms, APIs and gateways, and full-stack delivery in SaaS, B2B, B2C, consultancy, and R&amp;D—on stacks like Java/Spring, cloud, and streaming—while keeping clarity and operational control front and centre.</p>
+                            </div>
+                        </div>
+                        <div class="content-slider" data-content-slider>
+                            <h3 class="content-slider-title">Actions speak better than words</h3>
+                            <div class="content-slider-track">
+                                <div class="content-slider-inner">
+                                    <div class="content-slider-slide">
+                                        <figure class="content-slider-image">
+                                            <img src="/assets/images/leading.jpg" alt="Technical work sample" loading="lazy">
+                                        </figure>
+                                        <p class="content-slider-slide-caption">Technical work</p>
+                                        <p class="content-slider-slide-desc">Architecture &amp; data</p>
+                                    </div>
+                                    <div class="content-slider-slide">
+                                        <a href="https://www.youtube.com/watch?v=wK01Fpp6L6k&t=1s" target="_blank" rel="noopener" class="content-slider-youtube">
+                                            <img src="https://img.youtube.com/vi/wK01Fpp6L6k/mqdefault.jpg" alt="Video thumbnail" loading="lazy">
+                                            <span class="content-slider-play" aria-hidden="true"></span>
+                                        </a>
+                                        <p class="content-slider-slide-caption">Talk</p>
+                                        <p class="content-slider-slide-desc">Tech deep dive</p>
+                                    </div>
+                                    <div class="content-slider-slide">
+                                        <div class="content-slider-recommendation">
+                                            <div class="content-slider-recommendation-avatar" style="--rec-image: url('/assets/images/myselfbig.png');"></div>
+                                            <p class="content-slider-recommendation-quote">"Strong technical depth and clear architecture decisions."</p>
+                                            <span class="content-slider-recommendation-initials">A. P.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content-slider-controls">
+                                <button type="button" class="content-slider-prev" aria-label="Previous slide">&larr;</button>
+                                <button type="button" class="content-slider-next" aria-label="Next slide">&rarr;</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="project:featured-wrapper">
+                    <div class="grid:row border:top padding:vertical:4 project:featured align-items:center project:trigger" role="button" tabindex="0" aria-expanded="false" aria-controls="project-details-03" id="project-trigger-03">
+                        <div class="column:auto">
+                            <p class="number:marker">03</p>
+                        </div>
+                        <div class="column:md:3">
+                            <h2 class="text:headline">Product thinking</h2>
+                        </div>
+                        <div class="column:md:4">
+                            <p class="fontweight:4">Senior Product Manager | Group Product Manager</p>
+                        </div>
+                        <div class="column:md:auto margin:left:auto">
+                            <div class="icon:arrow">
+                                <div class="icon:arrow:inner">
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0.736542 28.435L3.56497 31.2635L31.8492 2.97919L29.0208 0.15076L0.736542 28.435Z"></path>
+                                    <path d="M28 1.54972e-06V30H32V1.54972e-06H28Z"></path>
+                                    <path d="M2 0V4H32L32 1.54972e-06L2 0Z"></path>
+                                    </svg>
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0.736542 28.435L3.56497 31.2635L31.8492 2.97919L29.0208 0.15076L0.736542 28.435Z"></path>
+                                        <path d="M28 1.54972e-06V30H32V1.54972e-06H28Z"></path>
+                                        <path d="M2 0V4H32L32 1.54972e-06L2 0Z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project:details" id="project-details-03" hidden>
+                        <div class="grid:row padding:vertical:3">
+                            <div class="column:12">
+                                <p>As a <strong>Product Manager and Group Product Manager</strong> I have connected what the business needs with what gets built—in corporate ERP, SaaS, consultancy, and ad-hoc product work for both enterprise and B2C. I lead discovery and roadmap and keep architecture and product strategy in sync so that user experience and impact stay in focus and execution doesn’t default to “tech for tech’s sake”.</p>
+                            </div>
+                        </div>
+                        <div class="content-slider" data-content-slider>
+                            <h3 class="content-slider-title">Actions speak better than words</h3>
+                            <div class="content-slider-track">
+                                <div class="content-slider-inner">
+                                    <div class="content-slider-slide">
+                                        <div class="content-slider-recommendation">
+                                            <div class="content-slider-recommendation-avatar" style="--rec-image: url('/assets/images/myselfbig.png');"></div>
+                                            <p class="content-slider-recommendation-quote">"Bridges business and tech with a clear product vision."</p>
+                                            <span class="content-slider-recommendation-initials">A. P.</span>
+                                        </div>
+                                    </div>
+                                    <div class="content-slider-slide">
+                                        <a href="https://www.youtube.com/watch?v=wK01Fpp6L6k&t=1s" target="_blank" rel="noopener" class="content-slider-youtube">
+                                            <img src="https://img.youtube.com/vi/wK01Fpp6L6k/mqdefault.jpg" alt="Video thumbnail" loading="lazy">
+                                            <span class="content-slider-play" aria-hidden="true"></span>
+                                        </a>
+                                        <p class="content-slider-slide-caption">Product talk</p>
+                                        <p class="content-slider-slide-desc">Vision &amp; strategy</p>
+                                    </div>
+                                    <div class="content-slider-slide">
+                                        <figure class="content-slider-image">
+                                            <img src="/assets/images/leading.jpg" alt="Product work sample" loading="lazy">
+                                        </figure>
+                                        <p class="content-slider-slide-caption">Product work</p>
+                                        <p class="content-slider-slide-desc">Discovery &amp; roadmap</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content-slider-controls">
+                                <button type="button" class="content-slider-prev" aria-label="Previous slide">&larr;</button>
+                                <button type="button" class="content-slider-next" aria-label="Next slide">&rarr;</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+    </div>
+</section>
 </main>
 <footer class="bg:primary padding:vertical:10">
     <section class=" padding:vertical:4" id="home-about">
-        <div class="grid">
-            <div class="grid:row">
-                <div class="column:md:8">
+    <div class="grid">
+        <div class="grid:row">
+            <div class="column:md:8">
                     <p class="h4 footertext">
                         Honestly, the fun stuff is right here, but...
                     </p>
                     <p class="h4 footertext">
                         if a <span class="text:blue">corporate-approved</span> version of me is needed
-                    </p>
-                </div>
-                
-                <div class="column:md:auto margin:left:auto margin:top:3 margin:top:md:0">
+                </p>
+            </div>
+            
+            <div class="column:md:auto margin:left:auto margin:top:3 margin:top:md:0">
                     <a href="https://www.linkedin.com/in/alvaropanizo/" class="button margin:left:auto">
                         <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 0.5rem;">
                             person_add
                         </span>
                         My LinkedIn profile
-                    </a>
-                </div>
+                </a>
             </div>
-        </div>
-    </section>
+            </div>
+    </div>
+</section>
     <div class="grid">
         <div class="grid:row">
             <div class="column:md:4 margin:left:auto">
@@ -235,7 +365,7 @@
                 </p>
                 <p>
                     Product Engineer with a data-driven soul. I bridge the gap between deep technical expertise and product vision.
-                    Having evolved from hands-on engineering to leading high-performance teams, I bring a unique blend of technical depth and product thinking to every challenge. 
+                    Having evolved from hands-on Software Engineering to leading high-performing teams, I bring a unique blend of technical depth and product thinking to every challenge. 
                     Think of me as the bridge between deep tech expertise and product vision – because the best features are built on solid foundations.
                 </p>
             </div>
@@ -269,10 +399,13 @@
         </div>
     </div>
 </footer>
-<script src="/assets/js/navigation.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/ScrollTrigger.min.js"></script>
 <script src="/assets/js/scrolltext.js"></script>
 <script src="assets/js/scrollimage.js"></script>
+<script src="assets/js/summaryblend.js"></script>
+<script src="assets/js/projects-accordion.js"></script>
+<script src="assets/js/content-slider.js"></script>
+<script src="assets/js/live-status.js"></script>
 </body>
 </html>
