@@ -36,6 +36,9 @@ jobs:
         run: |
           bundle config set --local path 'vendor/bundle'
           bundle install
+
+      - name: Validate home.json schema
+        run: npx --yes ajv-cli@5 validate -s schemas/home.schema.json -d _data/home.json --spec=draft2020
           
       - name: Setup Pages
         id: pages
@@ -64,7 +67,6 @@ jobs:
           required_files=(
             "_site/assets/css/basecamp.css"
             "_site/assets/css/theme.css"
-            "_site/assets/js/navigation.js"
             "_site/assets/js/scrolltext.js"
             "_site/assets/images/headshot.png"
             "_site/assets/fonts/Humane-Light.woff2"

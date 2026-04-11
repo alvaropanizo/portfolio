@@ -1,542 +1,132 @@
+---
+layout: null
+---
+{% assign d = site.data.home %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="index, follow">
-<!-- Core Title -->
-<title>Alvaro Panizo</title>
-<!-- End Title -->
-
-<!-- Basic Meta -->
-<meta name="description" content="Alvaro Panizo. Senior Product Engineer. Product Manager. Information retrieval and architecture expert. Backend and Data architecture and senior development.">
-<meta name="keywords" content="">
-<link rel="canonical" href="http://localhost:4000">
-
-<!-- Favicon -->
-<link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
-<link rel="icon" type="image/png" href="/assets/images/favicon.png">
-<!-- End Favicon -->
-
-<!-- Social Cards -->
-<meta property="og:title" content="Alvaro Panizo">
-<meta property="og:description" content="Alvaro Panizo. Senior Product Engineer. Product Manager. Information retrieval and architecture expert. Backend and Data architecture and senior development.">
-<meta property="og:image" content="">
-<meta property="og:url" content="http://localhost:4000">
-<!-- End Social Cards -->
-
-<!-- CSS Links -->
-<link rel="stylesheet" href="/assets/css/basecamp.css">
-<link rel="stylesheet" href="/assets/css/theme.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&family=Manrope:wght@200..800&family=Barlow Condensed:wght@200..800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://use.typekit.net/qjb8uyv.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+{% include home-head.html %}
 </head>
 <body class="blocks bg:white">
-    <main class="bg:white">
+<main class="bg:white">
     <header class="jumbotron:home" id="home-introduction">
         <div class="title:texture">
-            Panizo    
+            {{ d.header.texture_title }}
         </div>
         <div class="current-position">
             <div class="status" id="live-status" aria-live="polite">
-                <span class="label">—</span>
+                <span class="label">{{ d.header.live_status_label }}</span>
                 <span class="status-cet" aria-hidden="true"></span>
             </div>
             <div class="position">
-                <img src="/assets/images/logo-actual.png" alt="Oracle NetSuite logo" />
-                <span class="text">Product @Oracle NetSuite</span>
+                <img src="{{ d.header.current_work.logo | relative_url }}" alt="{{ d.header.current_work.logo_alt | escape }}" />
+                <span class="text">{{ d.header.current_work.text_html }}</span>
             </div>
         </div>
         <div class="latest-article">
             <div class="status">
-                <span class="label">Latest Article</span>
+                <span class="label">{{ d.header.latest_article.label }}</span>
             </div>
             <div class="article-link">
-                <img src="assets/images/medium-icon.png" alt="Medium" />
-                <a href="https://medium.com/empathyco/explainability-and-understanding-in-e-commerce-the-challenge-of-xai-2361b2e161ae" target="_blank" class="text">
-                    Explainability and reasoning in AI integrations
+                <img src="{{ d.header.latest_article.icon | relative_url }}" alt="{{ d.header.latest_article.icon_alt | escape }}" />
+                <a href="{{ d.header.latest_article.url }}" target="_blank" rel="noopener noreferrer" class="text">
+                    {{ d.header.latest_article.title }}
                 </a>
             </div>
-    </div>
-    <div class="grid">
-        <div class="grid:row">
-            <div class="column:12">
-                <h1 class="display:flex">
-                    <span class="line:one">
-                        Senior Product Engineer                
-                    </span>
-                    <span class="image:wrapper">
-                            <img src="/assets/images/headshot.png" alt="@alvaropanizo">
-                    </span>
-                    <span class="line:two">
-                        Product Manager       
-                    </span>
-                </h1>
-            </div>
-            <div class="column:md:7 margin:horizontal:auto">
-                <p class="h5 text:center">
-                        Product Engineer with a <span class="text:lime">data-driven</span> soul.
-                </p>
+        </div>
+        <div class="grid">
+            <div class="grid:row">
+                <div class="column:12">
+                    <h1 class="display:flex">
+                        <span class="line:one">{{ d.header.roles.line_one }}</span>
+                        <span class="image:wrapper">
+                            <img src="{{ d.header.roles.headshot.src | relative_url }}" alt="{{ d.header.roles.headshot.alt | escape }}">
+                        </span>
+                        <span class="line:two">{{ d.header.roles.line_two }}</span>
+                    </h1>
+                </div>
+                <div class="column:md:7 margin:horizontal:auto">
+                    <p class="h5 text:center">{{ d.header.headline_html }}</p>
+                </div>
             </div>
         </div>
-    </div>
-</header>
+    </header>
+
     <section class=" padding:vertical:4" id="home-about">
         <div class="grid">
             <div class="grid:row">
                 <div class="column:md:8 glass-blur">
-                    <p class="h4 scrolltext">Hi! I'm<span class="text:blue">Alvaro Panizo </span></p>
-                    <p class="h4 scrolltext">Think of me as the bridge between deep tech expertise and product strategy.</p>
-                    <p class="h4 scrolltext">Having evolved from hands-on Software Engineering to <strong>leading high-performing teams,</strong>I bring a unique blend of<strong>technical depth</strong>and<strong> product thinking </strong> to every challenge.</p>
+                    {% for para in d.about.paragraphs_html %}
+                    <p class="h4 scrolltext">{{ para }}</p>
+                    {% endfor %}
                     <br>
-                    <p class="h4 scrolltext">Because great products need more than just<strong>good vibes.</strong></p>
                 </div>
             </div>
         </div>
     </section>
+
     <section class="padding:vertical:4 section-blue" id="home-about-summary">
         <div class="grid">
             <div class="grid:row align-items:center">
                 <div class="column:md:4 summary-content">
-                    <p class="h4"><span class="text:lime">Product thinking</span></p>
-                    <p class="h4"><span class="text:lime">Technical depth</span></p>
-                    <p class="h4"><span class="text:lime">Leadership</span></p>
+                    {% for line in d.summary.lines_html %}
+                    <p class="h4">{{ line }}</p>
+                    {% endfor %}
                 </div>
                 <div class="column:md:8 summary-media">
-                    <img src="assets/images/speaker-image.png" alt="Speaker" class="speaker-image" loading="lazy" decoding="async">
+                    <img src="{{ d.summary.media.src | relative_url }}" alt="{{ d.summary.media.alt | escape }}" class="{{ d.summary.media.class }}" loading="lazy" decoding="async">
                 </div>
             </div>
         </div>
     </section>
+
     <section class=" padding:vertical:4 section-title" id="tenet-leader">
-        <h2 class="title:texture2">
-            Experience
-        </h2>
-        <h2 class="h1">
-            Experience & Core values
-        </h2>
+        <h2 class="title:texture2">{{ d.experience_section.texture_title }}</h2>
+        <h2 class="h1">{{ d.experience_section.heading }}</h2>
     </section>
+
     <section class=" work" id="home-work">
-    <div class="grid">
-            <div class="project:featured-wrapper">
-                    <div class="grid:row border:top padding:vertical:4 project:featured align-items:center project:trigger" role="button" tabindex="0" aria-expanded="false" aria-controls="project-details-01" id="project-trigger-01">
-                        <div class="column:auto">
-                            <p class="number:marker">01</p>
-                        </div>
-                        <div class="column:md:3">
-                            <h2 class="text:headline">Leading high-performing teams</h2>
-                        </div>
-                        <div class="column:md:4">
-                            <p class="fontweight:4">Product Owner / Team Leader</p>
-                        </div>
-                        <div class="column:md:auto margin:left:auto">
-                            <div class="icon:arrow">
-                                <div class="icon:arrow:inner">
-                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M0.736542 28.435L3.56497 31.2635L31.8492 2.97919L29.0208 0.15076L0.736542 28.435Z"></path>
-                                    <path d="M28 1.54972e-06V30H32V1.54972e-06H28Z"></path>
-                                    <path d="M2 0V4H32L32 1.54972e-06L2 0Z"></path>
-                                    </svg>
-                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M0.736542 28.435L3.56497 31.2635L31.8492 2.97919L29.0208 0.15076L0.736542 28.435Z"></path>
-                                        <path d="M28 1.54972e-06V30H32V1.54972e-06H28Z"></path>
-                                        <path d="M2 0V4H32L32 1.54972e-06L2 0Z"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project:details" id="project-details-01" hidden>
-                        <div class="grid:row padding:vertical:3">
-                            <div class="column:12">
-                                <p>I don’t just manage backlogs; I build the environments where engineers do their best work.</p>
-                                <p>Leading <strong>cross-functional teams</strong> across Europe, the US, and Asia, I bridge cultural and technical gaps to <strong>turn ambiguity into shippable code.</strong></p>
-                                <p>By prioritizing radical honesty and empathy, I ensure that <strong>"seeing beyond the immediate problem"</strong> becomes a team-wide habit, not just a solo effort.</p>
-                            </div>
-                        </div>
-                        <div class="grid:row padding:vertical:3">
-                            <div class="column:12">
-                                <div
-                                    class="project-details-canvas"
-                                    data-project-carousel
-                                    role="region"
-                                    aria-roledescription="carousel"
-                                    aria-label="Project highlights"
-                                    tabindex="0">
-                                    <button type="button" class="project-details-carousel__btn" data-carousel-prev aria-label="Previous highlight">
-                                        <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
-                                    </button>
-                                    <div class="project-details-carousel__viewport">
-                                        <div class="project-details-carousel__stack">
-                                            <article class="project-details-canvas-card project-details-canvas-card--photo project-details-carousel__slide" data-carousel-slide>
-                                                <div class="project-details-canvas-card__media">
-                                                    <img src="assets/images/lead-teams.png" alt="Alvaro Panizo">
-                                                </div>
-                                                <div class="project-details-canvas-card__footer">
-                                                    <p>Leading teams at the intersection of Product and Engineering for 5+ years, with a core focus on architecting Information Retrieval systems and AI-driven discovery foundations.</p>
-                                                </div>
-                                            </article>
-                                            <article class="project-details-carousel__slide" data-carousel-slide>
-                                                <div class="project-details-canvas-spotlight-card project-details-canvas-quote-card">
-                                                    <div class="project-details-canvas-quote-card__mark" aria-hidden="true">
-                                                        <span class="material-symbols-outlined">edit_note</span>
-                                                    </div>
-                                                    <div class="project-details-canvas-quote-card__content">
-                                                        <p>"He is a truly honest and authentic individual. An excellent teammate and highly empathetic, Álvaro has a unique ability to elevate everyone around him. Any organization that brings him on board will be gaining far more than they ever expected."</p>
-                                                        <p class="project-details-canvas-quote-card__attribution">Principal Software Engineer - Former Project Colleague (2021-2024)</p>
-                                                    </div>
-                                                </div>
-                                            </article>
-                                            <article class="project-details-carousel__slide" data-carousel-slide>
-                                                <div class="project-details-canvas-spotlight-card project-details-canvas-cert-card">
-                                                    <div class="project-details-canvas-cert-card__mark">
-                                                        <img
-                                                            src="assets/images/harvard_bs.png"
-                                                            alt="Harvard Business University"
-                                                            width="72"
-                                                            height="72"
-                                                            loading="lazy"
-                                                            decoding="async">
-                                                    </div>
-                                                    <div class="project-details-canvas-cert-card__content">
-                                                        <p class="project-details-canvas-cert-card__title">Change Managegemen in Tech Organizations (2026)</p>
-                                                        <p class="project-details-canvas-cert-card__issuer">Harvard Business School</p>
-                                                    </div>
-                                                </div>
-                                            </article>
-                                            <article class="project-details-canvas-card project-details-canvas-card--video project-details-carousel__slide" data-carousel-slide>
-                                                <div class="project-details-canvas-card__media">
-                                                    <div class="project-details-canvas-video-wrap">
-                                                        <iframe
-                                                            data-carousel-iframe
-                                                            src="https://youtu.be/d5WfSjocw88"
-                                                            title="Group Product Manager - Empathy.co (2019-2024)"
-                                                            loading="lazy"
-                                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                                            referrerpolicy="strict-origin-when-cross-origin"
-                                                            allowfullscreen>
-                                                        </iframe>
-                                                    </div>
-                                                </div>
-                                                <div class="project-details-canvas-card__footer">
-                                                    <p>Group Product Manager (2019-2024) - Meet Empathy.co's Product Managers</p>
-                                                </div>
-                                            </article>
-                                            <article class="project-details-carousel__slide" data-carousel-slide>
-                                                <div class="project-details-canvas-spotlight-card project-details-canvas-cert-card">
-                                                    <div class="project-details-canvas-cert-card__mark">
-                                                        <img
-                                                            src="assets/images/scrumorg.png"
-                                                            alt="Scrum.org"
-                                                            width="72"
-                                                            height="72"
-                                                            loading="lazy"
-                                                            decoding="async">
-                                                    </div>
-                                                    <div class="project-details-canvas-cert-card__content">
-                                                        <p class="project-details-canvas-cert-card__title">Professional Scrum Product Owner™ Certification (2021)</p>
-                                                        <p class="project-details-canvas-cert-card__issuer">Scrum.org</p>
-                                                    </div>
-                                                </div>
-                                            </article>
-                                        </div>
-                                    </div>
-                                    <button type="button" class="project-details-carousel__btn" data-carousel-next aria-label="Next highlight">
-                                        <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-            <div class="project:featured-wrapper">
-                    <div class="grid:row border:top padding:vertical:4 project:featured align-items:center project:trigger" role="button" tabindex="0" aria-expanded="false" aria-controls="project-details-02" id="project-trigger-02">
-                        <div class="column:auto">
-                            <p class="number:marker">02</p>
-                        </div>
-                        <div class="column:md:3">
-                            <h2 class="text:headline">Technical depth</h2>
-                        </div>
-                        <div class="column:md:4">
-                            <p class="fontweight:4">Senior Software Engineer / Data and Search </p>
-                        </div>
-                        <div class="column:md:auto margin:left:auto">
-                            <div class="icon:arrow">
-                                <div class="icon:arrow:inner">
-                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M0.736542 28.435L3.56497 31.2635L31.8492 2.97919L29.0208 0.15076L0.736542 28.435Z"></path>
-                                    <path d="M28 1.54972e-06V30H32V1.54972e-06H28Z"></path>
-                                    <path d="M2 0V4H32L32 1.54972e-06L2 0Z"></path>
-                                    </svg>
-                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M0.736542 28.435L3.56497 31.2635L31.8492 2.97919L29.0208 0.15076L0.736542 28.435Z"></path>
-                                        <path d="M28 1.54972e-06V30H32V1.54972e-06H28Z"></path>
-                                        <path d="M2 0V4H32L32 1.54972e-06L2 0Z"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project:details" id="project-details-02" hidden>
-                        <div class="grid:row padding:vertical:3">
-                            <div class="column:12">
-                                <p>I don’t just write code; I design systems that endure. </p>
-                                <p>My experience spans the entire technical spectrum—from deep-tech R&D to global B2B platforms—delivering everything <strong>cloud-native gateways to full-stack SaaS solutions.</strong> </p>
-                                <p>By mastering stacks like Java and streaming data, I turn <strong>information architectures into stable, scalable products</strong> that keep operational excellence at their core.</p>
-                            </div>
-                        </div>
-                        <div class="grid:row padding:vertical:3">
-                            <div class="column:12">
-                                <div
-                                    class="project-details-canvas"
-                                    data-project-carousel
-                                    role="region"
-                                    aria-roledescription="carousel"
-                                    aria-label="Technical depth highlights"
-                                    tabindex="0">
-                                    <button type="button" class="project-details-carousel__btn" data-carousel-prev aria-label="Previous highlight">
-                                        <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
-                                    </button>
-                                    <div class="project-details-carousel__viewport">
-                                        <div class="project-details-carousel__stack">
-                                            <article class="project-details-canvas-card project-details-canvas-card--photo project-details-carousel__slide" data-carousel-slide>
-                                                <div class="project-details-canvas-card__media">
-                                                    <img src="assets/images/tech-expertise.png" alt="Alvaro Panizo">
-                                                </div>
-                                                <div class="project-details-canvas-card__footer">
-                                                    <p>Hands-on engineering background across search, data platforms, APIs, and cloud-native delivery—keeping systems observable and evolvable.</p>
-                                                </div>
-                                            </article>
-                                            <article class="project-details-carousel__slide" data-carousel-slide>
-                                                <div class="project-details-canvas-spotlight-card project-details-canvas-quote-card">
-                                                    <div class="project-details-canvas-quote-card__mark" aria-hidden="true">
-                                                        <span class="material-symbols-outlined">format_quote</span>
-                                                    </div>
-                                                    <div class="project-details-canvas-quote-card__content">
-                                                        <p>"Alvaro is a really talented engineer with a great sense of ownership and commitment.
-                                                            He got up to speed surprisingly fast on really complex topics like search behaviour, big data analytics and data processing."</p>
-                                                        <p class="project-details-canvas-quote-card__attribution">Engineering lead — Former Manager (2019-2023)</p>
-                                                    </div>
-                                                </div>
-                                            </article>
-                                            <article class="project-details-carousel__slide" data-carousel-slide>
-                                                <div class="project-details-canvas-spotlight-card project-details-canvas-cert-card">
-                                                    <div class="project-details-canvas-cert-card__mark">
-                                                        <img
-                                                            src="assets/images/scrumorg.png"
-                                                            alt="Scrum.org"
-                                                            width="72"
-                                                            height="72"
-                                                            loading="lazy"
-                                                            decoding="async">
-                                                    </div>
-                                                    <div class="project-details-canvas-cert-card__content">
-                                                        <p class="project-details-canvas-cert-card__title">Professional Scrum Product Owner™ (2021)</p>
-                                                        <p class="project-details-canvas-cert-card__issuer">Scrum.org</p>
-                                                    </div>
-                                                </div>
-                                            </article>
-                                            <article class="project-details-canvas-card project-details-canvas-card--video project-details-carousel__slide" data-carousel-slide>
-                                                <div class="project-details-canvas-card__media">
-                                                    <div class="project-details-canvas-video-wrap">
-                                                        <iframe
-                                                            data-carousel-iframe
-                                                            src="https://www.youtube-nocookie.com/embed/d5WfSjocw88"
-                                                            title="Technical depth — replace with your video"
-                                                            loading="lazy"
-                                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                                            referrerpolicy="strict-origin-when-cross-origin"
-                                                            allowfullscreen>
-                                                        </iframe>
-                                                    </div>
-                                                </div>
-                                                <div class="project-details-canvas-card__footer">
-                                                    <p>Replace this caption with a talk or demo that reflects your engineering work.</p>
-                                                </div>
-                                            </article>
-                                        </div>
-                                    </div>
-                                    <button type="button" class="project-details-carousel__btn" data-carousel-next aria-label="Next highlight">
-                                        <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-            <div class="project:featured-wrapper">
-                    <div class="grid:row border:top padding:vertical:4 project:featured align-items:center project:trigger" role="button" tabindex="0" aria-expanded="false" aria-controls="project-details-03" id="project-trigger-03">
-                        <div class="column:auto">
-                            <p class="number:marker">03</p>
-                        </div>
-                        <div class="column:md:3">
-                            <h2 class="text:headline">Product thinking</h2>
-                        </div>
-                        <div class="column:md:4">
-                            <p class="fontweight:4">Senior Product Manager | Group Product Manager</p>
-                        </div>
-                        <div class="column:md:auto margin:left:auto">
-                            <div class="icon:arrow">
-                                <div class="icon:arrow:inner">
-                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M0.736542 28.435L3.56497 31.2635L31.8492 2.97919L29.0208 0.15076L0.736542 28.435Z"></path>
-                                    <path d="M28 1.54972e-06V30H32V1.54972e-06H28Z"></path>
-                                    <path d="M2 0V4H32L32 1.54972e-06L2 0Z"></path>
-                                    </svg>
-                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M0.736542 28.435L3.56497 31.2635L31.8492 2.97919L29.0208 0.15076L0.736542 28.435Z"></path>
-                                        <path d="M28 1.54972e-06V30H32V1.54972e-06H28Z"></path>
-                                        <path d="M2 0V4H32L32 1.54972e-06L2 0Z"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project:details" id="project-details-03" hidden>
-                        <div class="grid:row padding:vertical:3">
-                            <div class="column:12">
-                                <p>As a <strong>Product Manager and Group Product Manager</strong> I have connected what the business needs with what gets built—in corporate ERP, SaaS, consultancy, and ad-hoc product work for both enterprise and B2C. I lead discovery and roadmap and keep architecture and product strategy in sync so that user experience and impact stay in focus and execution doesn’t default to “tech for tech’s sake”.</p>
-                            </div>
-                        </div>
-                        <div class="grid:row padding:vertical:3">
-                            <div class="column:12">
-                                <div
-                                    class="project-details-canvas"
-                                    data-project-carousel
-                                    role="region"
-                                    aria-roledescription="carousel"
-                                    aria-label="Product thinking highlights"
-                                    tabindex="0">
-                                    <button type="button" class="project-details-carousel__btn" data-carousel-prev aria-label="Previous highlight">
-                                        <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
-                                    </button>
-                                    <div class="project-details-carousel__viewport">
-                                        <div class="project-details-carousel__stack">
-                                            <article class="project-details-canvas-card project-details-canvas-card--photo project-details-carousel__slide" data-carousel-slide>
-                                                <div class="project-details-canvas-card__media">
-                                                    <img src="assets/images/lead-teams.png" alt="Alvaro Panizo leading product">
-                                                </div>
-                                                <div class="project-details-canvas-card__footer">
-                                                    <p>Product leadership spanning discovery, roadmap, and alignment between strategy, UX, and engineering delivery.</p>
-                                                </div>
-                                            </article>
-                                            <article class="project-details-carousel__slide" data-carousel-slide>
-                                                <div class="project-details-canvas-spotlight-card project-details-canvas-quote-card">
-                                                    <div class="project-details-canvas-quote-card__mark" aria-hidden="true">
-                                                        <span class="material-symbols-outlined">edit_note</span>
-                                                    </div>
-                                                    <div class="project-details-canvas-quote-card__content">
-                                                        <p>"Alvaro is one of the very few engineers I've worked with that truly has a product mindset. One that can abstract himself from tech entanglement and focus on the problem / human-centered space."</p>
-                                                        <p class="project-details-canvas-quote-card__attribution">Co-founder / CXO</p>
-                                                    </div>
-                                                </div>
-                                            </article>
-                                            <article class="project-details-carousel__slide" data-carousel-slide>
-                                                <div class="project-details-canvas-spotlight-card project-details-canvas-cert-card">
-                                                    <div class="project-details-canvas-cert-card__mark">
-                                                        <img
-                                                            src="assets/images/harvard_bs.png"
-                                                            alt="Harvard Business School"
-                                                            width="72"
-                                                            height="72"
-                                                            loading="lazy"
-                                                            decoding="async">
-                                                    </div>
-                                                    <div class="project-details-canvas-cert-card__content">
-                                                        <p class="project-details-canvas-cert-card__title">Change Management in Tech Organizations (2026)</p>
-                                                        <p class="project-details-canvas-cert-card__issuer">Harvard Business School</p>
-                                                    </div>
-                                                </div>
-                                            </article>
-                                            <article class="project-details-canvas-card project-details-canvas-card--video project-details-carousel__slide" data-carousel-slide>
-                                                <div class="project-details-canvas-card__media">
-                                                    <div class="project-details-canvas-video-wrap">
-                                                        <iframe
-                                                            data-carousel-iframe
-                                                            src="https://www.youtube-nocookie.com/embed/d5WfSjocw88"
-                                                            title="Product thinking — replace with your video"
-                                                            loading="lazy"
-                                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                                            referrerpolicy="strict-origin-when-cross-origin"
-                                                            allowfullscreen>
-                                                        </iframe>
-                                                    </div>
-                                                </div>
-                                                <div class="project-details-canvas-card__footer">
-                                                    <p>Replace this caption with a product talk, case study, or interview.</p>
-                                                </div>
-                                            </article>
-                                        </div>
-                                    </div>
-                                    <button type="button" class="project-details-carousel__btn" data-carousel-next aria-label="Next highlight">
-                                        <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-    </div>
-</section>
+        <div class="grid">
+            {% for experience in d.experiences %}
+            {% include experience-block.html experience=experience topics=d.experience_topics %}
+            {% endfor %}
+        </div>
+    </section>
 </main>
+
 <footer class="bg:primary padding:vertical:10">
-    <section class=" padding:vertical:4" id="home-about">
-    <div class="grid">
-        <div class="grid:row">
-            <div class="column:md:8">
-                    <p class="h4 footertext">
-                        Honestly, the fun stuff is right here, but...
-                    </p>
-                    <p class="h4 footertext">
-                        if a <span class="text:blue">corporate-approved</span> version of me is needed
-                </p>
+    <section class=" padding:vertical:4" id="footer-cta">
+        <div class="grid">
+            <div class="grid:row">
+                <div class="column:md:8">
+                    {% for line in d.footer.cta_lines_html %}
+                    <p class="h4 footertext">{{ line }}</p>
+                    {% endfor %}
+                </div>
+                <div class="column:md:auto margin:left:auto margin:top:3 margin:top:md:0">
+                    <a href="{{ d.footer.linkedin_url }}" class="button margin:left:auto">
+                        <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 0.5rem;">person_add</span>
+                        My LinkedIn profile
+                    </a>
+                </div>
+                <div class="column:md:auto margin:left:auto margin:top:3 margin:top:md:0">
+                    <a href="{{ d.footer.cv_href | relative_url }}" class="button margin:left:auto" download>
+                        <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 0.5rem;">download</span>
+                        Download my CV in PDF
+                    </a>
+                </div>
             </div>
-            <div class="column:md:auto margin:left:auto margin:top:3 margin:top:md:0">
-                <a href="https://www.linkedin.com/in/alvaropanizo/" class="button margin:left:auto">
-                    <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 0.5rem;">
-                        person_add
-                    </span>
-                    My LinkedIn profile
-                </a>
-            </div>
-            <div class="column:md:auto margin:left:auto margin:top:3 margin:top:md:0">
-                <a href="assets/files/cv-alvaropanizo.pdf" class="button margin:left:auto" download>
-                    <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 0.5rem;">
-                        download
-                    </span>
-                    Download my CV in PDF
-                </a>
-            </div>
-            </div>
-    </div>
-</section>
+        </div>
+    </section>
     <div class="grid">
         <div class="grid:row">
             <div class="column:md:8 margin:left:auto">
-                <p class="eyebrow">
-                    About
-                </p>
-                <p>
-                    Product Engineer with a data-driven soul. I bridge the gap between deep technical expertise and product vision.
-                    Having evolved from hands-on Software Engineering to leading high-performing teams, I bring a unique blend of technical depth and product thinking to every challenge. 
-                    Think of me as the bridge between deep tech expertise and product vision – because the best features are built on solid foundations.
-                </p>
+                <p class="eyebrow">{{ d.footer.about_title }}</p>
+                <p>{{ d.footer.about_body_html }}</p>
             </div>
         </div>
     </div>
 </footer>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/ScrollTrigger.min.js"></script>
-<script src="/assets/js/scrolltext.js"></script>
-<script src="assets/js/scrollimage.js"></script>
-<script src="assets/js/summaryblend.js"></script>
-<script src="assets/js/projects-accordion.js"></script>
-<script src="assets/js/project-details-carousel.js"></script>
-<script src="assets/js/live-status.js"></script>
+{% include home-scripts.html %}
 </body>
 </html>
