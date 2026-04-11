@@ -6,20 +6,33 @@ document.addEventListener("DOMContentLoaded", () => {
     const details = detailsId ? document.getElementById(detailsId) : wrapper?.querySelector(".project\\:details");
     if (!wrapper || !details) return;
 
+    const openDetails = () => {
+      details.hidden = false;
+      // Measure after unhide so max-height uses actual content.
+      requestAnimationFrame(() => {
+        details.style.maxHeight = `${details.scrollHeight}px`;
+      });
+    };
+
+    const closeDetails = () => {
+      details.style.maxHeight = `${details.scrollHeight}px`;
+      requestAnimationFrame(() => {
+        details.style.maxHeight = "0px";
+      });
+      details.addEventListener(
+        "transitionend",
+        () => {
+          details.hidden = true;
+        },
+        { once: true }
+      );
+    };
+
     const toggle = () => {
       const isExpanded = wrapper.classList.toggle("is-expanded");
       trigger.setAttribute("aria-expanded", isExpanded);
-      if (isExpanded) {
-        details.hidden = false;
-      } else {
-        details.addEventListener(
-          "transitionend",
-          () => {
-            details.hidden = true;
-          },
-          { once: true }
-        );
-      }
+      if (isExpanded) openDetails();
+      else closeDetails();
     };
 
     trigger.addEventListener("click", (e) => {
