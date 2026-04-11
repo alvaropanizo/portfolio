@@ -1,0 +1,218 @@
+{
+  "meta": {
+    "title": "Alvaro Panizo",
+    "description": "Alvaro Panizo. Senior Product Engineer. Product Manager. Information retrieval and architecture expert. Backend and Data architecture and senior development.",
+    "keywords": "",
+    "og_image": ""
+  },
+  "header": {
+    "texture_title": "Panizo",
+    "live_status_label": "—",
+    "current_work": {
+      "logo": "/assets/images/logo-actual.png",
+      "logo_alt": "Oracle NetSuite logo",
+      "text_html": "Product @Oracle NetSuite"
+    },
+    "latest_article": {
+      "label": "Latest Article",
+      "icon": "/assets/images/medium-icon.png",
+      "icon_alt": "Medium",
+      "url": "https://medium.com/empathyco/explainability-and-understanding-in-e-commerce-the-challenge-of-xai-2361b2e161ae",
+      "title": "Explainability and reasoning in AI integrations"
+    },
+    "roles": {
+      "line_one": "Senior Product Engineer",
+      "headshot": {
+        "src": "/assets/images/headshot.png",
+        "alt": "@alvaropanizo"
+      },
+      "line_two": "Product Manager"
+    },
+    "headline_html": "Product Engineer with a <span class=\"text:lime\">data-driven</span> soul."
+  },
+  "about": {
+    "paragraphs_html": [
+      "Hi! I'm<span class=\"text:blue\">Alvaro Panizo </span>",
+      "Think of me as the bridge between deep tech expertise and product strategy.",
+      "Having evolved from hands-on Software Engineering to <strong>leading high-performing teams,</strong>I bring a unique blend of<strong>technical depth</strong>and<strong> product thinking </strong> to every challenge.",
+      "Because great products need more than just<strong>good vibes.</strong>"
+    ]
+  },
+  "summary": {
+    "lines_html": [
+      "<span class=\"text:lime\">Product thinking</span>",
+      "<span class=\"text:lime\">Technical depth</span>",
+      "<span class=\"text:lime\">Leadership</span>"
+    ],
+    "media": {
+      "src": "/assets/images/speaker-image.png",
+      "alt": "Speaker",
+      "class": "speaker-image"
+    }
+  },
+  "experience_section": {
+    "texture_title": "Experience",
+    "heading": "Experience & Core values"
+  },
+  "experience_topics": [
+    {
+      "id": "leading_teams",
+      "label": "Leading high-performing teams",
+      "short_label": "Leadership"
+    },
+    {
+      "id": "technical_depth",
+      "label": "Technical depth",
+      "short_label": "Engineering"
+    },
+    {
+      "id": "product_thinking",
+      "label": "Product thinking",
+      "short_label": "Product"
+    }
+  ],
+  "experiences": [
+    {
+      "id": "01",
+      "title": "Leading high-performing teams",
+      "subtitle": "Product Owner / Team Leader",
+      "body_paragraphs_html": [
+        "I don’t just manage backlogs; I build the environments where engineers do their best work.",
+        "Leading <strong>cross-functional teams</strong> across Europe, the US, and Asia, I bridge cultural and technical gaps to <strong>turn ambiguity into shippable code.</strong>",
+        "By prioritizing radical honesty and empathy, I ensure that <strong>\"seeing beyond the immediate problem\"</strong> becomes a team-wide habit, not just a solo effort."
+      ],
+      "carousel_aria_label": "Project highlights",
+      "cards": [
+        {
+          "type": "photo",
+          "topic_id": "leading_teams",
+          "image": "/assets/images/lead-teams.png",
+          "image_alt": "Alvaro Panizo",
+          "caption_html": "Leading teams at the intersection of Product and Engineering for 5+ years, with a core focus on architecting Information Retrieval systems and AI-driven discovery foundations."
+        },
+        {
+          "type": "quote",
+          "topic_id": "leading_teams",
+          "icon": "edit_note",
+          "quote_html": "\"He is a truly honest and authentic individual. An excellent teammate and highly empathetic, Álvaro has a unique ability to elevate everyone around him. Any organization that brings him on board will be gaining far more than they ever expected.\"",
+          "attribution_html": "Principal Software Engineer - Former Project Colleague (2021-2024)"
+        },
+        {
+          "type": "certificate",
+          "topic_id": "product_thinking",
+          "mark_image": "/assets/images/harvard_bs.png",
+          "mark_alt": "Harvard Business University",
+          "title_html": "Change Management in Tech Organizations (2026)",
+          "issuer_html": "Harvard Business School"
+        },
+        {
+          "type": "video",
+          "topic_id": "product_thinking",
+          "embed_url": "https://www.youtube-nocookie.com/embed/d5WfSjocw88",
+          "iframe_title": "Group Product Manager - Empathy.co (2019-2024)",
+          "caption_html": "Group Product Manager (2019-2024) - Meet Empathy.co's Product Managers"
+        },
+        {
+          "type": "certificate",
+          "topic_id": "leading_teams",
+          "mark_image": "/assets/images/scrumorg.png",
+          "mark_alt": "Scrum.org",
+          "title_html": "Professional Scrum Product Owner™ Certification (2021)",
+          "issuer_html": "Scrum.org"
+        }
+      ]
+    },
+    {
+      "id": "02",
+      "title": "Technical depth",
+      "subtitle": "Senior Software Engineer / Data and Search",
+      "body_paragraphs_html": [
+        "I don’t just write code; I design systems that endure.",
+        "My experience spans the entire technical spectrum—from deep-tech R&D to global B2B platforms—delivering everything <strong>cloud-native gateways to full-stack SaaS solutions.</strong>",
+        "By mastering stacks like Java and streaming data, I turn <strong>information architectures into stable, scalable products</strong> that keep operational excellence at their core."
+      ],
+      "carousel_aria_label": "Technical depth highlights",
+      "cards": [
+        {
+          "type": "photo",
+          "topic_id": "technical_depth",
+          "image": "/assets/images/tech-expertise.png",
+          "image_alt": "Alvaro Panizo",
+          "caption_html": "Hands-on engineering background across search, data platforms, APIs, and cloud-native delivery—keeping systems observable and evolvable."
+        },
+        {
+          "type": "quote",
+          "topic_id": "technical_depth",
+          "icon": "format_quote",
+          "quote_html": "\"Alvaro is a really talented engineer with a great sense of ownership and commitment. He got up to speed surprisingly fast on really complex topics like search behaviour, big data analytics and data processing.\"",
+          "attribution_html": "Engineering lead — Former Manager (2019-2023)"
+        },
+        {
+          "type": "certificate",
+          "topic_id": "product_thinking",
+          "mark_image": "/assets/images/scrumorg.png",
+          "mark_alt": "Scrum.org",
+          "title_html": "Professional Scrum Product Owner™ (2021)",
+          "issuer_html": "Scrum.org"
+        },
+        {
+          "type": "video",
+          "topic_id": "technical_depth",
+          "embed_url": "https://www.youtube-nocookie.com/embed/d5WfSjocw88",
+          "iframe_title": "Technical depth — replace with your video",
+          "caption_html": "Replace this caption with a talk or demo that reflects your engineering work."
+        }
+      ]
+    },
+    {
+      "id": "03",
+      "title": "Product thinking",
+      "subtitle": "Senior Product Manager | Group Product Manager",
+      "body_paragraphs_html": [
+        "As a <strong>Product Manager and Group Product Manager</strong> I have connected what the business needs with what gets built—in corporate ERP, SaaS, consultancy, and ad-hoc product work for both enterprise and B2C. I lead discovery and roadmap and keep architecture and product strategy in sync so that user experience and impact stay in focus and execution doesn’t default to “tech for tech’s sake”."
+      ],
+      "carousel_aria_label": "Product thinking highlights",
+      "cards": [
+        {
+          "type": "photo",
+          "topic_id": "product_thinking",
+          "image": "/assets/images/lead-teams.png",
+          "image_alt": "Alvaro Panizo leading product",
+          "caption_html": "Product leadership spanning discovery, roadmap, and alignment between strategy, UX, and engineering delivery."
+        },
+        {
+          "type": "quote",
+          "topic_id": "product_thinking",
+          "icon": "edit_note",
+          "quote_html": "\"Alvaro is one of the very few engineers I've worked with that truly has a product mindset. One that can abstract himself from tech entanglement and focus on the problem / human-centered space.\"",
+          "attribution_html": "Co-founder / CXO"
+        },
+        {
+          "type": "certificate",
+          "topic_id": "product_thinking",
+          "mark_image": "/assets/images/harvard_bs.png",
+          "mark_alt": "Harvard Business School",
+          "title_html": "Change Management in Tech Organizations (2026)",
+          "issuer_html": "Harvard Business School"
+        },
+        {
+          "type": "video",
+          "topic_id": "product_thinking",
+          "embed_url": "https://www.youtube-nocookie.com/embed/d5WfSjocw88",
+          "iframe_title": "Product thinking — replace with your video",
+          "caption_html": "Replace this caption with a product talk, case study, or interview."
+        }
+      ]
+    }
+  ],
+  "footer": {
+    "cta_lines_html": [
+      "Honestly, the fun stuff is right here, but...",
+      "if a <span class=\"text:blue\">corporate-approved</span> version of me is needed"
+    ],
+    "linkedin_url": "https://www.linkedin.com/in/alvaropanizo/",
+    "cv_href": "/assets/files/cv-alvaropanizo.pdf",
+    "about_title": "About",
+    "about_body_html": "Product Engineer with a data-driven soul. I bridge the gap between deep technical expertise and product vision. Having evolved from hands-on Software Engineering to leading high-performing teams, I bring a unique blend of technical depth and product thinking to every challenge. Think of me as the bridge between deep tech expertise and product vision – because the best features are built on solid foundations."
+  }
+}

@@ -1,0 +1,51 @@
+{% assign exp = include.experience %}
+<div class="project:featured-wrapper">
+    <div class="grid:row border:top padding:vertical:4 project:featured align-items:center project:trigger" role="button" tabindex="0" aria-expanded="false" aria-controls="project-details-{{ exp.id }}" id="project-trigger-{{ exp.id }}">
+        <div class="column:auto">
+            <p class="number:marker">{{ exp.id }}</p>
+        </div>
+        <div class="column:md:3">
+            <h2 class="text:headline">{{ exp.title }}</h2>
+        </div>
+        <div class="column:md:4">
+            <p class="fontweight:4">{{ exp.subtitle }}</p>
+        </div>
+        <div class="column:md:auto margin:left:auto">
+            {% include icon-project-arrow.html %}
+        </div>
+    </div>
+    <div class="project:details" id="project-details-{{ exp.id }}" hidden>
+        <div class="grid:row padding:vertical:3">
+            <div class="column:12">
+                {% for p in exp.body_paragraphs_html %}
+                <p>{{ p }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="grid:row padding:vertical:3">
+            <div class="column:12">
+                <div
+                    class="project-details-canvas"
+                    data-project-carousel
+                    role="region"
+                    aria-roledescription="carousel"
+                    aria-label="{{ exp.carousel_aria_label }}"
+                    tabindex="0">
+                    <button type="button" class="project-details-carousel__btn" data-carousel-prev aria-label="Previous highlight">
+                        <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+                    </button>
+                    <div class="project-details-carousel__viewport">
+                        <div class="project-details-carousel__stack">
+                            {% for card in exp.cards %}
+                            {% include carousel-card.html card=card topics=include.topics %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <button type="button" class="project-details-carousel__btn" data-carousel-next aria-label="Next highlight">
+                        <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

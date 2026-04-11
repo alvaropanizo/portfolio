@@ -1,0 +1,25 @@
+{% assign d = site.data.home %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow">
+<title>{{ d.meta.title }}</title>
+<meta name="description" content="{{ d.meta.description | escape }}">
+{% if d.meta.keywords != "" %}
+<meta name="keywords" content="{{ d.meta.keywords | escape }}">
+{% endif %}
+<link rel="canonical" href="{{ '/' | absolute_url }}">
+<link rel="icon" type="image/svg+xml" href="{{ '/assets/images/favicon.svg' | relative_url }}">
+<link rel="icon" type="image/png" href="{{ '/assets/images/favicon.png' | relative_url }}">
+<meta property="og:title" content="{{ d.meta.title | escape }}">
+<meta property="og:description" content="{{ d.meta.description | escape }}">
+{% if d.meta.og_image != "" %}
+<meta property="og:image" content="{{ d.meta.og_image | escape }}">
+{% endif %}
+<meta property="og:url" content="{{ '/' | absolute_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/basecamp.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/theme.css' | relative_url }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&family=Barlow+Condensed:wght@200..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.typekit.net/qjb8uyv.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />

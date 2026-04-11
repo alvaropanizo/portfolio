@@ -1,0 +1,330 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://alvaropanizo.github.io/portfolio/schemas/home.schema.json",
+  "title": "Portfolio homepage content",
+  "description": "Contract for _data/home.json. Carousel cards are a discriminated union on \"type\" and must declare topic_id (pillar tag).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "meta",
+    "header",
+    "about",
+    "summary",
+    "experience_section",
+    "experience_topics",
+    "experiences",
+    "footer"
+  ],
+  "properties": {
+    "meta": { "$ref": "#/$defs/Meta" },
+    "header": { "$ref": "#/$defs/Header" },
+    "about": { "$ref": "#/$defs/About" },
+    "summary": { "$ref": "#/$defs/Summary" },
+    "experience_section": { "$ref": "#/$defs/ExperienceSection" },
+    "experience_topics": { "$ref": "#/$defs/ExperienceTopics" },
+    "experiences": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/Experience" }
+    },
+    "footer": { "$ref": "#/$defs/Footer" }
+  },
+  "$defs": {
+    "ExperienceTopicId": {
+      "type": "string",
+      "enum": ["leading_teams", "technical_depth", "product_thinking"]
+    },
+    "ExperienceTopic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label"],
+      "properties": {
+        "id": { "$ref": "#/$defs/ExperienceTopicId" },
+        "label": { "type": "string", "minLength": 1 },
+        "short_label": { "type": "string", "minLength": 1 }
+      }
+    },
+    "ExperienceTopics": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/ExperienceTopic" },
+      "allOf": [
+        {
+          "contains": {
+            "type": "object",
+            "required": ["id"],
+            "properties": { "id": { "const": "leading_teams" } }
+          }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "required": ["id"],
+            "properties": { "id": { "const": "technical_depth" } }
+          }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "required": ["id"],
+            "properties": { "id": { "const": "product_thinking" } }
+          }
+        }
+      ]
+    },
+    "Meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "description", "keywords", "og_image"],
+      "properties": {
+        "title": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "keywords": { "type": "string" },
+        "og_image": { "type": "string" }
+      }
+    },
+    "Header": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "texture_title",
+        "live_status_label",
+        "current_work",
+        "latest_article",
+        "roles",
+        "headline_html"
+      ],
+      "properties": {
+        "texture_title": { "type": "string", "minLength": 1 },
+        "live_status_label": { "type": "string" },
+        "current_work": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["logo", "logo_alt", "text_html"],
+          "properties": {
+            "logo": { "$ref": "#/$defs/AssetPath" },
+            "logo_alt": { "type": "string", "minLength": 1 },
+            "text_html": { "type": "string" }
+          }
+        },
+        "latest_article": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["label", "icon", "icon_alt", "url", "title"],
+          "properties": {
+            "label": { "type": "string", "minLength": 1 },
+            "icon": { "$ref": "#/$defs/AssetPath" },
+            "icon_alt": { "type": "string", "minLength": 1 },
+            "url": { "type": "string", "minLength": 1 },
+            "title": { "type": "string", "minLength": 1 }
+          }
+        },
+        "roles": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["line_one", "line_two", "headshot"],
+          "properties": {
+            "line_one": { "type": "string", "minLength": 1 },
+            "line_two": { "type": "string", "minLength": 1 },
+            "headshot": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["src", "alt"],
+              "properties": {
+                "src": { "$ref": "#/$defs/AssetPath" },
+                "alt": { "type": "string", "minLength": 1 }
+              }
+            }
+          }
+        },
+        "headline_html": { "type": "string" }
+      }
+    },
+    "About": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["paragraphs_html"],
+      "properties": {
+        "paragraphs_html": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "Summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lines_html", "media"],
+      "properties": {
+        "lines_html": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "media": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["src", "alt", "class"],
+          "properties": {
+            "src": { "$ref": "#/$defs/AssetPath" },
+            "alt": { "type": "string", "minLength": 1 },
+            "class": { "type": "string" }
+          }
+        }
+      }
+    },
+    "ExperienceSection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["texture_title", "heading"],
+      "properties": {
+        "texture_title": { "type": "string", "minLength": 1 },
+        "heading": { "type": "string", "minLength": 1 }
+      }
+    },
+    "Experience": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "subtitle",
+        "body_paragraphs_html",
+        "carousel_aria_label",
+        "cards"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[0-9]{2}$" },
+        "title": { "type": "string", "minLength": 1 },
+        "subtitle": { "type": "string" },
+        "body_paragraphs_html": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "carousel_aria_label": { "type": "string", "minLength": 1 },
+        "cards": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/CarouselCard" }
+        }
+      }
+    },
+    "Footer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cta_lines_html",
+        "linkedin_url",
+        "cv_href",
+        "about_title",
+        "about_body_html"
+      ],
+      "properties": {
+        "cta_lines_html": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "linkedin_url": { "type": "string", "minLength": 1 },
+        "cv_href": { "$ref": "#/$defs/AssetPath" },
+        "about_title": { "type": "string", "minLength": 1 },
+        "about_body_html": { "type": "string" }
+      }
+    },
+    "AssetPath": {
+      "type": "string",
+      "pattern": "^(/|https?://).+"
+    },
+    "CarouselCard": {
+      "oneOf": [
+        { "$ref": "#/$defs/CardPhoto" },
+        { "$ref": "#/$defs/CardGeneral" },
+        { "$ref": "#/$defs/CardArticle" },
+        { "$ref": "#/$defs/CardQuote" },
+        { "$ref": "#/$defs/CardCertificate" },
+        { "$ref": "#/$defs/CardVideo" }
+      ]
+    },
+    "CardPhoto": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "topic_id", "image", "image_alt", "caption_html"],
+      "properties": {
+        "type": { "const": "photo" },
+        "topic_id": { "$ref": "#/$defs/ExperienceTopicId" },
+        "image": { "$ref": "#/$defs/AssetPath" },
+        "image_alt": { "type": "string", "minLength": 1 },
+        "caption_html": { "type": "string" }
+      }
+    },
+    "CardGeneral": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "topic_id", "image", "image_alt", "body_html"],
+      "properties": {
+        "type": { "const": "general" },
+        "topic_id": { "$ref": "#/$defs/ExperienceTopicId" },
+        "image": { "$ref": "#/$defs/AssetPath" },
+        "image_alt": { "type": "string", "minLength": 1 },
+        "body_html": { "type": "string" }
+      }
+    },
+    "CardArticle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "topic_id", "url", "title", "thumbnail"],
+      "properties": {
+        "type": { "const": "article" },
+        "topic_id": { "$ref": "#/$defs/ExperienceTopicId" },
+        "url": { "type": "string", "minLength": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "thumbnail": { "$ref": "#/$defs/AssetPath" },
+        "image_alt": { "type": "string", "minLength": 1 }
+      }
+    },
+    "CardQuote": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "topic_id", "icon", "quote_html", "attribution_html"],
+      "properties": {
+        "type": { "const": "quote" },
+        "topic_id": { "$ref": "#/$defs/ExperienceTopicId" },
+        "icon": { "type": "string", "minLength": 1 },
+        "quote_html": { "type": "string" },
+        "attribution_html": { "type": "string" }
+      }
+    },
+    "CardCertificate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "topic_id",
+        "mark_image",
+        "mark_alt",
+        "title_html",
+        "issuer_html"
+      ],
+      "properties": {
+        "type": { "const": "certificate" },
+        "topic_id": { "$ref": "#/$defs/ExperienceTopicId" },
+        "mark_image": { "$ref": "#/$defs/AssetPath" },
+        "mark_alt": { "type": "string", "minLength": 1 },
+        "title_html": { "type": "string" },
+        "issuer_html": { "type": "string" }
+      }
+    },
+    "CardVideo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "topic_id", "embed_url", "iframe_title", "caption_html"],
+      "properties": {
+        "type": { "const": "video" },
+        "topic_id": { "$ref": "#/$defs/ExperienceTopicId" },
+        "embed_url": { "type": "string", "minLength": 1 },
+        "iframe_title": { "type": "string", "minLength": 1 },
+        "caption_html": { "type": "string" }
+      }
+    }
+  }
+}

@@ -46,8 +46,10 @@ exclude:
   - node_modules
   - vendor
   - README.md
+  - agent.md
   - _config_local.yml
   - scripts
+  - schemas
 
 # Collections
 collections:
