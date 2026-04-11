@@ -8,50 +8,50 @@
 {% assign _topic_class = 'project-details-carousel__slide--topic-' | append: card.topic_id %}
 {% case card.type %}
 {% when 'photo' %}
-<article class="project-details-canvas-card project-details-canvas-card--photo project-details-carousel__slide {{ _topic_class }}" data-carousel-slide data-experience-topic="{{ card.topic_id }}"{% if _topic_label != '' %} data-experience-topic-label="{{ _topic_label | escape }}"{% endif %}>
-    <div class="project-details-canvas-card__media">
+<article class="project-details-carousel-card project-details-carousel-card--photo project-details-carousel__slide {{ _topic_class }}" data-carousel-slide data-experience-topic="{{ card.topic_id }}"{% if _topic_label != '' %} data-experience-topic-label="{{ _topic_label | escape }}"{% endif %}>
+    <div class="project-details-carousel-card__media">
         <img src="{{ card.image | relative_url }}" alt="{{ card.image_alt }}">
     </div>
-    <div class="project-details-canvas-card__footer">
+    <div class="project-details-carousel-card__footer">
         <p>{{ card.caption_html }}</p>
     </div>
 </article>
 {% when 'general' %}
-<article class="project-details-canvas-card project-details-canvas-card--photo project-details-carousel__slide {{ _topic_class }}" data-carousel-slide data-experience-topic="{{ card.topic_id }}"{% if _topic_label != '' %} data-experience-topic-label="{{ _topic_label | escape }}"{% endif %}>
-    <div class="project-details-canvas-card__media">
+<article class="project-details-carousel-card project-details-carousel-card--photo project-details-carousel__slide {{ _topic_class }}" data-carousel-slide data-experience-topic="{{ card.topic_id }}"{% if _topic_label != '' %} data-experience-topic-label="{{ _topic_label | escape }}"{% endif %}>
+    <div class="project-details-carousel-card__media">
         <img src="{{ card.image | relative_url }}" alt="{{ card.image_alt }}" loading="lazy" decoding="async">
     </div>
-    <div class="project-details-canvas-card__footer">
+    <div class="project-details-carousel-card__footer">
         <p>{{ card.body_html }}</p>
     </div>
 </article>
 {% when 'article' %}
-<article class="project-details-canvas-card project-details-canvas-card--photo project-details-carousel__slide {{ _topic_class }}" data-carousel-slide data-experience-topic="{{ card.topic_id }}"{% if _topic_label != '' %} data-experience-topic-label="{{ _topic_label | escape }}"{% endif %}>
-    <div class="project-details-canvas-card__media">
+<article class="project-details-carousel-card project-details-carousel-card--photo project-details-carousel__slide {{ _topic_class }}" data-carousel-slide data-experience-topic="{{ card.topic_id }}"{% if _topic_label != '' %} data-experience-topic-label="{{ _topic_label | escape }}"{% endif %}>
+    <div class="project-details-carousel-card__media">
         <a href="{{ card.url }}" target="_blank" rel="noopener noreferrer">
             <img src="{{ card.thumbnail | relative_url }}" alt="{{ card.image_alt | default: card.title }}" loading="lazy" decoding="async">
         </a>
     </div>
-    <div class="project-details-canvas-card__footer">
+    <div class="project-details-carousel-card__footer">
         <p><a href="{{ card.url }}" target="_blank" rel="noopener noreferrer">{{ card.title }}</a></p>
     </div>
 </article>
 {% when 'quote' %}
 <article class="project-details-carousel__slide {{ _topic_class }}" data-carousel-slide data-experience-topic="{{ card.topic_id }}"{% if _topic_label != '' %} data-experience-topic-label="{{ _topic_label | escape }}"{% endif %}>
-    <div class="project-details-canvas-spotlight-card project-details-canvas-quote-card">
-        <div class="project-details-canvas-quote-card__mark" aria-hidden="true">
+    <div class="project-details-carousel-spotlight-card project-details-carousel-quote-card">
+        <div class="project-details-carousel-quote-card__mark" aria-hidden="true">
             <span class="material-symbols-outlined">{{ card.icon }}</span>
         </div>
-        <div class="project-details-canvas-quote-card__content">
+        <div class="project-details-carousel-quote-card__content">
             <p>{{ card.quote_html }}</p>
-            <p class="project-details-canvas-quote-card__attribution">{{ card.attribution_html }}</p>
+            <p class="project-details-carousel-quote-card__attribution">{{ card.attribution_html }}</p>
         </div>
     </div>
 </article>
 {% when 'certificate' %}
 <article class="project-details-carousel__slide {{ _topic_class }}" data-carousel-slide data-experience-topic="{{ card.topic_id }}"{% if _topic_label != '' %} data-experience-topic-label="{{ _topic_label | escape }}"{% endif %}>
-    <div class="project-details-canvas-spotlight-card project-details-canvas-cert-card">
-        <div class="project-details-canvas-cert-card__mark">
+    <div class="project-details-carousel-spotlight-card project-details-carousel-cert-card">
+        <div class="project-details-carousel-cert-card__mark">
             <img
                 src="{{ card.mark_image | relative_url }}"
                 alt="{{ card.mark_alt }}"
@@ -60,16 +60,16 @@
                 loading="lazy"
                 decoding="async">
         </div>
-        <div class="project-details-canvas-cert-card__content">
-            <p class="project-details-canvas-cert-card__title">{{ card.title_html }}</p>
-            <p class="project-details-canvas-cert-card__issuer">{{ card.issuer_html }}</p>
+        <div class="project-details-carousel-cert-card__content">
+            <p class="project-details-carousel-cert-card__title">{{ card.title_html }}</p>
+            <p class="project-details-carousel-cert-card__issuer">{{ card.issuer_html }}</p>
         </div>
     </div>
 </article>
 {% when 'video' %}
-<article class="project-details-canvas-card project-details-canvas-card--video project-details-carousel__slide {{ _topic_class }}" data-carousel-slide data-experience-topic="{{ card.topic_id }}"{% if _topic_label != '' %} data-experience-topic-label="{{ _topic_label | escape }}"{% endif %}>
-    <div class="project-details-canvas-card__media">
-        <div class="project-details-canvas-video-wrap">
+<article class="project-details-carousel-card project-details-carousel-card--video project-details-carousel__slide {{ _topic_class }}" data-carousel-slide data-experience-topic="{{ card.topic_id }}"{% if _topic_label != '' %} data-experience-topic-label="{{ _topic_label | escape }}"{% endif %}>
+    <div class="project-details-carousel-card__media">
+        <div class="project-details-carousel-video-wrap">
             <iframe
                 data-carousel-iframe
                 src="{{ card.embed_url }}"
@@ -81,7 +81,7 @@
             </iframe>
         </div>
     </div>
-    <div class="project-details-canvas-card__footer">
+    <div class="project-details-carousel-card__footer">
         <p>{{ card.caption_html }}</p>
     </div>
 </article>

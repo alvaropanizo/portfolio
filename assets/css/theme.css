@@ -407,6 +407,15 @@ footer {
   overflow-x: hidden;
   overflow-y: hidden;
 }
+
+/* Tablet/mobile: allow footer content to scroll so CTAs + copy aren’t clipped (base uses overflow-y: hidden) */
+@media screen and (max-width: 1280px) {
+  footer {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 footer .title\:texture {
   font-size: 50vw;
   color: var(--texture-text-color);
@@ -763,6 +772,11 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   justify-content: center;
 }
 
+/* Wrapper for pills: desktop uses contents so pills keep absolute placement on the header */
+.jumbotron\:home .hero-pills {
+  display: contents;
+}
+
 .jumbotron\:home .title\:texture {
   position: absolute;
   font-family: var(--font-headline);
@@ -822,13 +836,6 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   animation: imageWrapper 1s 2s ease-in-out forwards;
   overflow: hidden;
 }
-@media screen and (max-width: 768px) {
-  .jumbotron\:home .image\:wrapper {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-}
-
 .jumbotron\:home .image\:wrapper img {
   width: 100%;
   height: 100%;
@@ -921,8 +928,8 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
 #home-work .project\:details strong {
   font-weight: 600;
 }
-/* Project details carousel: fixed-size cards + stacked deck */
-.project-details-canvas {
+/* Project details carousel: fixed-size cards + stacked deck (root = [data-project-carousel] only) */
+#home-work [data-project-carousel] {
   --project-carousel-card-w: min(100%, 42rem);
   --project-carousel-media-h: 14rem;
   --project-carousel-footer-min: 4.25rem;
@@ -934,10 +941,6 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   width: 100%;
   max-width: min(100%, 54rem);
   margin: 0.35rem auto 0;
-}
-
-/* Flex row so prev / card / next stay one line (grid was collapsing to block stack in some builds) */
-#home-work .project-details-canvas[data-project-carousel] {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -945,10 +948,11 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   justify-content: center;
   gap: clamp(0.5rem, 2.5vw, 1.35rem);
 }
-.project-details-canvas[data-project-carousel]:focus {
+
+#home-work [data-project-carousel]:focus {
   outline: none;
 }
-.project-details-canvas[data-project-carousel]:focus-visible {
+#home-work [data-project-carousel]:focus-visible {
   outline: 2px solid var(--color-blue);
   outline-offset: 4px;
   border-radius: 12px;
@@ -1030,7 +1034,7 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   .project-details-carousel__slide {
     transition: none;
   }
-  .project-details-canvas-card--article .project-details-canvas-article-card__image-link:hover .project-details-canvas-article-card__image {
+  .project-details-carousel-card--article .project-details-carousel-article-card__image-link:hover .project-details-carousel-article-card__image {
     transform: none;
   }
 }
@@ -1065,10 +1069,8 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
 }
 
 @media screen and (max-width: 520px) {
-  #home-work .project-details-canvas[data-project-carousel] {
+  #home-work [data-project-carousel] {
     gap: 0.35rem 0.45rem;
-  }
-  .project-details-canvas {
     max-width: 100%;
     --project-carousel-card-w: 100%;
     --project-carousel-media-h: 11.5rem;
@@ -1080,18 +1082,18 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   .project-details-carousel__btn .material-symbols-outlined {
     font-size: 1.2rem;
   }
-  .project-details-canvas-quote-card__mark .material-symbols-outlined {
+  .project-details-carousel-quote-card__mark .material-symbols-outlined {
     font-size: 1.55rem;
   }
-  .project-details-canvas-cert-card__mark img {
+  .project-details-carousel-cert-card__mark img {
     max-width: 3rem !important;
     max-height: 2.75rem !important;
   }
 }
 
 /* Glass shell: photo/video cards + quote/cert spotlight (more opaque = less of stack shows through) */
-.project-details-canvas-card,
-.project-details-canvas-spotlight-card {
+.project-details-carousel-card,
+.project-details-carousel-spotlight-card {
   border: 1px solid rgba(0, 0, 0, 0.1);
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(10px);
@@ -1106,13 +1108,13 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
 }
 
 /* Quote + certification: one compositing layer so backdrop + PNG logos match quote */
-.project-details-canvas-spotlight-card {
+.project-details-carousel-spotlight-card {
   justify-content: center;
   min-height: 0;
   gap: 0.28rem;
   isolation: isolate;
 }
-.project-details-canvas-card__media {
+.project-details-carousel-card__media {
   flex: 0 0 var(--project-carousel-media-h);
   height: var(--project-carousel-media-h);
   border-radius: 8px;
@@ -1120,15 +1122,15 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   background: rgba(0, 0, 0, 0.04);
 }
 
-/* Quote card: structure only (glass = .project-details-canvas-spotlight-card) */
-.project-details-canvas-quote-card__mark {
+/* Quote card: structure only (glass = .project-details-carousel-spotlight-card) */
+.project-details-carousel-quote-card__mark {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0.1rem 0 0;
 }
-.project-details-canvas-quote-card__mark .material-symbols-outlined {
+.project-details-carousel-quote-card__mark .material-symbols-outlined {
   font-size: 2rem;
   line-height: 1;
   color: var(--color-blue);
@@ -1139,7 +1141,7 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
     "GRAD" 0,
     "opsz" 28;
 }
-.project-details-canvas-quote-card__content {
+.project-details-carousel-quote-card__content {
   flex: 1 1 auto;
   min-height: 0;
   display: flex;
@@ -1148,7 +1150,7 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   text-align: center;
   padding: 0.2rem 0.5rem 0.45rem;
 }
-#home-work .project-details-canvas-quote-card__content > p:not(.project-details-canvas-quote-card__attribution) {
+#home-work .project-details-carousel-quote-card__content > p:not(.project-details-carousel-quote-card__attribution) {
   font-family: var(--font-subheadline);
   font-size: 1.2rem;
   font-style: italic;
@@ -1158,7 +1160,7 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   color: var(--heading-text);
   opacity: 0.95;
 }
-#home-work .project-details-canvas-quote-card__attribution {
+#home-work .project-details-carousel-quote-card__attribution {
   font-family: var(--font-headline);
   font-size: 0.92rem;
   font-weight: 600;
@@ -1168,15 +1170,15 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   opacity: 1;
 }
 
-/* Certification card: structure only (glass = .project-details-canvas-spotlight-card) */
-.project-details-canvas-cert-card__mark {
+/* Certification card: structure only (glass = .project-details-carousel-spotlight-card) */
+.project-details-carousel-cert-card__mark {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0.1rem 0 0;
 }
-.project-details-canvas-cert-card__mark img {
+.project-details-carousel-cert-card__mark img {
   width: auto;
   height: auto;
   max-width: 4.5rem;
@@ -1185,7 +1187,7 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   display: block;
   mix-blend-mode: normal;
 }
-.project-details-canvas-cert-card__content {
+.project-details-carousel-cert-card__content {
   flex: 1 1 auto;
   min-height: 0;
   display: flex;
@@ -1194,7 +1196,7 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   text-align: center;
   padding: 0.15rem 0.5rem 0.4rem;
 }
-#home-work .project-details-canvas-cert-card__title {
+#home-work .project-details-carousel-cert-card__title {
   font-family: var(--font-subheadline);
   font-size: 1.1rem;
   font-style: normal;
@@ -1205,7 +1207,7 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   color: var(--heading-text);
   opacity: 0.95;
 }
-#home-work .project-details-canvas-cert-card__issuer {
+#home-work .project-details-carousel-cert-card__issuer {
   font-family: var(--font-headline);
   font-size: 0.92rem;
   font-weight: 600;
@@ -1215,7 +1217,7 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   opacity: 1;
 }
 
-.project-details-canvas-card__footer {
+.project-details-carousel-card__footer {
   flex: 1 1 auto;
   min-height: var(--project-carousel-footer-min);
   display: flex;
@@ -1223,7 +1225,7 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   justify-content: flex-end;
   padding-top: 0.35rem;
 }
-.project-details-canvas-card--photo img {
+.project-details-carousel-card--photo img {
   width: 100% !important;
   max-width: 100% !important;
   height: 100% !important;
@@ -1233,7 +1235,7 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
 }
 
 /* Article card: linked cover image + title (title-only footer for now) */
-.project-details-canvas-card--article .project-details-canvas-article-card__image-link {
+.project-details-carousel-card--article .project-details-carousel-article-card__image-link {
   display: block;
   height: 100%;
   min-height: 0;
@@ -1241,10 +1243,10 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   outline: none;
   -webkit-tap-highlight-color: transparent;
 }
-.project-details-canvas-card--article .project-details-canvas-article-card__image-link:focus-visible {
+.project-details-carousel-card--article .project-details-carousel-article-card__image-link:focus-visible {
   box-shadow: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-blue);
 }
-.project-details-canvas-card--article .project-details-canvas-article-card__image {
+.project-details-carousel-card--article .project-details-carousel-article-card__image {
   width: 100% !important;
   max-width: 100% !important;
   height: 100% !important;
@@ -1253,15 +1255,15 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   border-radius: 0;
   transition: transform 0.35s var(--carousel-stack-ease, ease);
 }
-.project-details-canvas-card--article .project-details-canvas-article-card__image-link:hover .project-details-canvas-article-card__image {
+.project-details-carousel-card--article .project-details-carousel-article-card__image-link:hover .project-details-carousel-article-card__image {
   transform: scale(1.03);
 }
-.project-details-canvas-article-card__footer {
+.project-details-carousel-article-card__footer {
   justify-content: center;
   text-align: center;
   padding-top: 0.45rem;
 }
-#home-work .project-details-canvas-article-card__title {
+#home-work .project-details-carousel-article-card__title {
   font-family: var(--font-subheadline);
   font-size: 1rem;
   font-weight: 600;
@@ -1271,12 +1273,12 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   color: var(--heading-text);
   opacity: 0.96;
 }
-.project-details-canvas-card p,
-.project-details-canvas-card span {
+.project-details-carousel-card p,
+.project-details-carousel-card span {
   color: var(--heading-text);
 }
-#home-work .project-details-canvas-card p,
-#home-work .project-details-canvas-card span {
+#home-work .project-details-carousel-card p,
+#home-work .project-details-carousel-card span {
   font-family: var(--font-mono);
   font-size: 0.7rem;
   line-height: 1.35;
@@ -1285,13 +1287,13 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   font-weight: 500;
   opacity: 0.92;
 }
-#home-work .project-details-canvas-card__footer > p:first-child {
+#home-work .project-details-carousel-card__footer > p:first-child {
   margin-top: 0;
 }
-.project-details-canvas-card--video .project-details-canvas-card__footer {
+.project-details-carousel-card--video .project-details-carousel-card__footer {
   justify-content: flex-end;
 }
-.project-details-canvas-video-wrap {
+.project-details-carousel-video-wrap {
   position: relative;
   width: 100%;
   height: 100%;
@@ -1299,7 +1301,7 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   overflow: hidden;
   background: #000;
 }
-.project-details-canvas-video-wrap iframe {
+.project-details-carousel-video-wrap iframe {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -1318,6 +1320,33 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
 /* Horizontal line on each grid row in work section */
 #home-work .grid\:row {
   border-top: 1px solid var(--border-color);
+}
+
+/* Experience collapsed row: title + subtitle on one line (mobile only; ≥768px keeps column:md widths) */
+@media screen and (max-width: 767px) {
+  #home-work .project\:trigger.grid\:row {
+    align-items: flex-start;
+  }
+
+  #home-work .project\:trigger.grid\:row > .column\:md\:3,
+  #home-work .project\:trigger.grid\:row > .column\:md\:4 {
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
+    max-width: none;
+  }
+}
+
+/* Arrow column is visual only; expand/collapse is the whole row (projects-accordion.js on .project:trigger) */
+#home-work .project\:trigger.grid\:row > .column\:md\:auto.margin\:left\:auto {
+  display: none;
+}
+
+/* Mobile: hide experience highlights carousel (body copy row above stays visible) */
+@media screen and (max-width: 767px) {
+  #home-work .project\:details > .grid\:row.padding\:vertical\:3:has([data-project-carousel]) {
+    display: none;
+  }
 }
 
 /* Content slider (thumbnails, images, recommendations) */
@@ -1546,12 +1575,29 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   margin-left: 0.25rem;
 }
 
-.current-position .position {
+.current-position .position,
+.current-position a.position {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   padding-left: 0.75rem;
   border-left: 1px solid var(--border-color);
+}
+
+.current-position a.position {
+  color: inherit;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.current-position a.position:hover {
+  opacity: 0.92;
+}
+
+.current-position a.position:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 3px;
+  border-radius: 0.25rem;
 }
 
 .current-position img {
@@ -1579,56 +1625,21 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   }
 }
 
-@media screen and (max-width: 768px) {
-  .current-position {
-    bottom: auto;
-    top: 50px;
-    right: 1rem;
-    padding: 0.5rem 0.75rem;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.75rem;
-    max-width: calc(100% - 2rem);
-    z-index: 10;
+@keyframes imageWrapperNarrow {
+  0% {
+    width: 0;
   }
-  
-  .current-position .position {
-    padding-left: 0.75rem;
-    border-left: 1px solid var(--border-color);
-    padding-top: 0;
-    border-top: none;
-    width: auto;
+  100% {
+    width: 110px;
   }
-  
-  .current-position img {
-    width: 20px;
-    height: 20px;
-  }
-  
-  .current-position .text {
-    font-size: 12px;
-  }
+}
 
-  .current-position .status {
-    width: auto;
+@keyframes imageWrapperTablet {
+  0% {
+    width: 0;
   }
-
-  .jumbotron\:home h1 {
-    margin-top: 4rem;
-    font-size: clamp(6rem, 8vw + 1rem, 7rem);
-  }
-
-  .jumbotron\:home .image\:wrapper {
-    height: 120px;
-  }
-
-  @keyframes imageWrapper {
-    0% {
-      width: 0;
-    }
-    100% {
-      width: 120px;
-    }
+  100% {
+    width: 110px;
   }
 }
 
@@ -1721,36 +1732,6 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   }
   100% {
     box-shadow: 0 0 0 0 rgba(139, 92, 246, 0);
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .latest-article {
-    top: 100px;
-    right: 1rem;
-    left: auto;
-    bottom: auto;
-    max-width: calc(100% - 2rem);
-    padding: 0.5rem 0.75rem;
-  }
-  
-  .latest-article .article-link {
-    padding-left: 0.75rem;
-    border-left: 1px solid var(--border-color);
-    padding-top: 0;
-    border-top: none;
-    width: auto;
-  }
-  
-  .latest-article img {
-    width: 20px;
-    height: 20px;
-  }
-  
-  .latest-article .text {
-    font-size: 12px;
-    max-width: calc(100vw - 200px);
-    font-weight: 400;
   }
 }
 
@@ -1880,9 +1861,17 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
     z-index: 3;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1280px) {
     #home-about-summary {
-        width: calc(100% - 12px);
+        width: 100%;
+        transition: none;
+    }
+
+    /* No blend motion: ignore inline --summary-blend-* if JS still updates them */
+    #home-about-summary::before {
+        transition: none;
+        opacity: 0 !important;
+        transform: none !important;
     }
 }
 
@@ -1926,6 +1915,287 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
         max-width: 400px;
         max-height: 400px;
     }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Tablet + phone (max-width: 1280px): no horizontal scroll, hero type, layout */
+/* -------------------------------------------------------------------------- */
+@media screen and (max-width: 1280px) {
+  html {
+    overflow-x: hidden;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  main.bg\:white,
+  main {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    overflow-x: clip;
+  }
+
+  /* Fill at least one viewport; cap at one viewport so tall content scrolls inside hero */
+  .jumbotron\:home {
+    overflow-x: clip;
+    overflow-y: auto;
+    align-items: stretch;
+    padding-top: 0.5rem;
+    padding-bottom: clamp(1rem, 3vh, 2.5rem);
+    min-height: 100vh;
+    min-height: 100dvh;
+    max-height: 100vh;
+    max-height: 100dvh;
+    box-sizing: border-box;
+  }
+
+  .jumbotron\:home > .grid {
+    position: relative;
+    z-index: 0;
+    width: 100%;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    min-height: 0;
+    padding-top: 6.75rem;
+    padding-bottom: clamp(0.75rem, 2vh, 1.5rem);
+    box-sizing: border-box;
+  }
+
+  .jumbotron\:home > .grid > .grid\:row {
+    flex: 0 1 auto;
+  }
+
+  .jumbotron\:home .hero-pills {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.55rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    padding: 1.1rem 1rem 0.65rem;
+    box-sizing: border-box;
+    pointer-events: none;
+  }
+
+  .jumbotron\:home .hero-pills > * {
+    pointer-events: auto;
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    width: auto;
+    max-width: min(100%, 22.5rem);
+    align-self: center;
+    flex-wrap: nowrap;
+    row-gap: 0.45rem;
+    border-radius: 50rem;
+    justify-content: center;
+  }
+
+  .jumbotron\:home .hero-pills .current-position,
+  .jumbotron\:home .hero-pills .latest-article {
+    padding: 0.55rem 0.9rem;
+  }
+
+  .jumbotron\:home .title\:texture {
+    max-width: 100%;
+    left: 50%;
+    font-size: min(40vw, 100%);
+  }
+
+  .jumbotron\:home h1 {
+    margin-top: 0.35rem;
+    font-size: 5.05rem;
+    line-height: 1.12;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    box-sizing: border-box;
+  }
+
+  @media screen and (max-width: 480px) {
+    .jumbotron\:home > .grid {
+      padding-top: 6.25rem;
+    }
+  }
+
+  @media screen and (min-width: 769px) and (max-width: 1280px) {
+    .jumbotron\:home .image\:wrapper {
+      height: 110px;
+      animation: imageWrapperTablet 1s 2s ease-in-out forwards;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .jumbotron\:home .image\:wrapper {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      height: 110px;
+      animation: imageWrapperNarrow 1s 2s ease-in-out forwards;
+    }
+  }
+
+  .jumbotron\:home .h5 {
+    font-size: 1.2rem;
+    line-height: 1.45;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: 26rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Centered “bubble” pills: single-line copy capped (~36ch) with ellipsis */
+  .jumbotron\:home .hero-pills .current-position .text,
+  .jumbotron\:home .hero-pills .latest-article .text,
+  .jumbotron\:home .hero-pills .latest-article a.text {
+    white-space: nowrap;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: min(36ch, calc(100vw - 5.5rem));
+    min-width: 0;
+    display: block;
+  }
+
+  .jumbotron\:home .hero-pills .current-position .position {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 100%;
+    justify-content: center;
+  }
+
+  .jumbotron\:home .hero-pills .current-position .position .text {
+    flex: 1 1 0;
+  }
+
+  .jumbotron\:home .hero-pills .latest-article .article-link {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 100%;
+    justify-content: center;
+  }
+
+  .jumbotron\:home .hero-pills .latest-article .article-link a.text {
+    flex: 1 1 0;
+  }
+
+  #home-about-summary {
+    overflow-x: clip;
+  }
+
+  #home-about-summary > .grid {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  #home-about-summary .summary-content {
+    min-height: 0;
+    text-align: center;
+    padding: 0.75rem 0.5rem 0;
+    overflow: hidden;
+  }
+
+  #home-about-summary .summary-content p {
+    position: relative;
+    top: auto !important;
+    left: auto;
+    right: auto;
+    text-align: center;
+    white-space: normal;
+    width: 100%;
+    max-width: 100%;
+    margin: 0.4rem 0;
+    box-sizing: border-box;
+  }
+
+  /* Summary: space above image column */
+  #home-about-summary .summary-media {
+    padding-top: 1.75rem;
+    justify-content: center;
+  }
+
+  #home-about-summary .speaker-image {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #home-work {
+    overflow-x: clip;
+  }
+
+  /* Experience section titles: hide huge texture word; single readable heading */
+  .section-title {
+    min-height: 0;
+    padding: 2.25rem 1.25rem 2.75rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+  }
+
+  .section-title .title\:texture2 {
+    display: none;
+  }
+
+  .section-title h2.h1 {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    text-align: center;
+    font-size: 3.65rem;
+    line-height: 1.15;
+    opacity: 1;
+    animation: none;
+    font-stretch: 100%;
+  }
+
+  /* Project carousel: use full width, tighter chrome */
+  #home-work [data-project-carousel] {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    --project-carousel-card-w: 100%;
+    --project-carousel-media-h: 12.5rem;
+    gap: 0.4rem;
+    padding-inline: 0.25rem;
+  }
+
+  .project-details-carousel__viewport {
+    max-width: 100%;
+    padding: 0 0.25rem 1.25rem 0.25rem;
+    overflow-x: clip;
+  }
+
+  /* Narrower card stack peek so translated slides stay on-screen */
+  .project-details-carousel__slide.is-depth-1 {
+    transform: translate3d(3px, 5px, -18px) scale(0.97) rotate(0.35deg);
+  }
+  .project-details-carousel__slide.is-depth-2 {
+    transform: translate3d(5px, 8px, -36px) scale(0.94) rotate(0.5deg);
+  }
+  .project-details-carousel__slide.is-depth-3 {
+    transform: translate3d(7px, 10px, -52px) scale(0.91) rotate(0.65deg);
+  }
+  .project-details-carousel__slide.is-depth-4 {
+    transform: translate3d(8px, 12px, -68px) scale(0.88) rotate(0.75deg);
+  }
+  .project-details-carousel__slide.is-depth-5 {
+    transform: translate3d(9px, 13px, -80px) scale(0.86) rotate(0.85deg);
+  }
 }
 
 /*# sourceMappingURL=theme.css.map */

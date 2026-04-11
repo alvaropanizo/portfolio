@@ -5,7 +5,7 @@ Single source of truth for how this Jekyll portfolio is structured, how content 
 ## Purpose
 
 - **Personal portfolio** for Alvaro Panizo: hero, intro, summary band, expandable “Experience & core values” blocks with carousels, footer.
-- **Goal**: All *copy, links, images, and carousel items* live in structured data (`_data/`). Pages only **layout + Liquid**; new experiences or cards are added by editing data and, only if needed, small include templates.
+- **Goal**: `_data/home.json` is the **canonical content model** (copy, links, images, carousel items, schema). The homepage **`index.html` is a Liquid template** (`layout: null` so the theme does not wrap it): it assigns `d = site.data.home`, includes `home-head.html` / `home-scripts.html`, and loops `{% include experience-block.html %}` for each experience. **Edit content in `home.json` only**; the build renders the page from data + includes.
 
 ## Tech stack
 
@@ -14,7 +14,7 @@ Single source of truth for how this Jekyll portfolio is structured, how content 
 | **Jekyll** (~4.x) | Static build, Liquid, `_data` files |
 | **GitHub Pages** | Hosting (`baseurl` in `_config.yml` is `/portfolio` for project pages) |
 | **CSS** | `assets/css/basecamp.css`, `assets/css/theme.css` (utility-style classes) |
-| **JS** | `scrolltext.js`, `scrollimage.js`, `summaryblend.js`, `projects-accordion.js`, `project-details-carousel.js`, `live-status.js` (loaded via `_includes/home-scripts.html`) |
+| **JS** | `scrolltext.js`, `scrollimage.js`, `summaryblend.js`, `projects-accordion.js`, `project-details-carousel.js`, `live-status.js` (via `{% include home-scripts.html %}` at the bottom of `index.html`, with GSAP from CDN) |
 | **GSAP** | Loaded from CDN on the homepage for scroll animations |
 | **JSON Schema** | `schemas/home.schema.json` (draft 2020-12) validates `_data/home.json`; CI runs `ajv-cli` |
 
@@ -45,7 +45,7 @@ portfolio/
 ├── scripts/
 │   └── validate-home-data.sh # Optional local check (npx ajv-cli)
 ├── _includes/               # Liquid fragments: `home-head.html`, `home-scripts.html`, carousel, experience block
-├── index.html               # Homepage shell; must have YAML front matter for Liquid
+├── index.html               # Liquid homepage (`layout: null`); binds `site.data.home` into sections + includes
 ├── assets/
 │   ├── css/
 │   ├── js/
@@ -62,7 +62,7 @@ portfolio/
 The page is composed of these **regions** (map 1:1 to keys under `_data/home.json` where applicable):
 
 1. **Meta** (`meta`) — `<title>`, description, canonical hint, social preview fields.
-2. **Hero / header** (`header`) — Large texture name, “live” status strip (also wired to `live-status.js`), **current work** tag (logo + line of text), **latest article** tag (icon + link + title).
+2. **Hero / header** (`header.jumbotron:home`) — Texture title, **`.hero-pills`** (`.current-position` + `.latest-article`; the role line is **`a.position`** opening LinkedIn in a new tab; desktop `display: contents`, ≤1280px column of centered pill cards with extra top padding, `max-width` cap, single-line **`text-overflow: ellipsis`** on titles ~`36ch`), then **`.grid`** with the H1, headshot, and subhead.
 3. **Role lines + headshot** (`header.roles`) — Two position titles (left / right of photo) and profile image + alt.
 4. **Headline** (`header.headline_html`) — Short HTML line under the hero grid (supports inline spans/classes).
 5. **About** (`about.paragraphs_html`) — Scroll-text intro block; each item is an HTML string (paragraph).
@@ -70,7 +70,7 @@ The page is composed of these **regions** (map 1:1 to keys under `_data/home.jso
 7. **Section title** (`experience_section`) — Texture title + main H2 for “Experience & core values”.
 8. **Experience topics** (`experience_topics`) — Exactly three pillar definitions (`id`, `label`, optional `short_label`). Stable `id` values are the vocabulary for tagging carousel cards (`topic_id`). Cards may reference any pillar regardless of which experience row they appear under (cross-cutting highlights).
 9. **Experiences** (`experiences`) — Ordered list of **expandable sections** (accordion + carousel). Each has: number label, title, subtitle line, body paragraphs, carousel aria-label, **cards** (each card includes `topic_id`).
-10. **Footer** (`footer`) — CTA copy, LinkedIn URL, CV path, “About” blurb.
+10. **Footer** (`footer`) — CTA copy, LinkedIn URL, CV path, “About” blurb (`.footer-about` wraps the eyebrow + bio). ≤1280px footer uses `overflow-y: auto` so content isn’t clipped by the fixed layer.
 
 ## Experience block structure (repeated)
 
@@ -84,6 +84,8 @@ Each entry in `experiences[]` shares the same shape:
 | `body_paragraphs_html` | Array of HTML strings; each wrapped in `<p>` by the template |
 | `carousel_aria_label` | Accessible name for the highlights carousel |
 | `cards` | Ordered list of **typed** carousel items (see below); every card requires `topic_id` |
+
+Collapsed-row layout: on viewports **below 768px**, `theme.css` keeps `.column:md:3` (title) and `.column:md:4` (subtitle) **on one flex row** inside `#home-work .project:trigger`; from **768px** up, Basecamp `column:md:*` widths apply unchanged. The arrow column (`.column:md:auto.margin:left:auto`) inside each trigger row is **hidden** in CSS; **`projects-accordion.js` still attaches to `.project:trigger`**, so the full row remains the click/keyboard target (`cursor: pointer`, `role="button"`). On viewports **below 768px**, the **`grid:row.padding:vertical:3` that wraps `[data-project-carousel]`** is **`display: none`**, so the highlights carousel is hidden; the body-paragraph row above in `.project:details` stays visible.
 
 ## Experience pillars (`experience_topics`)
 
@@ -106,18 +108,25 @@ Each card has `type` (string) and **`topic_id`** (must match one of `experience_
 
 Rendered slides expose **`data-experience-topic`**, optional **`data-experience-topic-label`**, and a class **`project-details-carousel__slide--topic-<topic_id>`** for filtering or styling by pillar.
 
-**Extending**: Add a new `type` by branching in `_includes/carousel-card.html`, add a `$defs` branch and `oneOf` arm in `schemas/home.schema.json`, and document the field schema here. Prefer reusing existing CSS classes (`project-details-canvas-card`, `project-details-canvas-quote-card`, etc.) so JS and styling keep working.
+**Extending**: Add a new `type` by branching in `_includes/carousel-card.html`, add a `$defs` branch and `oneOf` arm in `schemas/home.schema.json`, and document the field schema here. Prefer reusing existing CSS classes (`project-details-carousel-card`, `project-details-carousel-quote-card`, etc.) so JS and styling keep working.
 
 ## IDs, accessibility, and JS contracts
 
 - **Accordion**: Rows use `.project:trigger`, `.project:details`, `aria-expanded`, `aria-controls`, `id`/`id` pairs. Implemented in `assets/js/projects-accordion.js` — **do not rename** these hooks without updating the script.
-- **Carousel**: Wrapper `[data-project-carousel]`, slides `[data-carousel-slide]`, prev/next `[data-carousel-prev]` / `[data-carousel-next]`, iframes `[data-carousel-iframe]`. Optional pillar hooks: `[data-experience-topic]`, `[data-experience-topic-label]`. See `assets/js/project-details-carousel.js`.
+- **Carousel**: Root wrapper is **`[data-project-carousel]`** only (no class on that element; `#home-work [data-project-carousel]` carries flex + sizing in `theme.css`). **Below 768px width the whole carousel block is hidden** in `theme.css` (the `.grid:row` that contains `[data-project-carousel]`). Slides use `[data-carousel-slide]` plus **`project-details-carousel-card`**, **`project-details-carousel-quote-card`**, **`project-details-carousel-cert-card`**, modifiers, and `project-details-carousel__*` chrome. Iframes: `[data-carousel-iframe]`. See `assets/js/project-details-carousel.js`.
 - **Live clock**: `#live-status` / `.status-cet` — `assets/js/live-status.js`.
+- **Summary band** (`#home-about-summary`): `assets/js/summaryblend.js` drives scroll blend + large desktop motion **only above 1280px** viewport width (aligned with tablet CSS). At **max-width 1280px** the script resets `--summary-blend-*`, kills desktop ScrollTriggers, and clears transforms; it then runs a **subtle scrubbed motion** for tablet + mobile: horizontal `x` on `.summary-content p.h4` (1st and 3rd from the left, 2nd from the right) and drift on `.speaker-image` (from the right/top with rotation into place; skipped when `prefers-reduced-motion: reduce`).
 
 ## URL and asset paths
 
-- Prefer **root-relative** paths in JSON: `/assets/images/...`, `/assets/js/...` so the site works with `baseurl` on GitHub Pages.
+- Prefer **root-relative** paths in JSON: `/assets/images/...`, `/assets/js/...`, `/assets/files/...`. In Liquid, pipe paths through the **`relative_url`** filter (see `home-head.html`, `carousel-card.html`, `index.html`) so GitHub Pages `baseurl` resolves correctly.
 - When adding images, place files under `assets/images/` (or subfolders) and reference them from `_data/home.json`.
+
+## Styling vs structural data (agents)
+
+- **Styling-only work** (layout, breakpoints, typography, motion): change **`assets/css/theme.css`** (and only `basecamp.css` if you are adjusting shared utilities). Do **not** add or rename keys in `_data/home.json` or change `schemas/home.schema.json` unless the task explicitly needs new content fields.
+- **Content or URL changes**: edit **`_data/home.json` only** (run `./scripts/validate-home-data.sh`), then rebuild and spot-check the rendered home page.
+- **Parity checklist** (spot-check after edits): hero pills (LinkedIn, work line, latest article), about paragraphs, summary lines + image, experience section titles, each accordion row and carousel media paths, footer CTA / LinkedIn / CV / about blurb (`about_title`, `about_body_html`).
 
 ## Editorial workflow (for humans and agents)
 
@@ -125,7 +134,9 @@ Rendered slides expose **`data-experience-topic`**, optional **`data-experience-
 2. Edit strings or arrays; add an object to `experiences` or `cards` following an existing entry as a template.
 3. Run `./scripts/validate-home-data.sh` (or rely on CI) so `home.json` matches `schemas/home.schema.json`.
 4. Run `bundle exec jekyll build` or `serve` and spot-check the home page.
-5. If a **new card type** is required, update `_includes/carousel-card.html`, `schemas/home.schema.json`, and this document in the same change.
+5. If a **new card type** is required, update `_includes/carousel-card.html`, `schemas/home.schema.json`, and this document in the same change (the home template only loops experiences; it does not hard-code cards).
+
+**CSS-only changes**: skip steps 1–3; edit `assets/css/theme.css` (and rebuild / spot-check in step 4).
 
 ## Quality checks
 
@@ -140,6 +151,6 @@ Rendered slides expose **`data-experience-topic`**, optional **`data-experience-
 
 ## Design intent
 
-- **DRY markup**: One Liquid partial per card type and one per experience block.
-- **Predictable growth**: New “experience” row = new JSON object + no HTML copy-paste.
-- **Stable presentation**: JSON holds content; CSS class names stay in templates so the visual system does not drift.
+- **DRY markup**: Liquid partials (`_includes/`) provide one template per card type and per experience block; `index.html` composes them with `site.data.home`.
+- **Predictable growth**: New “experience” row = new object in `experiences[]` in JSON; no duplicate HTML block in `index.html`.
+- **Stable presentation**: JSON holds content; CSS class names stay in markup so the visual system does not drift.

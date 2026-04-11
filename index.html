@@ -8,63 +8,74 @@ layout: null
 {% include home-head.html %}
 </head>
 <body class="blocks bg:white">
-<main class="bg:white">
+    <main class="bg:white">
     <header class="jumbotron:home" id="home-introduction">
         <div class="title:texture">
             {{ d.header.texture_title }}
         </div>
-        <div class="current-position">
-            <div class="status" id="live-status" aria-live="polite">
-                <span class="label">{{ d.header.live_status_label }}</span>
-                <span class="status-cet" aria-hidden="true"></span>
-            </div>
-            <div class="position">
-                <img src="{{ d.header.current_work.logo | relative_url }}" alt="{{ d.header.current_work.logo_alt | escape }}" />
-                <span class="text">{{ d.header.current_work.text_html }}</span>
-            </div>
-        </div>
-        <div class="latest-article">
-            <div class="status">
-                <span class="label">{{ d.header.latest_article.label }}</span>
-            </div>
-            <div class="article-link">
-                <img src="{{ d.header.latest_article.icon | relative_url }}" alt="{{ d.header.latest_article.icon_alt | escape }}" />
-                <a href="{{ d.header.latest_article.url }}" target="_blank" rel="noopener noreferrer" class="text">
-                    {{ d.header.latest_article.title }}
+        <div class="hero-pills" aria-label="Highlights">
+            <div class="current-position">
+                <div class="status" id="live-status" aria-live="polite">
+                    <span class="label">{{ d.header.live_status_label }}</span>
+                    <span class="status-cet" aria-hidden="true"></span>
+                </div>
+                <a
+                    class="position"
+                    href="{{ d.footer.linkedin_url }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Alvaro Panizo on LinkedIn">
+                    <img src="{{ d.header.current_work.logo | relative_url }}" alt="{{ d.header.current_work.logo_alt }}" />
+                    <span class="text">{{ d.header.current_work.text_html }}</span>
                 </a>
+            </div>
+            <div class="latest-article">
+                <div class="status">
+                    <span class="label">{{ d.header.latest_article.label }}</span>
+                </div>
+                <div class="article-link">
+                    <img src="{{ d.header.latest_article.icon | relative_url }}" alt="{{ d.header.latest_article.icon_alt }}" />
+                    <a href="{{ d.header.latest_article.url }}" target="_blank" rel="noopener noreferrer" class="text">
+                        {{ d.header.latest_article.title }}
+                    </a>
+                </div>
             </div>
         </div>
         <div class="grid">
-            <div class="grid:row">
-                <div class="column:12">
-                    <h1 class="display:flex">
-                        <span class="line:one">{{ d.header.roles.line_one }}</span>
-                        <span class="image:wrapper">
-                            <img src="{{ d.header.roles.headshot.src | relative_url }}" alt="{{ d.header.roles.headshot.alt | escape }}">
-                        </span>
-                        <span class="line:two">{{ d.header.roles.line_two }}</span>
-                    </h1>
-                </div>
-                <div class="column:md:7 margin:horizontal:auto">
-                    <p class="h5 text:center">{{ d.header.headline_html }}</p>
-                </div>
+        <div class="grid:row">
+            <div class="column:12">
+                <h1 class="display:flex">
+                    <span class="line:one">
+                        {{ d.header.roles.line_one }}
+                    </span>
+                    <span class="image:wrapper">
+                            <img src="{{ d.header.roles.headshot.src | relative_url }}" alt="{{ d.header.roles.headshot.alt }}">
+                    </span>
+                    <span class="line:two">
+                        {{ d.header.roles.line_two }}
+                    </span>
+                </h1>
+            </div>
+            <div class="column:md:7 margin:horizontal:auto">
+                <p class="h5 text:center">
+                        {{ d.header.headline_html }}
+                </p>
             </div>
         </div>
-    </header>
-
-    <section class=" padding:vertical:4" id="home-about">
+    </div>
+</header>
+    <section class="padding:vertical:4" id="home-about">
         <div class="grid">
             <div class="grid:row">
                 <div class="column:md:8 glass-blur">
                     {% for para in d.about.paragraphs_html %}
                     <p class="h4 scrolltext">{{ para }}</p>
+                    {% if forloop.index == 3 %}<br>{% endif %}
                     {% endfor %}
-                    <br>
                 </div>
             </div>
         </div>
     </section>
-
     <section class="padding:vertical:4 section-blue" id="home-about-summary">
         <div class="grid">
             <div class="grid:row align-items:center">
@@ -74,51 +85,58 @@ layout: null
                     {% endfor %}
                 </div>
                 <div class="column:md:8 summary-media">
-                    <img src="{{ d.summary.media.src | relative_url }}" alt="{{ d.summary.media.alt | escape }}" class="{{ d.summary.media.class }}" loading="lazy" decoding="async">
+                    <img src="{{ d.summary.media.src | relative_url }}" alt="{{ d.summary.media.alt }}" class="{{ d.summary.media.class }}" loading="lazy" decoding="async">
                 </div>
             </div>
         </div>
     </section>
-
-    <section class=" padding:vertical:4 section-title" id="tenet-leader">
-        <h2 class="title:texture2">{{ d.experience_section.texture_title }}</h2>
-        <h2 class="h1">{{ d.experience_section.heading }}</h2>
+    <section class="padding:vertical:4 section-title" id="tenet-leader">
+        <h2 class="title:texture2">
+            {{ d.experience_section.texture_title }}
+        </h2>
+        <h2 class="h1">
+            {{ d.experience_section.heading }}
+        </h2>
     </section>
-
-    <section class=" work" id="home-work">
-        <div class="grid">
-            {% for experience in d.experiences %}
-            {% include experience-block.html experience=experience topics=d.experience_topics %}
-            {% endfor %}
-        </div>
-    </section>
-</main>
-
-<footer class="bg:primary padding:vertical:10">
-    <section class=" padding:vertical:4" id="footer-cta">
-        <div class="grid">
-            <div class="grid:row">
-                <div class="column:md:8">
-                    {% for line in d.footer.cta_lines_html %}
-                    <p class="h4 footertext">{{ line }}</p>
-                    {% endfor %}
-                </div>
-                <div class="column:md:auto margin:left:auto margin:top:3 margin:top:md:0">
-                    <a href="{{ d.footer.linkedin_url }}" class="button margin:left:auto">
-                        <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 0.5rem;">person_add</span>
-                        My LinkedIn profile
-                    </a>
-                </div>
-                <div class="column:md:auto margin:left:auto margin:top:3 margin:top:md:0">
-                    <a href="{{ d.footer.cv_href | relative_url }}" class="button margin:left:auto" download>
-                        <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 0.5rem;">download</span>
-                        Download my CV in PDF
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+    <section class="work" id="home-work">
     <div class="grid">
+            {% for exp in d.experiences %}
+            {% include experience-block.html experience=exp topics=d.experience_topics %}
+            {% endfor %}
+    </div>
+</section>
+</main>
+<footer class="bg:primary padding:vertical:10">
+    <section class="padding:vertical:4" id="home-footer-cta">
+    <div class="grid">
+        <div class="grid:row">
+            <div class="column:md:8">
+                    {% for line in d.footer.cta_lines_html %}
+                    <p class="h4 footertext">
+                        {{ line }}
+                    </p>
+                    {% endfor %}
+            </div>
+            <div class="column:md:auto margin:left:auto margin:top:3 margin:top:md:0">
+                <a href="{{ d.footer.linkedin_url }}" class="button margin:left:auto">
+                    <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 0.5rem;">
+                        person_add
+                    </span>
+                    My LinkedIn profile
+                </a>
+            </div>
+            <div class="column:md:auto margin:left:auto margin:top:3 margin:top:md:0">
+                <a href="{{ d.footer.cv_href | relative_url }}" class="button margin:left:auto" download>
+                    <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 0.5rem;">
+                        download
+                    </span>
+                    Download my CV in PDF
+                </a>
+            </div>
+            </div>
+    </div>
+</section>
+    <div class="grid footer-about">
         <div class="grid:row">
             <div class="column:md:8 margin:left:auto">
                 <p class="eyebrow">{{ d.footer.about_title }}</p>
