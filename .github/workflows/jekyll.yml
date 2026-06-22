@@ -55,6 +55,7 @@ jobs:
           GITHUB_PAGES: true
         run: |
           bundle exec jekyll build --baseurl "/portfolio" --trace --verbose
+          touch _site/.nojekyll
           
       - name: Run Build Script
         run: |
