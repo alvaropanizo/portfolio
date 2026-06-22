@@ -18,7 +18,6 @@ sass:
 # Include settings
 include:
   - assets
-  - .nojekyll
   - _sass
   - assets/fonts
   - assets/css
@@ -37,7 +36,6 @@ include:
 # Keep files
 keep_files:
   - assets
-  - .nojekyll
 
 # Exclude from processing
 exclude:
@@ -48,6 +46,7 @@ exclude:
   - README.md
   - agent.md
   - _config_local.yml
+  - .nojekyll
   - scripts
   - schemas
 

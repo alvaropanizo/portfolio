@@ -1,6 +1,7 @@
 (function () {
   var REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var MAX_DPR = 2;
+  var MAX_CANVAS_PX = 2048;
 
   var VERTEX_SHADER = [
     "attribute vec2 a_position;",
@@ -145,19 +146,29 @@
     video.preload = "auto";
 
     var frameCallbackId = null;
+    var resizeRaf = null;
+    var lastCanvasWidth = 0;
+    var lastCanvasHeight = 0;
 
     var clip = media.querySelector(".hero-media__clip");
 
     function sizeCanvas() {
       var dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
       var rect = (clip || media).getBoundingClientRect();
-      var width = Math.max(1, Math.round(rect.width * dpr));
-      var height = Math.max(1, Math.round(rect.height * dpr));
+      if (!rect.width || !rect.height) return false;
 
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
+      var width = Math.min(MAX_CANVAS_PX, Math.max(1, Math.round(rect.width * dpr)));
+      var height = Math.min(MAX_CANVAS_PX, Math.max(1, Math.round(rect.height * dpr)));
+
+      if (width === lastCanvasWidth && height === lastCanvasHeight) {
+        return false;
       }
+
+      lastCanvasWidth = width;
+      lastCanvasHeight = height;
+      canvas.width = width;
+      canvas.height = height;
+      return true;
     }
 
     function render() {
@@ -241,7 +252,11 @@
     video.addEventListener("play", startRenderLoop);
 
     function onResize() {
-      render();
+      if (resizeRaf) return;
+      resizeRaf = window.requestAnimationFrame(function () {
+        resizeRaf = null;
+        render();
+      });
     }
 
     document.addEventListener("visibilitychange", function () {
