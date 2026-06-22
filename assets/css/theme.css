@@ -82,6 +82,9 @@
   --font-subheadline: ivypresto-display;
   --font-body: Geist, serif;
   --font-mono: Geist Mono, serif;
+  --font-bold: Caprasimo, serif;
+  --font-clear: Montserrat, sans-serif;
+  --font-handwritten: "Jim Nightshade", cursive;
   --breakpoint-sm: 576px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
@@ -765,11 +768,14 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
 .jumbotron\:home {
   position: relative;
   min-height: 95vh;
+  min-height: 95dvh;
   height: 100%;
   z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  overflow-x: clip;
 }
 
 /* Wrapper for pills: desktop uses contents so pills keep absolute placement on the header */
@@ -777,70 +783,192 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   display: contents;
 }
 
-.jumbotron\:home .title\:texture {
-  position: absolute;
-  font-family: var(--font-headline);
-  text-transform: uppercase;
-  line-height: 0.8;
-  left: 50%;
-  top: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  z-index: -1;
-  opacity: 0;
-  font-size: 40vw;
-  color: var(--texture-text-color);
-  animation: titleTexture 1s forwards;
-}
-
-.jumbotron\:home h1 {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  font-size: 6rem;
-  text-align: center;
+.jumbotron\:home .hero-stage {
+  --hero-media-size: clamp(34rem, 42vw, 44rem);
+  --hero-vertical-overlap: clamp(5.5rem, 17vw, 11.5rem);
+  --hero-panizo-lift: clamp(7rem, 17vw, 11rem);
+  --hero-cluster-x: clamp(6%, 12vw, 14%);
+  --hero-cluster-y: 50%;
+  --hero-tagline-x: clamp(47%, 50%, 51%);
+  --hero-tagline-y: 46%;
+  position: relative;
   width: 100%;
+  max-width: 96rem;
+  min-height: clamp(38rem, 82vh, 54rem);
+  margin: 0 auto;
+  padding: clamp(5.5rem, 9vh, 7rem) clamp(1.5rem, 4vw, 3.5rem) clamp(2rem, 5vh, 3.5rem);
+  box-sizing: border-box;
+  isolation: isolate;
 }
 
-@media screen and (max-width: 992px) {
-  .jumbotron\:home h1 {
-    flex-direction: column;
-  }
-}
-.jumbotron\:home h1 span.line\:one, .jumbotron\:home h1 span.line\:two {
-  opacity: 0;
+/* Scroll-ready layers: target [data-hero-layer] for per-element motion */
+
+.jumbotron\:home .hero-cluster {
+  position: absolute;
+  left: var(--hero-cluster-x);
+  top: var(--hero-cluster-y);
+  transform: translateY(-46%);
+  z-index: 2;
+  display: grid;
+  grid-template-columns: auto var(--hero-media-size);
+  grid-template-rows: auto auto;
+  column-gap: 0;
+  row-gap: 0;
+  align-items: end;
+  width: fit-content;
+  max-width: calc(100% - var(--hero-cluster-x));
 }
 
-.jumbotron\:home h1 span.line\:one {
-  animation: titleTexture 1s 1s ease-in-out forwards;
+.jumbotron\:home .hero-name__vertical {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: end;
+  align-self: center;
+  z-index: 0;
+  margin: 0 calc(-1 * var(--hero-vertical-overlap)) 0 0;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-headline);
+  font-size: clamp(2.35rem, 3.9vw, 4.3rem);
+  font-weight: 600;
+  line-height: 0.88;
+  letter-spacing: 0.06em;
+  color: var(--color-text-black);
+  text-transform: uppercase;
+  pointer-events: none;
+  opacity: 0.5;
 }
 
-.jumbotron\:home h1 span.line\:two {
-  animation: titleTexture 1s 1.75s ease-in-out forwards;
+.jumbotron\:home .hero-name__primary {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  margin: calc(-1 * var(--hero-panizo-lift)) 0 0 40px;
+  padding: 0;
+  z-index: 2;
+  font-family: var(--font-headline);
+  font-size: clamp(7.1rem, 17.25vw, 15.75rem);
+  font-weight: 700;
+  line-height: 0.72;
+  color: var(--text-black);
+  text-transform: uppercase;
+  pointer-events: none;
+  opacity: 0.9;
 }
 
-.jumbotron\:home .h5 {
-  opacity: 0;
-  animation: titleTexture 1s 2s ease-in-out forwards;
+.jumbotron\:home .hero-media {
+  position: relative;
+  grid-column: 2;
+  grid-row: 1;
+  width: var(--hero-media-size);
+  aspect-ratio: 1;
+  justify-self: end;
+  align-self: end;
+  z-index: 1;
+  background: transparent;
 }
 
-.jumbotron\:home .image\:wrapper {
-  display: inline-flex;
-  width: 0px;
-  height: 155px;
-  border-radius: 50rem;
-  margin-right: 1rem;
-  margin-left: 1rem;
-  transform: translateY(-10%);
-  opacity: 1;
-  animation: imageWrapper 1s 2s ease-in-out forwards;
+.jumbotron\:home .hero-media__clip {
+  position: absolute;
+  inset: 0;
   overflow: hidden;
+  border-radius: 0 0 50% 50% / 0 0 18% 18%;
 }
-.jumbotron\:home .image\:wrapper img {
+
+.jumbotron\:home .hero-media__backdrop {
+  position: absolute;
+  width: 34%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--color-lime);
+  z-index: 0;
+  top: 19%;
+  left: 61%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.jumbotron\:home .hero-media__canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: top center;
+  display: block;
+  background: transparent;
+  image-rendering: auto;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+.jumbotron\:home .hero-media__video {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+}
+
+.jumbotron\:home .hero-media--alpha .hero-media__canvas {
+  display: block;
+}
+
+.jumbotron\:home .hero-media--alpha .hero-media__video {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+}
+
+.jumbotron\:home .hero-tagline {
+  position: absolute;
+  left: var(--hero-tagline-x);
+  top: var(--hero-tagline-y);
+  transform: translateY(-10%);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+  margin: 0;
+  text-transform: uppercase;
+  line-height: 0.95;
+  min-width: 0;
+  padding: 0 clamp(1.5rem, 8vw, 5rem) 0 clamp(0.5rem, 2vw, 1.5rem);
+  box-sizing: border-box;
+}
+
+.jumbotron\:home .hero-tagline__line {
+  font-family: var(--font-clear);
+  font-size: 2.55rem;
+  font-weight: 200;
+  color: var(--color-text-black);
+}
+
+.jumbotron\:home .hero-tagline__line--emphasis {
+  font-family: var(--font-bold);
+  font-size: 3.1vw;
+  font-weight: 400;
+  color: var(--text-black);
+  text-transform: lowercase;
+  letter-spacing: -0.01em;
+  line-height: 0.88;
+  margin-block: 0.06em 0.12em;
+}
+
+.jumbotron\:home .hero-tagline__line--handwritten {
+  font-family: var(--font-handwritten);
+  font-size: 2.4vw;
+  font-weight: 400;
+  color: var(--color-text-black);
+  text-transform: none;
+  letter-spacing: 0.01em;
+  line-height: 1.05;
 }
 
 @keyframes titleTexture {
@@ -849,14 +977,6 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   }
   100% {
     opacity: 1;
-  }
-}
-@keyframes imageWrapper {
-  0% {
-    width: 0;
-  }
-  100% {
-    width: 150px;
   }
 }
 .project\:featured .icon\:arrow {
@@ -1521,8 +1641,6 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
 
 .current-position, .latest-article {
   position: absolute;
-  bottom: 2rem;
-  right: 2rem;
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -1575,44 +1693,6 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   margin-left: 0.25rem;
 }
 
-.current-position .position,
-.current-position a.position {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding-left: 0.75rem;
-  border-left: 1px solid var(--border-color);
-}
-
-.current-position a.position {
-  color: inherit;
-  text-decoration: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.current-position a.position:hover {
-  opacity: 0.92;
-}
-
-.current-position a.position:focus-visible {
-  outline: 2px solid var(--color-blue);
-  outline-offset: 3px;
-  border-radius: 0.25rem;
-}
-
-.current-position img {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-}
-
-.current-position .text {
-  font-family: var(--font-mono);
-  font-size: 14px;
-  color: var(--text-text-black);
-  white-space: nowrap;
-}
-
 @keyframes pulse {
   0% {
     box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
@@ -1625,27 +1705,10 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   }
 }
 
-@keyframes imageWrapperNarrow {
-  0% {
-    width: 0;
-  }
-  100% {
-    width: 110px;
-  }
-}
-
-@keyframes imageWrapperTablet {
-  0% {
-    width: 0;
-  }
-  100% {
-    width: 110px;
-  }
-}
-
 .latest-article {
+  top: 2rem;
+  bottom: auto;
   right: 2rem;
-  bottom: calc(2rem + 65px);
   left: auto;
   background: var(--bg-white);
   max-width: 650px;
@@ -1657,6 +1720,13 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   border-radius: 50rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   border: 1px solid var(--border-color);
+}
+
+.current-position {
+  top: calc(2rem + 4.35rem);
+  bottom: auto;
+  right: 2rem;
+  left: auto;
 }
 
 .latest-article .status {
@@ -1684,7 +1754,8 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   letter-spacing: 0.05em;
 }
 
-.latest-article .article-link {
+.latest-article .article-link,
+.current-position .position-link {
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -1701,16 +1772,60 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   flex-shrink: 0;
 }
 
-.latest-article .text {
+.current-position .position-link img {
+  width: auto;
+  height: 18px;
+  max-width: 36px;
+  object-fit: contain;
+  object-position: center;
+  flex-shrink: 0;
+  align-self: center;
+  display: block;
+}
+
+.latest-article .text,
+.latest-article a.text,
+.current-position .text,
+.current-position a.text {
   font-family: var(--font-mono);
   font-size: 14px;
   font-weight: 400;
+  font-variation-settings: "wght" 400;
+  font-synthesis: none;
   color: var(--text-text-black);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   min-width: 0;
   max-width: 500px;
+  line-height: 1.3;
+}
+
+.latest-article a.text,
+.current-position a.text {
+  align-self: center;
+  color: var(--text-text-black);
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.latest-article a.text:hover,
+.current-position a.text:hover {
+  opacity: 0.8;
+}
+
+.jumbotron\:home .hero-pills .current-position a.text,
+.jumbotron\:home .hero-pills .latest-article a.text {
+  font-weight: 400;
+  font-variation-settings: "wght" 400;
+  text-decoration: none;
+}
+
+.current-position a.text:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 3px;
+  border-radius: 0.25rem;
 }
 
 .latest-article a {
@@ -1954,23 +2069,102 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
     box-sizing: border-box;
   }
 
-  .jumbotron\:home > .grid {
+  .jumbotron\:home > .hero-stage {
     position: relative;
     z-index: 0;
-    width: 100%;
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
     justify-content: center;
+    gap: clamp(1.25rem, 4vh, 2rem);
     min-height: 0;
+    width: 100%;
+    max-width: 32rem;
     padding-top: 6.75rem;
     padding-bottom: clamp(0.75rem, 2vh, 1.5rem);
     box-sizing: border-box;
+    isolation: auto;
   }
 
-  .jumbotron\:home > .grid > .grid\:row {
-    flex: 0 1 auto;
+  .jumbotron\:home .hero-cluster {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    z-index: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    gap: 0;
+  }
+
+  .jumbotron\:home .hero-name__vertical {
+    grid-column: auto;
+    grid-row: auto;
+    writing-mode: horizontal-tb;
+    transform: none;
+    padding-bottom: 0;
+    margin: 0 0 0.35rem;
+    font-size: clamp(2rem, 9vw, 2.6rem);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+  }
+
+  .jumbotron\:home .hero-media {
+    width: min(78vw, 15.5rem);
+    aspect-ratio: 1;
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .jumbotron\:home .hero-media__clip {
+    border-radius: 0 0 50% 50% / 0 0 16% 16%;
+  }
+
+  .jumbotron\:home .hero-media__backdrop {
+    width: 38%;
+    top: 22%;
+    left: 54%;
+  }
+
+  .jumbotron\:home .hero-name__primary {
+    margin: clamp(-2.5rem, -8vw, -1.5rem) 0 0;
+    padding: 0;
+    font-size: clamp(4.9rem, 25.5vw, 7.1rem);
+    text-align: center;
+    width: 100%;
+  }
+
+  .jumbotron\:home .hero-tagline {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    z-index: auto;
+    grid-column: auto;
+    text-align: center;
+    align-items: center;
+    justify-self: center;
+    margin: 0;
+    padding: 0 1rem;
+    max-width: 100%;
+  }
+
+  .jumbotron\:home .hero-tagline__line {
+    font-size: clamp(1.1rem, 5vw, 1.45rem);
+    font-weight: 100;
+    letter-spacing: 0.06em;
+  }
+
+  .jumbotron\:home .hero-tagline__line--emphasis {
+    font-size: clamp(1.15rem, 5.2vw, 1.5rem);
+  }
+
+  .jumbotron\:home .hero-tagline__line--handwritten {
+    font-size: clamp(1.35rem, 6vw, 1.85rem);
   }
 
   .jumbotron\:home .hero-pills {
@@ -2010,55 +2204,15 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
     padding: 0.55rem 0.9rem;
   }
 
-  .jumbotron\:home .title\:texture {
-    max-width: 100%;
-    left: 50%;
-    font-size: min(40vw, 100%);
-  }
-
-  .jumbotron\:home h1 {
-    margin-top: 0.35rem;
-    font-size: 5.05rem;
-    line-height: 1.12;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-    box-sizing: border-box;
-  }
-
   @media screen and (max-width: 480px) {
-    .jumbotron\:home > .grid {
+    .jumbotron\:home > .hero-stage {
       padding-top: 6.25rem;
     }
   }
 
-  @media screen and (min-width: 769px) and (max-width: 1280px) {
-    .jumbotron\:home .image\:wrapper {
-      height: 110px;
-      animation: imageWrapperTablet 1s 2s ease-in-out forwards;
-    }
-  }
-
-  @media screen and (max-width: 768px) {
-    .jumbotron\:home .image\:wrapper {
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-      height: 110px;
-      animation: imageWrapperNarrow 1s 2s ease-in-out forwards;
-    }
-  }
-
-  .jumbotron\:home .h5 {
-    font-size: 1.2rem;
-    line-height: 1.45;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    max-width: 26rem;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   /* Centered “bubble” pills: single-line copy capped (~36ch) with ellipsis */
   .jumbotron\:home .hero-pills .current-position .text,
+  .jumbotron\:home .hero-pills .current-position a.text,
   .jumbotron\:home .hero-pills .latest-article .text,
   .jumbotron\:home .hero-pills .latest-article a.text {
     white-space: nowrap;
@@ -2067,18 +2221,26 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
     text-overflow: ellipsis;
     max-width: min(36ch, calc(100vw - 5.5rem));
     min-width: 0;
-    display: block;
+    font-weight: 400;
+    font-variation-settings: "wght" 400;
   }
 
-  .jumbotron\:home .hero-pills .current-position .position {
+  .jumbotron\:home .hero-pills .current-position .position-link {
     flex: 1 1 auto;
     min-width: 0;
     max-width: 100%;
     justify-content: center;
+    align-items: center;
   }
 
-  .jumbotron\:home .hero-pills .current-position .position .text {
+  .jumbotron\:home .hero-pills .current-position .position-link img {
+    height: 16px;
+    max-width: 30px;
+  }
+
+  .jumbotron\:home .hero-pills .current-position .position-link a.text {
     flex: 1 1 0;
+    align-self: center;
   }
 
   .jumbotron\:home .hero-pills .latest-article .article-link {
