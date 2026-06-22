@@ -6,7 +6,6 @@
     "og_image": ""
   },
   "header": {
-    "texture_title": "Panizo",
     "live_status_label": "—",
     "current_work": {
       "logo": "/assets/images/logo-actual.png",
@@ -20,15 +19,23 @@
       "url": "https://medium.com/empathyco/explainability-and-understanding-in-e-commerce-the-challenge-of-xai-2361b2e161ae",
       "title": "Explainability and reasoning in AI integrations"
     },
-    "roles": {
-      "line_one": "Senior Product Engineer",
-      "headshot": {
-        "src": "/assets/images/headshot.png",
-        "alt": "@alvaropanizo"
+    "hero": {
+      "name_vertical": "ALVARO",
+      "name_horizontal": "PANIZO",
+      "video": {
+        "src": "/assets/videos/profile-hair-bck.mp4",
+        "src_webm": "/assets/videos/profile-hair-loop.webm",
+        "boomerang": true,
+        "alt": "Alvaro Panizo portrait animation"
       },
-      "line_two": "Product Manager"
-    },
-    "headline_html": "Product Engineer with a <span class=\"text:lime\">data-driven</span> soul."
+      "tagline_lines": [
+        { "text": "CONNECTING", "emphasis": false },
+        { "text": "software and creativity", "emphasis": true },
+        { "text": "FOR BUSINESSES, BRANDS,", "emphasis": false },
+        { "text": "PEOPLE", "emphasis": false },
+        { "text": "and all other creatures", "emphasis": false, "handwritten": true }
+      ]
+    }
   },
   "about": {
     "paragraphs_html": [

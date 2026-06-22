@@ -62,15 +62,14 @@ portfolio/
 The page is composed of these **regions** (map 1:1 to keys under `_data/home.json` where applicable):
 
 1. **Meta** (`meta`) — `<title>`, description, canonical hint, social preview fields.
-2. **Hero / header** (`header.jumbotron:home`) — Texture title, **`.hero-pills`** (`.current-position` + `.latest-article`; the role line is **`a.position`** opening LinkedIn in a new tab; desktop `display: contents`, ≤1280px column of centered pill cards with extra top padding, `max-width` cap, single-line **`text-overflow: ellipsis`** on titles ~`36ch`), then **`.grid`** with the H1, headshot, and subhead.
-3. **Role lines + headshot** (`header.roles`) — Two position titles (left / right of photo) and profile image + alt.
-4. **Headline** (`header.headline_html`) — Short HTML line under the hero grid (supports inline spans/classes).
-5. **About** (`about.paragraphs_html`) — Scroll-text intro block; each item is an HTML string (paragraph).
-6. **Summary band** (`summary`) — Three short “flying” concept lines + one large image (scroll-driven effects via existing JS).
-7. **Section title** (`experience_section`) — Texture title + main H2 for “Experience & core values”.
-8. **Experience topics** (`experience_topics`) — Exactly three pillar definitions (`id`, `label`, optional `short_label`). Stable `id` values are the vocabulary for tagging carousel cards (`topic_id`). Cards may reference any pillar regardless of which experience row they appear under (cross-cutting highlights).
-9. **Experiences** (`experiences`) — Ordered list of **expandable sections** (accordion + carousel). Each has: number label, title, subtitle line, body paragraphs, carousel aria-label, **cards** (each card includes `topic_id`).
-10. **Footer** (`footer`) — CTA copy, LinkedIn URL, CV path, “About” blurb (`.footer-about` wraps the eyebrow + bio). ≤1280px footer uses `overflow-y: auto` so content isn’t clipped by the fixed layer.
+2. **Hero / header** (`header.jumbotron:home`) — **`.hero-pills`** (`.latest-article` + `.current-position`; article on top, live status below; desktop top-right absolute stack, ≤1280px centered column at top with ellipsis ~`36ch`), then **`.hero-stage`**: name block (vertical + horizontal from `header.hero`), center **video** (`header.hero.video`, ping-pong loop via `hero-video.js`), right **`.hero-tagline`** H1 from `header.hero.tagline_lines`.
+3. **Hero content** (`header.hero`) — `name_vertical`, `name_horizontal`, `video` (`src`, `alt`), `tagline_lines[]` (`text`, `emphasis`).
+4. **About** (`about.paragraphs_html`) — Scroll-text intro block; each item is an HTML string (paragraph).
+5. **Summary band** (`summary`) — Three short “flying” concept lines + one large image (scroll-driven effects via existing JS).
+6. **Section title** (`experience_section`) — Texture title + main H2 for “Experience & core values”.
+7. **Experience topics** (`experience_topics`) — Exactly three pillar definitions (`id`, `label`, optional `short_label`). Stable `id` values are the vocabulary for tagging carousel cards (`topic_id`). Cards may reference any pillar regardless of which experience row they appear under (cross-cutting highlights).
+8. **Experiences** (`experiences`) — Ordered list of **expandable sections** (accordion + carousel). Each has: number label, title, subtitle line, body paragraphs, carousel aria-label, **cards** (each card includes `topic_id`).
+9. **Footer** (`footer`) — CTA copy, LinkedIn URL, CV path, “About” blurb (`.footer-about` wraps the eyebrow + bio). ≤1280px footer uses `overflow-y: auto` so content isn’t clipped by the fixed layer.
 
 ## Experience block structure (repeated)
 

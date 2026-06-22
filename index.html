@@ -10,25 +10,7 @@ layout: null
 <body class="blocks bg:white">
     <main class="bg:white">
     <header class="jumbotron:home" id="home-introduction">
-        <div class="title:texture">
-            {{ d.header.texture_title }}
-        </div>
         <div class="hero-pills" aria-label="Highlights">
-            <div class="current-position">
-                <div class="status" id="live-status" aria-live="polite">
-                    <span class="label">{{ d.header.live_status_label }}</span>
-                    <span class="status-cet" aria-hidden="true"></span>
-                </div>
-                <a
-                    class="position"
-                    href="{{ d.footer.linkedin_url }}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Alvaro Panizo on LinkedIn">
-                    <img src="{{ d.header.current_work.logo | relative_url }}" alt="{{ d.header.current_work.logo_alt }}" />
-                    <span class="text">{{ d.header.current_work.text_html }}</span>
-                </a>
-            </div>
             <div class="latest-article">
                 <div class="status">
                     <span class="label">{{ d.header.latest_article.label }}</span>
@@ -40,30 +22,54 @@ layout: null
                     </a>
                 </div>
             </div>
-        </div>
-        <div class="grid">
-        <div class="grid:row">
-            <div class="column:12">
-                <h1 class="display:flex">
-                    <span class="line:one">
-                        {{ d.header.roles.line_one }}
-                    </span>
-                    <span class="image:wrapper">
-                            <img src="{{ d.header.roles.headshot.src | relative_url }}" alt="{{ d.header.roles.headshot.alt }}">
-                    </span>
-                    <span class="line:two">
-                        {{ d.header.roles.line_two }}
-                    </span>
-                </h1>
-            </div>
-            <div class="column:md:7 margin:horizontal:auto">
-                <p class="h5 text:center">
-                        {{ d.header.headline_html }}
-                </p>
+            <div class="current-position">
+                <div class="status" id="live-status" aria-live="polite">
+                    <span class="label">{{ d.header.live_status_label }}</span>
+                    <span class="status-cet" aria-hidden="true"></span>
+                </div>
+                <div class="position-link">
+                    <img src="{{ d.header.current_work.logo | relative_url }}" alt="{{ d.header.current_work.logo_alt }}" />
+                    <a
+                        class="text"
+                        href="{{ d.footer.linkedin_url }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Alvaro Panizo on LinkedIn">{{ d.header.current_work.text_html }}</a>
+                </div>
             </div>
         </div>
-    </div>
-</header>
+        <div class="hero-stage">
+            <div class="hero-cluster" data-hero-layer="cluster">
+                <span class="hero-name__vertical" data-hero-layer="name-vertical">{{ d.header.hero.name_vertical }}</span>
+                <div class="hero-media{% if d.header.hero.video.src_webm %} hero-media--alpha{% endif %}" data-hero-layer="media"{% if d.header.hero.video.boomerang %} data-hero-boomerang="true"{% endif %}>
+                    <div class="hero-media__clip">
+                        <div class="hero-media__backdrop" aria-hidden="true"></div>
+                        <canvas class="hero-media__canvas" aria-hidden="true"></canvas>
+                    </div>
+                    <video
+                        class="hero-media__video"
+                        muted
+                        playsinline
+                        preload="auto"
+                        aria-label="{{ d.header.hero.video.alt }}"
+                    >
+                        {% if d.header.hero.video.src_webm %}
+                        <source src="{{ d.header.hero.video.src_webm | relative_url }}" type="video/webm">
+                        {% endif %}
+                        {% if d.header.hero.video.src %}
+                        <source src="{{ d.header.hero.video.src | relative_url }}" type="video/mp4">
+                        {% endif %}
+                    </video>
+                </div>
+                <span class="hero-name__primary" data-hero-layer="name-primary">{{ d.header.hero.name_horizontal }}</span>
+            </div>
+            <h1 class="hero-tagline" data-hero-layer="tagline">
+                {% for line in d.header.hero.tagline_lines %}
+                <span class="hero-tagline__line{% if line.emphasis %} hero-tagline__line--emphasis{% endif %}{% if line.handwritten %} hero-tagline__line--handwritten{% endif %}">{{ line.text }}</span>
+                {% endfor %}
+            </h1>
+        </div>
+    </header>
     <section class="padding:vertical:4" id="home-about">
         <div class="grid">
             <div class="grid:row">
