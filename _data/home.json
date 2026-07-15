@@ -29,11 +29,9 @@
         "alt": "Alvaro Panizo portrait animation"
       },
       "tagline_lines": [
-        { "text": "CONNECTING", "emphasis": false },
-        { "text": "software and creativity", "emphasis": true },
-        { "text": "FOR BUSINESSES, BRANDS,", "emphasis": false },
-        { "text": "PEOPLE", "emphasis": false },
-        { "text": "and all other creatures", "emphasis": false, "handwritten": true }
+        { "text": "CONNECTING PRODUCT, ENGINEERING, AND CREATIVITY", "emphasis": false },
+        { "text": "Product Manager", "emphasis": true },
+        { "text": "Senior Software Engineer", "emphasis": true }
       ]
     }
   },
@@ -126,6 +124,15 @@
           "mark_alt": "Scrum.org",
           "title_html": "Professional Scrum Product Owner™ Certification (2021)",
           "issuer_html": "Scrum.org"
+        },
+        {
+          "type": "article",
+          "topic_id": "leading_teams",
+          "label": "Article / Blog post",
+          "url": "https://medium.com/empathyco/explainability-and-understanding-in-e-commerce-the-challenge-of-xai-2361b2e161ae",
+          "title": "Explainability and understanding in e-commerce: The challenge of XAI",
+          "thumbnail": "/assets/images/medium-icon.png",
+          "image_alt": "Medium article cover"
         }
       ]
     },
@@ -156,18 +163,35 @@
         },
         {
           "type": "certificate",
-          "topic_id": "product_thinking",
-          "mark_image": "/assets/images/scrumorg.png",
-          "mark_alt": "Scrum.org",
-          "title_html": "Professional Scrum Product Owner™ (2021)",
-          "issuer_html": "Scrum.org"
+          "topic_id": "technical_depth",
+          "mark_image": "/assets/images/logo-actual.png",
+          "mark_alt": "Oracle",
+          "title_html": "Oracle AI Vector Search Professional (2025)",
+          "issuer_html": "Oracle"
+        },
+        {
+          "type": "certificate",
+          "topic_id": "technical_depth",
+          "mark_image": "/assets/images/articles_1.png",
+          "mark_alt": "Cloud platforms",
+          "title_html": "Cloud Associate (2020–2026)",
+          "issuer_html": "AWS, Google, Microsoft, Kubernetes"
         },
         {
           "type": "video",
           "topic_id": "technical_depth",
-          "embed_url": "https://www.youtube-nocookie.com/embed/d5WfSjocw88",
-          "iframe_title": "Technical depth — replace with your video",
-          "caption_html": "Replace this caption with a talk or demo that reflects your engineering work."
+          "embed_url": "https://www.youtube-nocookie.com/embed/wK01Fpp6L6k",
+          "iframe_title": "Running Apache Spark on K8s: From AWS EMR to K8s",
+          "caption_html": "Running Apache Spark on K8s: From AWS EMR to K8s"
+        },
+        {
+          "type": "article",
+          "topic_id": "technical_depth",
+          "label": "Article / Blog post",
+          "url": "https://medium.com/empathyco/improving-performance-in-spark-jobs-8a60a56327da",
+          "title": "Improving performance in Spark jobs",
+          "thumbnail": "/assets/images/medium-icon.png",
+          "image_alt": "Medium article cover"
         }
       ]
     },
@@ -197,17 +221,17 @@
         {
           "type": "certificate",
           "topic_id": "product_thinking",
-          "mark_image": "/assets/images/harvard_bs.png",
-          "mark_alt": "Harvard Business School",
-          "title_html": "Change Management in Tech Organizations (2026)",
-          "issuer_html": "Harvard Business School"
+          "mark_image": "/assets/images/scrumorg.png",
+          "mark_alt": "Scrum.org",
+          "title_html": "Professional Scrum Product Owner™ (2021)",
+          "issuer_html": "Scrum.org"
         },
         {
           "type": "video",
           "topic_id": "product_thinking",
-          "embed_url": "https://www.youtube-nocookie.com/embed/d5WfSjocw88",
-          "iframe_title": "Product thinking — replace with your video",
-          "caption_html": "Replace this caption with a product talk, case study, or interview."
+          "embed_url": "https://www.youtube-nocookie.com/embed/onkyYxTB7qw?start=921",
+          "iframe_title": "Semantic Experiences in Action",
+          "caption_html": "Semantic Experiences in Action"
         }
       ]
     }

@@ -295,6 +295,7 @@
         "url": { "type": "string", "minLength": 1 },
         "title": { "type": "string", "minLength": 1 },
         "thumbnail": { "$ref": "#/$defs/AssetPath" },
+        "label": { "type": "string", "minLength": 1 },
         "image_alt": { "type": "string", "minLength": 1 }
       }
     },

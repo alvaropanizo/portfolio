@@ -100,7 +100,7 @@ Each card has `type` (string) and **`topic_id`** (must match one of `experience_
 |--------|-----------|-------------|
 | `photo` | Image + caption | `topic_id`, `image`, `image_alt`, `caption_html` |
 | `video` | Embedded video + caption | `topic_id`, `embed_url` (full iframe `src`, preferably YouTube embed URL), `iframe_title`, `caption_html` |
-| `article` | Article / project link with thumbnail | `topic_id`, `url`, `title`, `thumbnail` (image URL), `image_alt` (optional) |
+| `article` | Article / blog post with linked thumbnail | `topic_id`, `url`, `title`, `thumbnail`; optional `label` (defaults to “Article / Blog post”), `image_alt` |
 | `quote` | Testimonial | `topic_id`, `quote_html`, `attribution_html`, `icon` (Material Symbols ligature name, e.g. `format_quote`) |
 | `certificate` | Credential / badge | `topic_id`, `mark_image`, `mark_alt`, `title_html`, `issuer_html` |
 | `general` | Image + freeform description | `topic_id`, `image`, `image_alt`, `body_html` (same presentation as `photo`; use when semantics differ in data only) |
