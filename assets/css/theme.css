@@ -766,6 +766,8 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   }
 }
 .jumbotron\:home {
+  --hero-stage-max: 96rem;
+  --hero-rail-inset: max(1.5rem, calc((100% - var(--hero-stage-max)) / 2 + clamp(1.5rem, 4vw, 3.5rem)));
   position: relative;
   min-height: 95vh;
   min-height: 95dvh;
@@ -778,23 +780,42 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   overflow-x: clip;
 }
 
-/* Wrapper for pills: desktop uses contents so pills keep absolute placement on the header */
+/* Desktop: stack pills on the hero content rail (top-right of the 96rem stage) */
 .jumbotron\:home .hero-pills {
-  display: contents;
+  position: absolute;
+  top: clamp(1.25rem, 3.5vh, 2.25rem);
+  right: var(--hero-rail-inset);
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.65rem;
+  width: auto;
+  max-width: min(40rem, calc(100% - var(--hero-rail-inset) * 2));
+  pointer-events: none;
+}
+
+.jumbotron\:home .hero-pills > * {
+  pointer-events: auto;
+  position: relative;
+  top: auto;
+  right: auto;
+  left: auto;
+  bottom: auto;
 }
 
 .jumbotron\:home .hero-stage {
-  --hero-media-size: clamp(34rem, 42vw, 44rem);
+  --hero-media-size: clamp(32rem, 40vw, 42rem);
   --hero-vertical-overlap: clamp(5.5rem, 17vw, 11.5rem);
   --hero-panizo-lift: clamp(7rem, 17vw, 11rem);
-  --hero-cluster-x: clamp(6%, 12vw, 14%);
-  --hero-cluster-y: 50%;
-  --hero-tagline-x: clamp(47%, 50%, 51%);
-  --hero-tagline-y: 46%;
+  --hero-cluster-x: clamp(5%, 9vw, 11%);
+  --hero-cluster-y: 52%;
+  --hero-tagline-x: 52%;
+  --hero-tagline-y: 48%;
   position: relative;
   width: 100%;
-  max-width: 96rem;
-  min-height: clamp(38rem, 82vh, 54rem);
+  max-width: var(--hero-stage-max);
+  min-height: clamp(36rem, 78vh, 50rem);
   margin: 0 auto;
   padding: clamp(5.5rem, 9vh, 7rem) clamp(1.5rem, 4vw, 3.5rem) clamp(2rem, 5vh, 3.5rem);
   box-sizing: border-box;
@@ -807,7 +828,7 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   position: absolute;
   left: var(--hero-cluster-x);
   top: var(--hero-cluster-y);
-  transform: translateY(-46%);
+  transform: translateY(-44%);
   z-index: 2;
   display: grid;
   grid-template-columns: auto var(--hero-media-size);
@@ -928,38 +949,51 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   clip-path: inset(50%);
 }
 
+.jumbotron\:home h1.hero-tagline {
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 400;
+  line-height: 1;
+  text-transform: none;
+  color: inherit;
+  margin: 0;
+}
+
 .jumbotron\:home .hero-tagline {
   position: absolute;
   left: var(--hero-tagline-x);
   top: var(--hero-tagline-y);
-  transform: translateY(-10%);
+  transform: translateY(-50%);
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.1em;
+  gap: 0.08em;
   margin: 0;
   text-transform: uppercase;
   line-height: 0.95;
   min-width: 0;
-  padding: 0 clamp(1.5rem, 8vw, 5rem) 0 clamp(0.5rem, 2vw, 1.5rem);
+  max-width: min(60vw, 60rem);
+  padding: 0 clamp(1rem, 6vw, 4rem) 0 clamp(0.75rem, 2vw, 1.25rem);
   box-sizing: border-box;
 }
 
 .jumbotron\:home .hero-tagline__line {
   font-family: var(--font-clear);
-  font-size: 2.55rem;
-  font-weight: 200;
+  font-size: 3.1rem;
+  font-weight: 100;
   color: var(--color-text-black);
+  letter-spacing: 0.08em;
 }
 
 .jumbotron\:home .hero-tagline__line--emphasis {
   font-family: var(--font-bold);
-  font-size: 3.1vw;
+  font-size: 2.1vw;
   font-weight: 400;
   color: var(--text-black);
   text-transform: lowercase;
   letter-spacing: -0.01em;
   line-height: 0.88;
+  padding-top: 1em;
   margin-block: 0.06em 0.12em;
 }
 
@@ -1385,6 +1419,24 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   text-align: center;
   padding-top: 0.45rem;
 }
+#home-work .project-details-carousel-article-card__kind {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.35rem;
+  color: var(--color-blue);
+  opacity: 0.92;
+}
+#home-work .project-details-carousel-article-card__title a {
+  color: inherit;
+  text-decoration: none;
+}
+#home-work .project-details-carousel-article-card__title a:hover {
+  opacity: 0.82;
+}
 #home-work .project-details-carousel-article-card__title {
   font-family: var(--font-subheadline);
   font-size: 1rem;
@@ -1712,16 +1764,18 @@ body:has(.nav\:panel.active) .nav\:bar #nav\:panel\:toggle .line-3 {
   bottom: auto;
   right: 2rem;
   left: auto;
-  background: var(--bg-white);
   max-width: 650px;
   min-height: 40px;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  border-radius: 50rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  border: 1px solid var(--border-color);
+}
+
+.jumbotron\:home .latest-article,
+.jumbotron\:home .current-position {
+  position: relative;
+  top: auto;
+  right: auto;
+  left: auto;
+  width: auto;
+  max-width: min(100%, 36rem);
 }
 
 .current-position {

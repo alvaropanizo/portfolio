@@ -26,14 +26,17 @@
     </div>
 </article>
 {% when 'article' %}
-<article class="project-details-carousel-card project-details-carousel-card--photo project-details-carousel__slide {{ _topic_class }}" data-carousel-slide data-experience-topic="{{ card.topic_id }}"{% if _topic_label != '' %} data-experience-topic-label="{{ _topic_label | escape }}"{% endif %}>
+<article class="project-details-carousel-card project-details-carousel-card--article project-details-carousel__slide {{ _topic_class }}" data-carousel-slide data-experience-topic="{{ card.topic_id }}"{% if _topic_label != '' %} data-experience-topic-label="{{ _topic_label | escape }}"{% endif %}>
     <div class="project-details-carousel-card__media">
-        <a href="{{ card.url }}" target="_blank" rel="noopener noreferrer">
-            <img src="{{ card.thumbnail | relative_url }}" alt="{{ card.image_alt | default: card.title }}" loading="lazy" decoding="async">
+        <a href="{{ card.url }}" class="project-details-carousel-article-card__image-link" target="_blank" rel="noopener noreferrer" aria-label="{{ card.title | escape }}">
+            <img class="project-details-carousel-article-card__image" src="{{ card.thumbnail | relative_url }}" alt="{{ card.image_alt | default: card.title }}" loading="lazy" decoding="async">
         </a>
     </div>
-    <div class="project-details-carousel-card__footer">
-        <p><a href="{{ card.url }}" target="_blank" rel="noopener noreferrer">{{ card.title }}</a></p>
+    <div class="project-details-carousel-card__footer project-details-carousel-article-card__footer">
+        <p class="project-details-carousel-article-card__kind">{{ card.label | default: "Article / Blog post" }}</p>
+        <p class="project-details-carousel-article-card__title">
+            <a href="{{ card.url }}" target="_blank" rel="noopener noreferrer">{{ card.title }}</a>
+        </p>
     </div>
 </article>
 {% when 'quote' %}
