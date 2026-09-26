@@ -1,7 +1,7 @@
 (function () {
   var REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var MAX_DPR = 2;
-  var MAX_CANVAS_PX = 2048;
+  var MAX_DPR = 1.25;
+  var MAX_CANVAS_PX = 1400;
 
   var VERTEX_SHADER = [
     "attribute vec2 a_position;",
@@ -92,7 +92,7 @@
     var gl = canvas.getContext("webgl", {
       alpha: true,
       premultipliedAlpha: false,
-      antialias: true
+      antialias: false
     });
 
     if (!gl) return;
@@ -224,6 +224,7 @@
 
     function pump() {
       frameCallbackId = null;
+      if (!inView) return;
       render();
 
       if (!video.paused && !video.ended) {
@@ -261,6 +262,29 @@
       }
     }
 
+    var inView = true;
+
+    function setInView(next) {
+      if (inView === next) return;
+      inView = next;
+      media.classList.toggle("is-offscreen", !next);
+      if (!next) {
+        stopRenderLoop();
+        video.pause();
+        return;
+      }
+      if (!REDUCED_MOTION) {
+        play();
+      }
+    }
+
+    if (typeof IntersectionObserver !== "undefined") {
+      var observer = new IntersectionObserver(function (entries) {
+        setInView(Boolean(entries[0] && entries[0].isIntersecting));
+      }, { root: null, threshold: 0.12, rootMargin: "10% 0px" });
+      observer.observe(media);
+    }
+
     video.addEventListener("play", startRenderLoop);
 
     function onResize() {
@@ -278,7 +302,7 @@
         video.pause();
         return;
       }
-      if (video.paused && !REDUCED_MOTION) {
+      if (video.paused && !REDUCED_MOTION && inView) {
         play();
       }
     });

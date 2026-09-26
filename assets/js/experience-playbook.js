@@ -42,11 +42,20 @@
         section.classList.add("is-enhanced");
 
         function setTrackHeight() {
-          track.style.height = Math.round(window.innerHeight * (features.length * 1.55 + 1)) + "px";
+          track.style.height = Math.round(window.innerHeight * (features.length * 1.2 + 1)) + "px";
         }
 
-        function headingShift() {
-          return copyViewport ? copyViewport.offsetHeight * -0.07 : 0;
+        var headingEndScale = 0.56;
+
+        function headingEndY() {
+          return copyViewport ? copyViewport.offsetHeight * -0.03 : 0;
+        }
+
+        function headingEndX(heading) {
+          return function () {
+            if (!copyViewport) return 0;
+            return (copyViewport.offsetWidth - heading.offsetWidth * headingEndScale) / 2;
+          };
         }
 
         function setActiveRail(activeIndex) {
@@ -58,7 +67,6 @@
         setTrackHeight();
 
         window.gsap.set(features, {
-          force3D: true,
           zIndex: function (index) {
             return index + 1;
           },
@@ -67,15 +75,7 @@
           }
         });
 
-        window.gsap.set(featureMedia.filter(Boolean), {
-          force3D: true,
-          xPercent: function (index) {
-            return index === 0 ? 0 : -100;
-          }
-        });
-
         window.gsap.set(copies, {
-          force3D: true,
           opacity: function (index) {
             return index === 0 ? 1 : 0;
           },
@@ -85,31 +85,29 @@
         });
 
         window.gsap.set(headings, {
-          force3D: true,
+          x: 0,
           y: 0,
           scale: 1,
           transformOrigin: "left top"
         });
 
         window.gsap.set(descriptions, {
-          force3D: true,
           opacity: 0,
-          y: 30
+          y: 24
         });
 
         window.gsap.set(notes, {
-          force3D: true,
           opacity: 1,
           y: 0
         });
 
-        window.gsap.set(rails, {
+        window.gsap.set(progressStates, {
           opacity: function (index) {
             return index === 0 ? 1 : 0;
           }
         });
 
-        window.gsap.set(progressStates, {
+        window.gsap.set(rails, {
           opacity: function (index) {
             return index === 0 ? 1 : 0;
           }
@@ -128,20 +126,19 @@
 
         var timeline = window.gsap.timeline({
           defaults: {
-            ease: "none",
-            force3D: true
+            ease: "none"
           },
           scrollTrigger: {
             trigger: track,
             start: "top top",
             end: "bottom bottom",
-            scrub: 0.15,
-            invalidateOnRefresh: true,
+            scrub: true,
+            invalidateOnRefresh: false,
             refreshPriority: 0,
             onUpdate: function () {
               syncActiveRail(Math.min(
                 features.length - 1,
-                Math.max(0, Math.floor(timeline.time() / segmentDuration))
+                Math.max(0, Math.floor((timeline.time() + 0.85) / segmentDuration))
               ));
             }
           }
@@ -152,80 +149,66 @@
           var detailStart = segmentStart + 0.25;
 
           timeline.to(headings[index], {
-            y: headingShift,
-            scale: 0.78,
-            duration: 0.58,
-            ease: "power2.inOut"
+            x: headingEndX(headings[index]),
+            y: headingEndY,
+            scale: headingEndScale,
+            duration: 0.5
           }, detailStart);
 
           timeline.to(notes[index], {
-            y: -18,
+            y: -16,
             opacity: 0,
-            duration: 0.3
+            duration: 0.28
           }, detailStart);
 
           timeline.to(descriptions[index], {
             y: 0,
             opacity: 1,
-            duration: 0.48,
-            ease: "power2.out"
-          }, detailStart + 0.18);
+            duration: 0.4
+          }, detailStart + 0.16);
 
           if (index < features.length - 1) {
             var transitionStart = segmentStart + 1.2;
-            var nextMedia = featureMedia[index + 1];
 
             timeline.to(copies[index], {
-              yPercent: -110,
+              yPercent: -100,
               opacity: 0,
-              duration: 0.5
+              duration: 0.45
             }, transitionStart);
 
             timeline.fromTo(copies[index + 1], {
-              yPercent: 25,
+              yPercent: 20,
               opacity: 0
             }, {
               yPercent: 0,
               opacity: 1,
-              duration: 0.56,
-              ease: "power2.out"
-            }, transitionStart + 0.16);
+              duration: 0.45
+            }, transitionStart + 0.12);
 
             timeline.to(features[index + 1], {
               xPercent: 0,
-              duration: 0.72,
-              ease: "power2.inOut"
+              duration: 0.6
             }, transitionStart);
-
-            if (nextMedia) {
-              timeline.to(nextMedia, {
-                xPercent: 0,
-                duration: 0.72,
-                ease: "power2.inOut"
-              }, transitionStart);
-            }
-
-            timeline.to(progressStates[index], {
-              opacity: 0,
-              duration: 0.3,
-              ease: "power1.inOut"
-            }, transitionStart + 0.04);
-
-            timeline.to(progressStates[index + 1], {
-              opacity: 1,
-              duration: 0.36,
-              ease: "power1.inOut"
-            }, transitionStart + 0.12);
 
             timeline.to(rails[index], {
               opacity: 0,
-              duration: 0.24
-            }, transitionStart + 0.08);
+              duration: 0.4
+            }, transitionStart);
 
             timeline.to(rails[index + 1], {
               opacity: 1,
-              duration: 0.3
-            }, transitionStart + 0.22);
+              duration: 0.45
+            }, transitionStart + 0.04);
+
+            timeline.to(progressStates[index], {
+              opacity: 0,
+              duration: 0.24
+            }, transitionStart);
+
+            timeline.to(progressStates[index + 1], {
+              opacity: 1,
+              duration: 0.24
+            }, transitionStart + 0.08);
           }
         }
 
