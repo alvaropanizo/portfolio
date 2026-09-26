@@ -303,7 +303,7 @@ footer {
   left: 50%;
   bottom: clamp(-3rem, -5vh, -1.5rem);
   z-index: 3;
-  width: clamp(38rem, 58vw, 48rem);
+  width: min(44rem, 40vw, 78cqi);
   max-width: none;
   aspect-ratio: 1;
   background: transparent;
@@ -459,6 +459,8 @@ footer {
   min-width: 0;
   min-height: 100vh;
   min-height: 100dvh;
+  container-type: inline-size;
+  container-name: hero-aside;
 }
 
 .jumbotron\:home .hero-status-column {
@@ -482,7 +484,7 @@ footer {
 
 .jumbotron\:home .hero-card-motion {
   width: 100%;
-  max-width: clamp(18.5rem, 20vw, 24rem);
+  max-width: min(21.5rem, 17vw, 42cqi);
 }
 
 .jumbotron\:home .hero-pills {
@@ -491,7 +493,7 @@ footer {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: clamp(18.5rem, 20vw, 24rem);
+  max-width: min(21.5rem, 17vw, 42cqi);
   padding: 0;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.4);
@@ -693,7 +695,7 @@ footer {
   min-height: 100vh;
   min-height: 100dvh;
   margin-top: -1px;
-  padding: clamp(2rem, 4vw, 4.5rem) clamp(1.25rem, 6vw, 6rem);
+  padding: clamp(2rem, 4vw, 4.5rem) clamp(4.5rem, 8vw, 8rem);
   box-sizing: border-box;
   overflow: visible;
   background: var(--color-blue);
@@ -1564,12 +1566,10 @@ section#home-footer-cta {
 
   main.bg\:white,
   main {
-    width: 100%;
+    width: calc(100% - 20px);
     max-width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .footer-transition {
@@ -1577,6 +1577,13 @@ section#home-footer-cta {
   }
 
   @media screen and (max-width: 767px) {
+    main.bg\:white,
+    main {
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
     .jumbotron\:home {
       min-height: auto;
       overflow: visible;
