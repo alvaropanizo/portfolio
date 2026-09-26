@@ -42,7 +42,7 @@
         section.classList.add("is-enhanced");
 
         function setTrackHeight() {
-          track.style.height = Math.round(window.innerHeight * (features.length * 1.2 + 1)) + "px";
+          track.style.height = Math.round(window.innerHeight * (features.length * 1.85 + 1)) + "px";
         }
 
         var headingEndScale = 0.56;
@@ -114,7 +114,8 @@
         });
 
         var activeRailIndex = -1;
-        var segmentDuration = 2.05;
+        var segmentDuration = 2.9;
+        var transitionOffset = 1.55;
 
         function syncActiveRail(activeIndex) {
           if (activeIndex === activeRailIndex) return;
@@ -138,7 +139,7 @@
             onUpdate: function () {
               syncActiveRail(Math.min(
                 features.length - 1,
-                Math.max(0, Math.floor((timeline.time() + 0.85) / segmentDuration))
+                Math.max(0, Math.floor((timeline.time() + (segmentDuration - transitionOffset)) / segmentDuration))
               ));
             }
           }
@@ -152,28 +153,28 @@
             x: headingEndX(headings[index]),
             y: headingEndY,
             scale: headingEndScale,
-            duration: 0.5
+            duration: 0.7
           }, detailStart);
 
           timeline.to(notes[index], {
             y: -16,
             opacity: 0,
-            duration: 0.28
+            duration: 0.4
           }, detailStart);
 
           timeline.to(descriptions[index], {
             y: 0,
             opacity: 1,
-            duration: 0.4
-          }, detailStart + 0.16);
+            duration: 0.55
+          }, detailStart + 0.2);
 
           if (index < features.length - 1) {
-            var transitionStart = segmentStart + 1.2;
+            var transitionStart = segmentStart + transitionOffset;
 
             timeline.to(copies[index], {
               yPercent: -100,
               opacity: 0,
-              duration: 0.45
+              duration: 0.75
             }, transitionStart);
 
             timeline.fromTo(copies[index + 1], {
@@ -182,33 +183,33 @@
             }, {
               yPercent: 0,
               opacity: 1,
-              duration: 0.45
-            }, transitionStart + 0.12);
+              duration: 0.75
+            }, transitionStart + 0.16);
 
             timeline.to(features[index + 1], {
               xPercent: 0,
-              duration: 0.6
+              duration: 0.95
             }, transitionStart);
 
             timeline.to(rails[index], {
               opacity: 0,
-              duration: 0.4
+              duration: 0.7
             }, transitionStart);
 
             timeline.to(rails[index + 1], {
               opacity: 1,
-              duration: 0.45
-            }, transitionStart + 0.04);
+              duration: 0.75
+            }, transitionStart + 0.06);
 
             timeline.to(progressStates[index], {
               opacity: 0,
-              duration: 0.24
+              duration: 0.4
             }, transitionStart);
 
             timeline.to(progressStates[index + 1], {
               opacity: 1,
-              duration: 0.24
-            }, transitionStart + 0.08);
+              duration: 0.4
+            }, transitionStart + 0.1);
           }
         }
 
