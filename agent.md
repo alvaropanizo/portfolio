@@ -4,7 +4,7 @@ Single source of truth for how this Jekyll portfolio is structured, how content 
 
 ## Purpose
 
-- **Personal portfolio** for Alvaro Panizo: hero, intro, summary band, expandable “Experience & core values” blocks with carousels, footer.
+- **Personal portfolio** for Alvaro Panizo: hero, intro, editorial playbook, expandable experience blocks with carousels, footer.
 - **Goal**: `_data/home.json` is the **canonical content model** (copy, links, images, carousel items, schema). The homepage **`index.html` is a Liquid template** (`layout: null` so the theme does not wrap it): it assigns `d = site.data.home`, includes `home-head.html` / `home-scripts.html`, and loops `{% include experience-block.html %}` for each experience. **Edit content in `home.json` only**; the build renders the page from data + includes.
 
 ## Tech stack
@@ -14,7 +14,7 @@ Single source of truth for how this Jekyll portfolio is structured, how content 
 | **Jekyll** (~4.x) | Static build, Liquid, `_data` files |
 | **GitHub Pages** | Hosting (`baseurl` in `_config.yml` is `/portfolio` for project pages) |
 | **CSS** | `assets/css/basecamp.css`, `assets/css/theme.css` (utility-style classes) |
-| **JS** | `scrolltext.js`, `scrollimage.js`, `summaryblend.js`, `projects-accordion.js`, `project-details-carousel.js`, `live-status.js` (via `{% include home-scripts.html %}` at the bottom of `index.html`, with GSAP from CDN) |
+| **JS** | `about-reveal.js`, `experience-playbook.js`, `scrollimage.js`, `hero-scroll.js`, `hero-video.js`, `section-wave.js`, `projects-accordion.js`, `project-details-carousel.js`, `live-status.js` (via `{% include home-scripts.html %}` at the bottom of `index.html`, with GSAP from CDN) |
 | **GSAP** | Loaded from CDN on the homepage for scroll animations |
 | **JSON Schema** | `schemas/home.schema.json` (draft 2020-12) validates `_data/home.json`; CI runs `ajv-cli` |
 
@@ -62,11 +62,11 @@ portfolio/
 The page is composed of these **regions** (map 1:1 to keys under `_data/home.json` where applicable):
 
 1. **Meta** (`meta`) — `<title>`, description, canonical hint, social preview fields.
-2. **Hero / header** (`header.jumbotron:home`) — **`.hero-pills`** (`.latest-article` + `.current-position`; article on top, live status below; desktop top-right absolute stack, ≤1280px centered column at top with ellipsis ~`36ch`), then **`.hero-stage`**: name block (vertical + horizontal from `header.hero`), center **video** (`header.hero.video`, ping-pong loop via `hero-video.js`), right **`.hero-tagline`** H1 from `header.hero.tagline_lines`.
-3. **Hero content** (`header.hero`) — `name_vertical`, `name_horizontal`, `video` (`src`, `alt`), `tagline_lines[]` (`text`, `emphasis`).
-4. **About** (`about.paragraphs_html`) — Scroll-text intro block; each item is an HTML string (paragraph).
-5. **Summary band** (`summary`) — Three short “flying” concept lines + one large image (scroll-driven effects via existing JS).
-6. **Section title** (`experience_section`) — Texture title + main H2 for “Experience & core values”.
+2. **Hero / header** (`header.jumbotron:home`) — **`.hero-layout`** is a two-column desktop grid. Box 1, **`.hero-stage`**, has three explicit rows for the intro, two-line name, decorative inline-SVG lime arrow, and role pill. Box 2, **`.hero-aside`**, has an animation cell for the **video** (`header.hero.video`, loop via `hero-video.js`) and a status column containing the soft **`.hero-pills`** dashboard. `.hero-media__pulse` applies a slow CSS scale pulse around the visual contents without changing the positioned/parallax media wrapper. Below 768px, these regions stack.
+3. **Hero content** (`header.hero`) — `name_vertical`, `name_horizontal`, `video` (`src`, `alt`), `tagline_lines[]` (`text`, `emphasis`). Non-emphasis lines render as the intro; emphasis lines render in the role pill.
+4. **Wave divider** (`.section-wave`) — Decorative inline SVG with three broad wave crests at the start of About, directly after the full-height hero. `section-wave.js` applies only a very subtle continuous drift and converts its points to smooth cubic Bézier segments.
+5. **About** (`about`) — A full-viewport blue reveal panel renders `intro_paragraphs[]` as oversized type beside a “Who am I” label. `about-reveal.js` pins the panel once it fills the viewport, progressively changes the words from translucent cream to black, and draws the lime top rule as scrolling continues.
+6. **Experience playbook** (`#tenet-leader`) — A pinned editorial grid generated from every `experiences[]` item. Scrolling moves complete narratives upward, wipes each new feature image in from left to right, and swaps independently looping media rails. The rail markup is shared through `_includes/playbook-rail-sequence.html`.
 7. **Experience topics** (`experience_topics`) — Exactly three pillar definitions (`id`, `label`, optional `short_label`). Stable `id` values are the vocabulary for tagging carousel cards (`topic_id`). Cards may reference any pillar regardless of which experience row they appear under (cross-cutting highlights).
 8. **Experiences** (`experiences`) — Ordered list of **expandable sections** (accordion + carousel). Each has: number label, title, subtitle line, body paragraphs, carousel aria-label, **cards** (each card includes `topic_id`).
 9. **Footer** (`footer`) — CTA copy, LinkedIn URL, CV path, “About” blurb (`.footer-about` wraps the eyebrow + bio). ≤1280px footer uses `overflow-y: auto` so content isn’t clipped by the fixed layer.
@@ -114,7 +114,10 @@ Rendered slides expose **`data-experience-topic`**, optional **`data-experience-
 - **Accordion**: Rows use `.project:trigger`, `.project:details`, `aria-expanded`, `aria-controls`, `id`/`id` pairs. Implemented in `assets/js/projects-accordion.js` — **do not rename** these hooks without updating the script.
 - **Carousel**: Root wrapper is **`[data-project-carousel]`** only (no class on that element; `#home-work [data-project-carousel]` carries flex + sizing in `theme.css`). **Below 768px width the whole carousel block is hidden** in `theme.css` (the `.grid:row` that contains `[data-project-carousel]`). Slides use `[data-carousel-slide]` plus **`project-details-carousel-card`**, **`project-details-carousel-quote-card`**, **`project-details-carousel-cert-card`**, modifiers, and `project-details-carousel__*` chrome. Iframes: `[data-carousel-iframe]`. See `assets/js/project-details-carousel.js`.
 - **Live clock**: `#live-status` / `.status-cet` — `assets/js/live-status.js`.
-- **Summary band** (`#home-about-summary`): `assets/js/summaryblend.js` drives scroll blend + large desktop motion **only above 1280px** viewport width (aligned with tablet CSS). At **max-width 1280px** the script resets `--summary-blend-*`, kills desktop ScrollTriggers, and clears transforms; it then runs a **subtle scrubbed motion** for tablet + mobile: horizontal `x` on `.summary-content p.h4` (1st and 3rd from the left, 2nd from the right) and drift on `.speaker-image` (from the right/top with rotation into place; skipped when `prefers-reduced-motion: reduce`).
+- **Hero parallax**: `[data-hero-parallax="copy"]` moves upward faster than page scroll, `[data-hero-parallax="card"]` drifts downward, and the decorative `[data-hero-parallax="backdrop"]` lime-drop image drifts downward more subtly. The portrait media also drifts down slowly and can overflow the hero so the higher-z-index About wave passes over it. Implemented in `assets/js/hero-scroll.js` with GSAP ScrollTrigger and disabled for reduced motion.
+- **Wave divider**: `[data-section-wave]` / `[data-section-wave-path]` — `assets/js/section-wave.js` continuously recalculates a three-crest cubic SVG path with minimal drift; it pauses in hidden tabs and is disabled for reduced motion.
+- **About reveal**: `[data-about-reveal]` is pinned by `assets/js/about-reveal.js` when its top reaches the viewport. The script wraps `.about-reveal__copy` text in word spans and progressively changes them from translucent cream to black. Reduced-motion mode skips pinning and shows the final black state.
+- **Experience playbook**: `[data-experience-playbook]` groups matching `[data-playbook-feature]`, `[data-playbook-copy]`, and `[data-playbook-rail]` elements by array order. `assets/js/experience-playbook.js` pins and transitions those groups on desktop; mobile and reduced-motion modes keep all text in normal document flow.
 
 ## URL and asset paths
 
@@ -125,7 +128,7 @@ Rendered slides expose **`data-experience-topic`**, optional **`data-experience-
 
 - **Styling-only work** (layout, breakpoints, typography, motion): change **`assets/css/theme.css`** (and only `basecamp.css` if you are adjusting shared utilities). Do **not** add or rename keys in `_data/home.json` or change `schemas/home.schema.json` unless the task explicitly needs new content fields.
 - **Content or URL changes**: edit **`_data/home.json` only** (run `./scripts/validate-home-data.sh`), then rebuild and spot-check the rendered home page.
-- **Parity checklist** (spot-check after edits): hero pills (LinkedIn, work line, latest article), about paragraphs, summary lines + image, experience section titles, each accordion row and carousel media paths, footer CTA / LinkedIn / CV / about blurb (`about_title`, `about_body_html`).
+- **Parity checklist** (spot-check after edits): hero pills (LinkedIn, work line, latest article), about paragraphs, playbook feature and preview images, each accordion row and carousel media paths, footer CTA / LinkedIn / CV / about blurb (`about_title`, `about_body_html`).
 
 ## Editorial workflow (for humans and agents)
 

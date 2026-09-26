@@ -10,108 +10,232 @@ layout: null
 <body class="blocks bg:white">
     <main class="bg:white">
     <header class="jumbotron:home" id="home-introduction">
-        <div class="hero-pills" aria-label="Highlights">
-            <div class="latest-article">
-                <div class="status">
-                    <span class="label">{{ d.header.latest_article.label }}</span>
-                </div>
-                <div class="article-link">
-                    <img src="{{ d.header.latest_article.icon | relative_url }}" alt="{{ d.header.latest_article.icon_alt }}" />
-                    <a href="{{ d.header.latest_article.url }}" target="_blank" rel="noopener noreferrer" class="text">
-                        {{ d.header.latest_article.title }}
-                    </a>
-                </div>
-            </div>
-            <div class="current-position">
-                <div class="status" id="live-status" aria-live="polite">
-                    <span class="label">{{ d.header.live_status_label }}</span>
-                    <span class="status-cet" aria-hidden="true"></span>
-                </div>
-                <div class="position-link">
-                    <img src="{{ d.header.current_work.logo | relative_url }}" alt="{{ d.header.current_work.logo_alt }}" />
-                    <a
-                        class="text"
-                        href="{{ d.footer.linkedin_url }}"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="Alvaro Panizo on LinkedIn">{{ d.header.current_work.text_html }}</a>
-                </div>
-            </div>
-        </div>
-        <div class="hero-stage">
-            <div class="hero-cluster" data-hero-layer="cluster">
-                <span class="hero-name__vertical" data-hero-layer="name-vertical">{{ d.header.hero.name_vertical }}</span>
-                <div class="hero-media{% if d.header.hero.video.src_webm %} hero-media--alpha{% endif %}" data-hero-layer="media"{% if d.header.hero.video.boomerang %} data-hero-boomerang="true"{% endif %}>
-                    <div class="hero-media__clip">
-                        <div class="hero-media__backdrop" aria-hidden="true"></div>
-                        <canvas class="hero-media__canvas" aria-hidden="true"></canvas>
+        <div class="hero-layout">
+            <section class="hero-stage" aria-labelledby="hero-name">
+                <div class="hero-copy-motion" data-hero-parallax="copy">
+                    <div class="hero-intro" data-hero-layer="tagline">
+                        {% for line in d.header.hero.tagline_lines %}
+                        {% unless line.emphasis %}
+                        <p class="hero-tagline__line{% if line.handwritten %} hero-tagline__line--handwritten{% endif %}">{{ line.text }}</p>
+                        {% endunless %}
+                        {% endfor %}
                     </div>
-                    <video
-                        class="hero-media__video"
-                        muted
-                        playsinline
-                        preload="auto"
-                        aria-label="{{ d.header.hero.video.alt }}"
-                    >
-                        {% if d.header.hero.video.src_webm %}
-                        <source src="{{ d.header.hero.video.src_webm | relative_url }}" type="video/webm">
+
+                    <h1 class="hero-name" id="hero-name" data-hero-layer="name">
+                        <span class="hero-name__vertical" data-hero-layer="name-vertical">{{ d.header.hero.name_vertical }}</span>
+                        <span class="hero-name__primary" data-hero-layer="name-primary">{{ d.header.hero.name_horizontal }}</span>
+                    </h1>
+
+                    <svg class="hero-name-arrow" viewBox="0 0 96 96" aria-hidden="true">
+                        <path d="M79 10C49 16 28 35 25 62C24 72 29 79 39 78" />
+                        <path d="M16 62L25 79L42 69" />
+                    </svg>
+
+                    <div class="hero-roles" aria-label="Roles">
+                        {% for line in d.header.hero.tagline_lines %}
+                        {% if line.emphasis %}
+                        <span class="hero-role{% if line.handwritten %} hero-role--handwritten{% endif %}">{{ line.text }}</span>
                         {% endif %}
-                        {% if d.header.hero.video.src %}
-                        <source src="{{ d.header.hero.video.src | relative_url }}" type="video/mp4">
-                        {% endif %}
-                    </video>
+                        {% endfor %}
+                    </div>
                 </div>
-                <span class="hero-name__primary" data-hero-layer="name-primary">{{ d.header.hero.name_horizontal }}</span>
-            </div>
-            <h1 class="hero-tagline" data-hero-layer="tagline">
-                {% for line in d.header.hero.tagline_lines %}
-                <span class="hero-tagline__line{% if line.emphasis %} hero-tagline__line--emphasis{% endif %}{% if line.handwritten %} hero-tagline__line--handwritten{% endif %}">{{ line.text }}</span>
-                {% endfor %}
-            </h1>
+            </section>
+
+            <aside class="hero-aside" aria-label="Current highlights">
+                <div class="hero-media-cell">
+                    <div class="hero-media{% if d.header.hero.video.src_webm %} hero-media--alpha{% endif %}" data-hero-layer="media"{% if d.header.hero.video.boomerang %} data-hero-boomerang="true"{% endif %}>
+                        <div class="hero-media__pulse">
+                            <div class="hero-media__clip">
+                                <img
+                                    class="hero-media__backdrop"
+                                    src="{{ '/assets/images/lime_drop.png' | relative_url }}"
+                                    alt=""
+                                    aria-hidden="true"
+                                    data-hero-parallax="backdrop"
+                                >
+                                <canvas class="hero-media__canvas" aria-hidden="true"></canvas>
+                            </div>
+                            <video
+                                class="hero-media__video"
+                                muted
+                                playsinline
+                                preload="auto"
+                                aria-label="{{ d.header.hero.video.alt }}"
+                            >
+                                {% if d.header.hero.video.src_webm %}
+                                <source src="{{ d.header.hero.video.src_webm | relative_url }}" type="video/webm">
+                                {% endif %}
+                                {% if d.header.hero.video.src %}
+                                <source src="{{ d.header.hero.video.src | relative_url }}" type="video/mp4">
+                                {% endif %}
+                            </video>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-status-column">
+                    <div class="hero-dashboard">
+                        <div class="hero-card-motion" data-hero-parallax="card">
+                            <div class="hero-pills">
+                                <div class="hero-card-status status" id="live-status" aria-live="polite">
+                                    <span class="label">{{ d.header.live_status_label }}</span>
+                                    <span class="status-cet" aria-hidden="true"></span>
+                                </div>
+                                <div class="hero-highlight hero-highlight--current">
+                                    <div class="hero-highlight__heading">
+                                        <span class="label">{{ d.header.current_work.label }}</span>
+                                    </div>
+                                    <div class="hero-highlight__content">
+                                        <img src="{{ d.header.current_work.logo | relative_url }}" alt="{{ d.header.current_work.logo_alt }}" />
+                                        <a
+                                            class="text"
+                                            href="{{ d.footer.linkedin_url }}"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            aria-label="Alvaro Panizo on LinkedIn">{{ d.header.current_work.text_html }}</a>
+                                    </div>
+                                </div>
+                                <div class="hero-highlight hero-highlight--article">
+                                    <div class="hero-highlight__heading">
+                                        <span class="label">{{ d.header.latest_article.label }}</span>
+                                    </div>
+                                    <div class="hero-highlight__content">
+                                        <img src="{{ d.header.latest_article.icon | relative_url }}" alt="{{ d.header.latest_article.icon_alt }}" />
+                                        <a href="{{ d.header.latest_article.url }}" target="_blank" rel="noopener noreferrer" class="text">
+                                            {{ d.header.latest_article.title }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-aside__space" aria-hidden="true"></div>
+                </div>
+            </aside>
         </div>
     </header>
-    <section class="padding:vertical:4" id="home-about">
-        <div class="grid">
-            <div class="grid:row">
-                <div class="column:md:8 glass-blur">
-                    {% for para in d.about.paragraphs_html %}
-                    <p class="h4 scrolltext">{{ para }}</p>
-                    {% if forloop.index == 3 %}<br>{% endif %}
+    <section class="padding:vertical:4 section-blue" id="home-about">
+        <div class="section-wave" data-section-wave aria-hidden="true">
+            <svg viewBox="0 0 1440 220" preserveAspectRatio="none" focusable="false">
+                <path
+                    data-section-wave-path
+                    d="M0 92 C63 71 98 28 190 28 C310 28 430 138 550 138 C655 138 760 54 865 54 C967 54 1068 122 1170 122 C1240 122 1310 30 1380 30 C1400 30 1420 34 1440 36 L1440 220 L0 220 Z"
+                />
+            </svg>
+        </div>
+        <div class="about-reveal" data-about-reveal>
+            <svg class="about-reveal__rule" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
+                <defs>
+                    <clipPath id="about-reveal-rule-clip">
+                        <rect data-about-rule-clip x="0" y="0" width="1000" height="0" />
+                    </clipPath>
+                </defs>
+                <path
+                    class="about-reveal__rule-progress"
+                    clip-path="url(#about-reveal-rule-clip)"
+                    d="M500 0 C500 65 540 105 525 170 S470 275 490 340 S550 445 515 510 S455 615 485 680 S545 785 510 850 S475 945 500 1000"
+                />
+            </svg>
+            <div class="about-reveal__layout">
+                <div class="about-reveal__copy">
+                    {%- capture about_emphasis -%}<br><span class="about-reveal__emphasis">{{ d.about.emphasis_phrase }}</span>{%- endcapture -%}
+                    {% for paragraph in d.about.intro_paragraphs %}
+                    <p>{{ paragraph | replace: d.about.emphasis_phrase, about_emphasis }}</p>
                     {% endfor %}
                 </div>
             </div>
         </div>
     </section>
-    <section class="padding:vertical:4 section-blue" id="home-about-summary">
-        <div class="grid">
-            <div class="grid:row align-items:center">
-                <div class="column:md:4 summary-content">
-                    {% for line in d.summary.lines_html %}
-                    <p class="h4">{{ line }}</p>
-                    {% endfor %}
-                </div>
-                <div class="column:md:8 summary-media">
-                    <img src="{{ d.summary.media.src | relative_url }}" alt="{{ d.summary.media.alt }}" class="{{ d.summary.media.class }}" loading="lazy" decoding="async">
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="padding:vertical:4 section-title" id="tenet-leader">
-        <h2 class="title:texture2">
-            {{ d.experience_section.texture_title }}
-        </h2>
-        <h2 class="h1">
-            {{ d.experience_section.heading }}
-        </h2>
-    </section>
-    <section class="work" id="home-work">
-    <div class="grid">
-            {% for exp in d.experiences %}
-            {% include experience-block.html experience=exp topics=d.experience_topics %}
+    <div class="experience-playbook-track" data-experience-playbook-track>
+    <section class="experience-playbook" id="tenet-leader" data-experience-playbook aria-labelledby="playbook-title">
+        <div class="experience-playbook__features" aria-hidden="true">
+            {% for experience in d.experiences %}
+            <figure class="experience-playbook__feature{% if forloop.first %} is-active{% endif %}" data-playbook-feature>
+                {% if experience.feature_image %}
+                <img
+                    src="{{ experience.feature_image | relative_url }}"
+                    alt=""
+                    loading="eager"
+                    decoding="async"
+                >
+                {% else %}
+                <div class="experience-playbook__placeholder">{{ experience.id }}</div>
+                {% endif %}
+            </figure>
             {% endfor %}
+        </div>
+
+        <div class="experience-playbook__panel">
+            <header class="experience-playbook__header" id="playbook-title" aria-label="{{ d.experience_section.texture_title }} progress">
+                <div class="experience-playbook__progress" aria-hidden="true">
+                    <img
+                        class="experience-playbook__progress-base"
+                        src="{{ '/assets/images/playbook-circle-empty.svg' | relative_url }}"
+                        alt=""
+                    >
+                    {% for experience in d.experiences %}
+                    <img
+                        class="experience-playbook__progress-state{% if forloop.first %} is-active{% endif %}"
+                        src="{{ '/assets/images/playbook-circle-' | append: forloop.index | append: '.svg' | relative_url }}"
+                        alt=""
+                        data-playbook-progress
+                    >
+                    {% endfor %}
+                </div>
+            </header>
+            <div class="experience-playbook__copy-viewport">
+                {% for experience in d.experiences %}
+                <article class="experience-playbook__content{% if forloop.first %} is-active{% endif %}" data-playbook-copy>
+                    <div class="experience-playbook__heading" data-playbook-heading>
+                        <p class="experience-playbook__number">{{ experience.id }}</p>
+                        <h2>{{ experience.title }}</h2>
+                    </div>
+                    <div class="experience-playbook__description" data-playbook-description>
+                        {% for paragraph in experience.body_paragraphs_html %}
+                        {% if forloop.first %}
+                        <p class="experience-playbook__lead">{{ paragraph }}</p>
+                        {% else %}
+                        {% assign pillar_parts = paragraph | split: '</strong>' %}
+                        <p>
+                            <span class="experience-playbook__pillar-label">{{ pillar_parts | first | strip_html }}</span>
+                            {{ pillar_parts | last }}
+                        </p>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <p class="experience-playbook__note" data-playbook-note>
+                        <span aria-hidden="true">←</span>
+                        {{ experience.subtitle }}
+                    </p>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+
+        <aside class="experience-playbook__rail" aria-label="Experience media">
+            <div class="experience-playbook__rail-viewport">
+                {% for experience in d.experiences %}
+                <div class="experience-playbook__rail-group{% if forloop.first %} is-active{% endif %}" data-playbook-rail>
+                    <div class="experience-playbook__rail-loop">
+                        {% include playbook-rail-sequence.html experience=experience playbook_section=forloop.index %}
+                        {% include playbook-rail-sequence.html experience=experience playbook_section=forloop.index %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </aside>
+    </section>
     </div>
-</section>
 </main>
+<div class="footer-transition" aria-hidden="true">
+    <div class="section-wave section-wave--footer" data-section-wave aria-hidden="true">
+        <svg viewBox="0 0 1440 220" preserveAspectRatio="none" focusable="false">
+            <path
+                data-section-wave-path
+                d="M0 92 C63 71 98 28 190 28 C310 28 430 138 550 138 C655 138 760 54 865 54 C967 54 1068 122 1170 122 C1240 122 1310 30 1380 30 C1400 30 1420 34 1440 36 L1440 220 L0 220 Z"
+            />
+        </svg>
+    </div>
+</div>
 <footer class="bg:primary padding:vertical:10">
     <section class="padding:vertical:4" id="home-footer-cta">
     <div class="grid">

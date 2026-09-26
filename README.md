@@ -87,8 +87,7 @@ Jekyll exposes this file as `site.data.home` in Liquid. The root object has fixe
 | `meta` | `<title>`, meta description, keywords, optional `og_image` |
 | `header` | Hero: texture title, live-status label, current work, latest article, role lines + headshot, headline |
 | `about` | Intro section paragraphs (scroll text) |
-| `summary` | Three highlight lines + one large image (summary band) |
-| `experience_section` | Section titles above the accordion |
+| `experience_section` | Labels for the editorial playbook section |
 | `experience_topics` | Exactly three pillar definitions; vocabulary for `cards[].topic_id` |
 | `experiences` | Ordered list of expandable experience blocks, each with a carousel |
 | `footer` | CTA lines, LinkedIn, CV link, about blurb |
@@ -108,7 +107,7 @@ Jekyll exposes this file as `site.data.home` in Liquid. The root object has fixe
 |-------|------|--------|
 | `texture_title` | string | Large display name in hero |
 | `live_status_label` | string | Initial label for `#live-status` (may be updated by JS) |
-| `current_work` | object | `logo`, `logo_alt`, `text_html` (inline HTML allowed) |
+| `current_work` | object | `label`, `logo`, `logo_alt`, `text_html` (inline HTML allowed) |
 | `latest_article` | object | `label`, `icon`, `icon_alt`, `url`, `title` |
 | `roles` | object | `line_one`, `line_two`, `headshot.src`, `headshot.alt` |
 | `headline_html` | string | HTML inside the subheading under the H1 |
@@ -117,14 +116,7 @@ Jekyll exposes this file as `site.data.home` in Liquid. The root object has fixe
 
 | Field | Type | Notes |
 |-------|------|--------|
-| `paragraphs_html` | string[] | Each item is output inside `<p class="h4 scrolltext">` |
-
-### `summary`
-
-| Field | Type | Notes |
-|-------|------|--------|
-| `lines_html` | string[] | Three lines (often with `<span class="text:lime">` wrappers) |
-| `media` | object | `src`, `alt`, `class` for the large image |
+| `intro_paragraphs` | string[] | Oversized statements in the pinned blue word-reveal panel |
 
 ### `experience_section`
 
