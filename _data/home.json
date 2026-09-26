@@ -8,6 +8,7 @@
   "header": {
     "live_status_label": "—",
     "current_work": {
+      "label": "CURRENTLY",
       "logo": "/assets/images/logo-actual.png",
       "logo_alt": "Oracle NetSuite logo",
       "text_html": "Product @Oracle NetSuite"
@@ -29,35 +30,32 @@
         "alt": "Alvaro Panizo portrait animation"
       },
       "tagline_lines": [
-        { "text": "CONNECTING PRODUCT, ENGINEERING, AND CREATIVITY", "emphasis": false },
-        { "text": "Product Manager", "emphasis": true },
-        { "text": "Senior Software Engineer", "emphasis": true }
+        {
+          "text": "CONNECTING PRODUCT, ENGINEERING, AND CREATIVITY",
+          "emphasis": false
+        },
+        {
+          "text": "Product Manager",
+          "emphasis": true
+        },
+        {
+          "text": "Senior Software Engineer",
+          "emphasis": true
+        }
       ]
     }
   },
   "about": {
-    "paragraphs_html": [
-      "Hi! I'm<span class=\"text:blue\">Alvaro Panizo </span>",
-      "Think of me as the bridge between deep tech expertise and product strategy.",
-      "Having evolved from hands-on Software Engineering to <strong>leading high-performing teams,</strong>I bring a unique blend of<strong>technical depth</strong>and<strong> product thinking </strong> to every challenge.",
-      "Because great products need more than just<strong>good vibes.</strong>"
+    "emphasis_phrase": "in between.",
+    "intro_paragraphs": [
+      "Some people decide how a product should look.",
+      "Others write the code that makes it real.",
+      "I've always lived somewhere in between."
     ]
   },
-  "summary": {
-    "lines_html": [
-      "<span class=\"text:lime\">Product thinking</span>",
-      "<span class=\"text:lime\">Technical depth</span>",
-      "<span class=\"text:lime\">Leadership</span>"
-    ],
-    "media": {
-      "src": "/assets/images/speaker-image.png",
-      "alt": "Speaker",
-      "class": "speaker-image"
-    }
-  },
   "experience_section": {
-    "texture_title": "Experience",
-    "heading": "Experience & Core values"
+    "texture_title": "My playbook",
+    "heading": "How I work"
   },
   "experience_topics": [
     {
@@ -79,159 +77,438 @@
   "experiences": [
     {
       "id": "01",
-      "title": "Leading high-performing teams",
-      "subtitle": "Product Owner / Team Leader",
+      "title": "Technical Depth",
+      "subtitle": "Senior Software Engineer / Data and Search",
+      "feature_image": "/assets/images/playbook2.jpeg",
       "body_paragraphs_html": [
-        "I don’t just manage backlogs; I build the environments where engineers do their best work.",
-        "Leading <strong>cross-functional teams</strong> across Europe, the US, and Asia, I bridge cultural and technical gaps to <strong>turn ambiguity into shippable code.</strong>",
-        "By prioritizing radical honesty and empathy, I ensure that <strong>\"seeing beyond the immediate problem\"</strong> becomes a team-wide habit, not just a solo effort."
+        "I write code when needed, but my real focus is building systems that last.",
+        "<strong>Architecture</strong> I design search, data, and cloud systems that stay observable, scalable, and straightforward to operate.",
+        "<strong>Hands-on Delivery</strong> I move comfortably from product decisions to Java, APIs, streaming pipelines, and production troubleshooting."
       ],
-      "carousel_aria_label": "Project highlights",
+      "carousel_aria_label": "Technical depth highlights",
       "cards": [
         {
+          "id": "photo-technical-depth",
           "type": "photo",
-          "topic_id": "leading_teams",
-          "image": "/assets/images/lead-teams.png",
+          "topic_id": "technical_depth",
+          "category_label": "Technical depth",
+          "type_label": "Highlight",
+          "badge_icon": "/assets/images/playbook/icons/photo.svg",
+          "image": "/assets/images/tech-expertise.png",
           "image_alt": "Alvaro Panizo",
-          "caption_html": "Leading teams at the intersection of Product and Engineering for 5+ years, with a core focus on architecting Information Retrieval systems and AI-driven discovery foundations."
+          "caption_html": "Hands-on engineering background across search, data platforms, APIs, and cloud-native delivery—keeping systems observable and evolvable.",
+          "short": {
+            "title": "Search, data platforms, and cloud-native delivery"
+          },
+          "detail": {
+            "meta": "Technical depth",
+            "body_html": "Hands-on engineering background across search, data platforms, APIs, and cloud-native delivery—keeping systems observable and evolvable."
+          }
         },
         {
+          "id": "quote-productivity-standards",
           "type": "quote",
-          "topic_id": "leading_teams",
-          "icon": "edit_note",
-          "quote_html": "\"He is a truly honest and authentic individual. An excellent teammate and highly empathetic, Álvaro has a unique ability to elevate everyone around him. Any organization that brings him on board will be gaining far more than they ever expected.\"",
-          "attribution_html": "Principal Software Engineer - Former Project Colleague (2021-2024)"
+          "topic_id": "technical_depth",
+          "category_label": "Technical depth",
+          "type_label": "Quote",
+          "badge_icon": "/assets/images/playbook/icons/quote.svg",
+          "icon": "format_quote",
+          "quote_html": "\"Álvaro produces a high volume of work while consistently maintaining high standards for quality and accuracy. He possesses the ultimate 'can do' attitude while taking on all tasks with a positive energy and a smile.\"",
+          "attribution_html": "Engineering Lead · former manager, 2019–2023",
+          "short": {
+            "title": "High volume of work while consistently maintaining high standards",
+            "visual_image": "/assets/images/playbook/quote2.png",
+            "visual_alt": ""
+          },
+          "detail": {
+            "meta": "Engineering Lead · former manager, 2019–2023",
+            "body_html": "<p>I have worked very closely with Álvaro during a couple of years. Álvaro has excelled in this role, exhibiting one of the highest levels of productivity of the team. Álvaro produces a high volume of work while consistently maintaining high standards for quality and accuracy.</p><p>Álvaro possesses the ultimate \"can do\" attitude while taking on all tasks with a positive energy and a smile. His upbeat personality and engaging personal style enable him to interact effectively with clients and staff.</p><p>All the intangibles that lead to success in the workplace are in order with Álvaro. There will be no unpleasant surprises and I am confident he will fit in and add to any office morale.</p>"
+          }
         },
         {
+          "id": "cert-oracle-ai-vector",
           "type": "certificate",
-          "topic_id": "product_thinking",
-          "mark_image": "/assets/images/harvard_bs.png",
-          "mark_alt": "Harvard Business University",
-          "title_html": "Change Management in Tech Organizations (2026)",
-          "issuer_html": "Harvard Business School"
+          "topic_id": "technical_depth",
+          "category_label": "Technical depth",
+          "type_label": "Certification",
+          "badge_icon": "/assets/images/playbook/icons/certificate.svg",
+          "mark_image": "/assets/images/logo-actual.png",
+          "mark_alt": "Oracle",
+          "title_html": "Oracle AI Vector Search Professional",
+          "issuer_html": "Oracle",
+          "short": {
+            "title": "Oracle AI Vector Search Professional",
+            "caption": "Oracle",
+            "visual_image": "/assets/images/logo-actual.png",
+            "visual_alt": "Oracle"
+          },
+          "detail": {
+            "meta": "Oracle · 2025"
+          }
         },
         {
+          "id": "cert-cloud-associate",
+          "type": "certificate",
+          "topic_id": "technical_depth",
+          "category_label": "Technical depth",
+          "type_label": "Certification",
+          "badge_icon": "/assets/images/playbook/icons/certificate.svg",
+          "mark_image": "/assets/images/articles_1.png",
+          "mark_alt": "Cloud platforms",
+          "title_html": "Cloud Associate",
+          "issuer_html": "AWS, Google, Microsoft, Kubernetes",
+          "short": {
+            "title": "Cloud Associate",
+            "caption": "AWS, Google, Microsoft, Kubernetes",
+            "visual_image": "/assets/images/articles_1.png",
+            "visual_alt": "Cloud platforms"
+          },
+          "detail": {
+            "meta": "AWS, Google, Microsoft, Kubernetes · 2020–2026"
+          }
+        },
+        {
+          "id": "cert-software-engineering-graduate",
+          "type": "certificate",
+          "topic_id": "technical_depth",
+          "category_label": "Technical depth",
+          "type_label": "Certification",
+          "badge_icon": "/assets/images/playbook/icons/certificate.svg",
+          "mark_image": "/assets/images/playbook/icons/certificate.svg",
+          "mark_alt": "Universidad de Oviedo",
+          "title_html": "Software Engineering — Graduate",
+          "issuer_html": "Universidad de Oviedo",
+          "short": {
+            "title": "Software Engineering — Graduate",
+            "caption": "Universidad de Oviedo",
+            "visual_image": "/assets/images/playbook/icons/certificate.svg",
+            "visual_alt": "Universidad de Oviedo"
+          },
+          "detail": {
+            "meta": "Universidad de Oviedo · 2016"
+          }
+        },
+        {
+          "id": "video-spark-k8s",
           "type": "video",
-          "topic_id": "product_thinking",
-          "embed_url": "https://www.youtube-nocookie.com/embed/d5WfSjocw88",
-          "iframe_title": "Group Product Manager - Empathy.co (2019-2024)",
-          "caption_html": "Group Product Manager (2019-2024) - Meet Empathy.co's Product Managers"
+          "topic_id": "technical_depth",
+          "category_label": "Technical depth",
+          "type_label": "Video",
+          "badge_icon": "/assets/images/playbook/icons/video.svg",
+          "embed_url": "https://www.youtube-nocookie.com/embed/wK01Fpp6L6k",
+          "iframe_title": "Running Apache Spark on K8s: From AWS EMR to K8s",
+          "caption_html": "Technical talk · Berlin Buzzwords",
+          "short": {
+            "title": "Running Apache Spark on K8s: From AWS EMR to K8s",
+            "caption": "Technical talk",
+            "visual_image": "https://img.youtube.com/vi/wK01Fpp6L6k/hqdefault.jpg",
+            "visual_alt": "Running Apache Spark on K8s talk thumbnail"
+          },
+          "detail": {
+            "meta": "Berlin Buzzwords",
+            "action_label": "Watch",
+            "action_url": "https://www.youtube-nocookie.com/embed/wK01Fpp6L6k"
+          }
         },
         {
-          "type": "certificate",
-          "topic_id": "leading_teams",
-          "mark_image": "/assets/images/scrumorg.png",
-          "mark_alt": "Scrum.org",
-          "title_html": "Professional Scrum Product Owner™ Certification (2021)",
-          "issuer_html": "Scrum.org"
-        },
-        {
+          "id": "article-spark-performance",
           "type": "article",
-          "topic_id": "leading_teams",
+          "topic_id": "technical_depth",
+          "category_label": "Technical depth",
+          "type_label": "Article",
+          "badge_icon": "/assets/images/playbook/icons/article.svg",
           "label": "Article / Blog post",
-          "url": "https://medium.com/empathyco/explainability-and-understanding-in-e-commerce-the-challenge-of-xai-2361b2e161ae",
-          "title": "Explainability and understanding in e-commerce: The challenge of XAI",
+          "url": "https://medium.com/empathyco/improving-performance-in-spark-jobs-8a60a56327da",
+          "title": "Improving performance in Spark jobs",
           "thumbnail": "/assets/images/medium-icon.png",
-          "image_alt": "Medium article cover"
+          "image_alt": "Medium article cover",
+          "short": {
+            "title": "Improving performance in Spark jobs",
+            "caption": "Medium · Empathy.co",
+            "visual_image": "/assets/images/medium-icon.png",
+            "visual_alt": "Medium"
+          },
+          "detail": {
+            "meta": "Medium / Empathy.co",
+            "action_label": "Read article",
+            "action_url": "https://medium.com/empathyco/improving-performance-in-spark-jobs-8a60a56327da"
+          }
         }
       ]
     },
     {
       "id": "02",
-      "title": "Technical depth",
-      "subtitle": "Senior Software Engineer / Data and Search",
+      "title": "Product Thinking",
+      "subtitle": "Senior Product Manager | Group Product Manager",
+      "feature_image": "/assets/images/playbook3.png",
       "body_paragraphs_html": [
-        "I don’t just write code; I design systems that endure.",
-        "My experience spans the entire technical spectrum—from deep-tech R&D to global B2B platforms—delivering everything <strong>cloud-native gateways to full-stack SaaS solutions.</strong>",
-        "By mastering stacks like Java and streaming data, I turn <strong>information architectures into stable, scalable products</strong> that keep operational excellence at their core."
+        "I turn business needs into clear product decisions that teams can actually ship.",
+        "<strong>Discovery</strong> I clarify the real problem, test assumptions early, and shape roadmaps around useful outcomes rather than feature volume.",
+        "<strong>Alignment</strong> I keep business goals, user needs, and technical constraints visible so teams can make sensible trade-offs."
       ],
-      "carousel_aria_label": "Technical depth highlights",
+      "carousel_aria_label": "Product thinking highlights",
       "cards": [
         {
+          "id": "photo-product-thinking",
           "type": "photo",
-          "topic_id": "technical_depth",
-          "image": "/assets/images/tech-expertise.png",
-          "image_alt": "Alvaro Panizo",
-          "caption_html": "Hands-on engineering background across search, data platforms, APIs, and cloud-native delivery—keeping systems observable and evolvable."
+          "topic_id": "product_thinking",
+          "category_label": "Product thinking",
+          "type_label": "Highlight",
+          "badge_icon": "/assets/images/playbook/icons/photo.svg",
+          "image": "/assets/images/lead-teams.png",
+          "image_alt": "Alvaro Panizo leading product",
+          "caption_html": "Product leadership spanning discovery, roadmap, and alignment between strategy, UX, and engineering delivery.",
+          "short": {
+            "title": "Discovery, roadmap, and cross-functional alignment"
+          },
+          "detail": {
+            "meta": "Product thinking",
+            "body_html": "Product leadership spanning discovery, roadmap, and alignment between strategy, UX, and engineering delivery."
+          }
         },
         {
+          "id": "quote-rare-profile",
           "type": "quote",
-          "topic_id": "technical_depth",
+          "topic_id": "product_thinking",
+          "category_label": "Product thinking",
+          "type_label": "Quote",
+          "badge_icon": "/assets/images/playbook/icons/quote.svg",
           "icon": "format_quote",
-          "quote_html": "\"Alvaro is a really talented engineer with a great sense of ownership and commitment. He got up to speed surprisingly fast on really complex topics like search behaviour, big data analytics and data processing.\"",
-          "attribution_html": "Engineering lead — Former Manager (2019-2023)"
+          "quote_html": "\"Simply put: you won't find this type of profile very often. Every org that gets him onboard can count itself lucky.\"",
+          "attribution_html": "Senior Data Scientist · former project colleague, 2021–2024",
+          "short": {
+            "title": "You won't find this type of profile very often",
+            "visual_image": "/assets/images/playbook/quote1.png",
+            "visual_alt": ""
+          },
+          "detail": {
+            "meta": "Senior Data Scientist · former project colleague, 2021–2024",
+            "body_html": "<p>Alvaro brings a special profile to the table that is now more relevant than ever: a deep understanding of the tech side and a focus on delivering most value for the users, a great product mindset. He combines this with a great, very approachable character which highly benefits team atmosphere.</p><p>He cares deeply, about the work, the product and every single one on the team, including everyone's development, making him a strong motivational factor for each one and thus a driving factor for team productivity.</p><p>Further adding to this range of capabilities and talents is the fact that he brings deep experience both working in backend as well as data / data sciences. All combined makes him a great fit for any org with focus on improving their tech and / or AI product.</p><p>Simply put: you won't find this type of profile very often. Every org that gets him onboard can count itself lucky. Simply a great guy :).</p>"
+          }
         },
         {
+          "id": "quote-product-mindset",
+          "type": "quote",
+          "topic_id": "product_thinking",
+          "category_label": "Product thinking",
+          "type_label": "Quote",
+          "badge_icon": "/assets/images/playbook/icons/quote.svg",
+          "icon": "format_quote",
+          "quote_html": "\"Alvaro is one of the very few engineers I've worked with that truly has a product mindset—able to abstract from tech entanglement and focus on the human-centered problem space.\"",
+          "attribution_html": "Co-founder / CXO",
+          "short": {
+            "title": "One of the very few with a true product mindset",
+            "visual_image": "/assets/images/playbook/quote4.png",
+            "visual_alt": ""
+          },
+          "detail": {
+            "meta": "Co-founder / CXO",
+            "body_html": "<p>Alvaro is on of the very few engineers I've worked with that truly has a product mindset. One that can abstract himself from tech entanglement and focus on the problem / human-centrered space. He understands the importance of experiences and perception, beyond good relevance and elegant architectures.</p>"
+          }
+        },
+        {
+          "id": "cert-pspo",
           "type": "certificate",
-          "topic_id": "technical_depth",
-          "mark_image": "/assets/images/logo-actual.png",
-          "mark_alt": "Oracle",
-          "title_html": "Oracle AI Vector Search Professional (2025)",
-          "issuer_html": "Oracle"
+          "topic_id": "product_thinking",
+          "category_label": "Product thinking",
+          "type_label": "Certification",
+          "badge_icon": "/assets/images/playbook/icons/certificate.svg",
+          "mark_image": "/assets/images/scrumorg.png",
+          "mark_alt": "Scrum.org",
+          "title_html": "Professional Scrum Product Owner (PSPO I & PSPO II)",
+          "issuer_html": "Scrum.org",
+          "short": {
+            "title": "Professional Scrum Product Owner (PSPO I & PSPO II)",
+            "caption": "Scrum.org",
+            "visual_image": "/assets/images/scrumorg.png",
+            "visual_alt": "Scrum.org"
+          },
+          "detail": {
+            "meta": "Scrum.org · 2021"
+          }
         },
         {
+          "id": "cert-ux-master",
           "type": "certificate",
-          "topic_id": "technical_depth",
-          "mark_image": "/assets/images/articles_1.png",
-          "mark_alt": "Cloud platforms",
-          "title_html": "Cloud Associate (2020–2026)",
-          "issuer_html": "AWS, Google, Microsoft, Kubernetes"
+          "topic_id": "product_thinking",
+          "category_label": "Product thinking",
+          "type_label": "Certification",
+          "badge_icon": "/assets/images/playbook/icons/certificate.svg",
+          "mark_image": "/assets/images/playbook/icons/certificate.svg",
+          "mark_alt": "ESdesign Barcelona",
+          "title_html": "UX for multi-device web apps — Master",
+          "issuer_html": "ESdesign Barcelona",
+          "short": {
+            "title": "UX for multi-device web apps — Master",
+            "caption": "ESdesign Barcelona",
+            "visual_image": "/assets/images/playbook/icons/certificate.svg",
+            "visual_alt": "ESdesign Barcelona"
+          },
+          "detail": {
+            "meta": "ESdesign Escuela Superior de Diseño de Barcelona · 2018"
+          }
         },
         {
+          "id": "video-meet-product-managers",
           "type": "video",
-          "topic_id": "technical_depth",
-          "embed_url": "https://www.youtube-nocookie.com/embed/wK01Fpp6L6k",
-          "iframe_title": "Running Apache Spark on K8s: From AWS EMR to K8s",
-          "caption_html": "Running Apache Spark on K8s: From AWS EMR to K8s"
+          "topic_id": "product_thinking",
+          "category_label": "Product thinking",
+          "type_label": "Video",
+          "badge_icon": "/assets/images/playbook/icons/video.svg",
+          "embed_url": "https://www.youtube-nocookie.com/embed/d5WfSjocw88",
+          "iframe_title": "Meet Empathy.co's Product Managers",
+          "caption_html": "Group Product Manager, 2019–2024",
+          "short": {
+            "title": "Meet Empathy.co's Product Managers",
+            "caption": "Group Product Manager, 2019–2024",
+            "visual_image": "https://img.youtube.com/vi/d5WfSjocw88/hqdefault.jpg",
+            "visual_alt": "Meet Empathy.co Product Managers video thumbnail"
+          },
+          "detail": {
+            "meta": "Empathy.co",
+            "action_label": "Watch",
+            "action_url": "https://www.youtube-nocookie.com/embed/d5WfSjocw88"
+          }
         },
         {
+          "id": "article-xai-ecommerce",
           "type": "article",
-          "topic_id": "technical_depth",
+          "topic_id": "product_thinking",
+          "category_label": "Product thinking",
+          "type_label": "Article",
+          "badge_icon": "/assets/images/playbook/icons/article.svg",
           "label": "Article / Blog post",
-          "url": "https://medium.com/empathyco/improving-performance-in-spark-jobs-8a60a56327da",
-          "title": "Improving performance in Spark jobs",
+          "url": "https://medium.com/empathyco/explainability-and-understanding-in-e-commerce-the-challenge-of-xai-2361b2e161ae",
+          "title": "Explainability and understanding in e-commerce: The challenge of XAI",
           "thumbnail": "/assets/images/medium-icon.png",
-          "image_alt": "Medium article cover"
+          "image_alt": "Medium article cover",
+          "short": {
+            "title": "Explainability and understanding in e-commerce: The challenge of XAI",
+            "caption": "Medium · Empathy.co",
+            "visual_image": "/assets/images/medium-icon.png",
+            "visual_alt": "Medium"
+          },
+          "detail": {
+            "meta": "Medium / Empathy.co",
+            "action_label": "Read article",
+            "action_url": "https://medium.com/empathyco/explainability-and-understanding-in-e-commerce-the-challenge-of-xai-2361b2e161ae"
+          }
         }
       ]
     },
     {
       "id": "03",
-      "title": "Product thinking",
-      "subtitle": "Senior Product Manager | Group Product Manager",
+      "title": "Leadership",
+      "subtitle": "Product Owner / Team Leader",
+      "feature_image": "/assets/images/playbook1.png",
       "body_paragraphs_html": [
-        "As a <strong>Product Manager and Group Product Manager</strong> I have connected what the business needs with what gets built—in corporate ERP, SaaS, consultancy, and ad-hoc product work for both enterprise and B2C. I lead discovery and roadmap and keep architecture and product strategy in sync so that user experience and impact stay in focus and execution doesn’t default to “tech for tech’s sake”."
+        "I build honest, focused teams that handle ambiguity without unnecessary drama.",
+        "<strong>Clarity</strong> I turn ambiguous work into practical priorities, clear ownership, and decisions the whole team can understand.",
+        "<strong>Trust</strong> I lead with honesty, empathy, and useful feedback, giving people room to do strong work without micromanagement."
       ],
-      "carousel_aria_label": "Product thinking highlights",
+      "carousel_aria_label": "Project highlights",
       "cards": [
         {
+          "id": "photo-leadership",
           "type": "photo",
-          "topic_id": "product_thinking",
+          "topic_id": "leading_teams",
+          "category_label": "Leadership",
+          "type_label": "Highlight",
+          "badge_icon": "/assets/images/playbook/icons/photo.svg",
           "image": "/assets/images/lead-teams.png",
-          "image_alt": "Alvaro Panizo leading product",
-          "caption_html": "Product leadership spanning discovery, roadmap, and alignment between strategy, UX, and engineering delivery."
+          "image_alt": "Alvaro Panizo",
+          "caption_html": "Leading teams at the intersection of Product and Engineering for 5+ years, with a core focus on architecting Information Retrieval systems and AI-driven discovery foundations.",
+          "short": {
+            "title": "Leading teams across product and engineering"
+          },
+          "detail": {
+            "meta": "Leadership",
+            "body_html": "Leading teams at the intersection of Product and Engineering for 5+ years, with a core focus on architecting Information Retrieval systems and AI-driven discovery foundations."
+          }
         },
         {
+          "id": "quote-honest-authentic",
           "type": "quote",
-          "topic_id": "product_thinking",
-          "icon": "edit_note",
-          "quote_html": "\"Alvaro is one of the very few engineers I've worked with that truly has a product mindset. One that can abstract himself from tech entanglement and focus on the problem / human-centered space.\"",
-          "attribution_html": "Co-founder / CXO"
+          "topic_id": "leading_teams",
+          "category_label": "Leadership",
+          "type_label": "Quote",
+          "badge_icon": "/assets/images/playbook/icons/quote.svg",
+          "icon": "format_quote",
+          "quote_html": "\"Álvaro es una persona honesta y auténtica. Muy buen compañero, muy empático. Álvaro hace crecer al grupo de personas a su alrededor.\"",
+          "attribution_html": "Principal Software Engineer · former project colleague, 2021–2024",
+          "short": {
+            "title": "Truly honest and elevates everyone around him",
+            "visual_image": "/assets/images/playbook/quote3.png",
+            "visual_alt": ""
+          },
+          "detail": {
+            "meta": "Principal Software Engineer · former project colleague, 2021–2024",
+            "body_html": "<p>Simplemente, Álvaro es uno de las personas más inteligentes que he conocido a lo largo de mi trayectoria profesional. Su capacidad creativa, visión de conjunto y agudeza natural le convierten en ese tipo tan difícil de encontrar que es capaz de \"ver más allá\" del problema inmediato.</p><p>Puedo afirmar de corazón y de primera mano que es también una persona honesta y auténtica. Muy buen compañero, muy empático. Álvaro hace crecer al grupo de personas a su alrededor.</p><p>Cualquier organización que cuente con él estará ganando mucho más de lo que esperaba.</p>"
+          }
         },
         {
+          "id": "cert-harvard-change-management",
           "type": "certificate",
-          "topic_id": "product_thinking",
-          "mark_image": "/assets/images/scrumorg.png",
-          "mark_alt": "Scrum.org",
-          "title_html": "Professional Scrum Product Owner™ (2021)",
-          "issuer_html": "Scrum.org"
+          "topic_id": "leading_teams",
+          "category_label": "Leadership",
+          "type_label": "Certification",
+          "badge_icon": "/assets/images/playbook/icons/certificate.svg",
+          "mark_image": "/assets/images/harvard_bs.png",
+          "mark_alt": "Harvard Business School",
+          "title_html": "Change Management in Tech Organizations",
+          "issuer_html": "Harvard Business School",
+          "short": {
+            "title": "Change Management in Tech Organizations",
+            "caption": "Harvard Business School",
+            "visual_image": "/assets/images/harvard_bs.png",
+            "visual_alt": "Harvard Business School"
+          },
+          "detail": {
+            "meta": "Harvard Business School · 2026"
+          }
         },
         {
+          "id": "cert-release-management",
+          "type": "certificate",
+          "topic_id": "leading_teams",
+          "category_label": "Leadership",
+          "type_label": "Certification",
+          "badge_icon": "/assets/images/playbook/icons/certificate.svg",
+          "mark_image": "/assets/images/playbook/icons/certificate.svg",
+          "mark_alt": "O'Reilly",
+          "title_html": "Release Management - SDLC",
+          "issuer_html": "O'Reilly",
+          "short": {
+            "title": "Release Management - SDLC",
+            "caption": "O'Reilly",
+            "visual_image": "/assets/images/playbook/icons/certificate.svg",
+            "visual_alt": "O'Reilly"
+          },
+          "detail": {
+            "meta": "O'Reilly · 2024"
+          }
+        },
+        {
+          "id": "video-semantic-experiences",
           "type": "video",
-          "topic_id": "product_thinking",
+          "topic_id": "leading_teams",
+          "category_label": "Leadership",
+          "type_label": "Video",
+          "badge_icon": "/assets/images/playbook/icons/video.svg",
           "embed_url": "https://www.youtube-nocookie.com/embed/onkyYxTB7qw?start=921",
           "iframe_title": "Semantic Experiences in Action",
-          "caption_html": "Semantic Experiences in Action"
+          "caption_html": "Product Demo",
+          "short": {
+            "title": "Semantic Experiences in Action",
+            "caption": "Product Demo",
+            "visual_image": "https://img.youtube.com/vi/onkyYxTB7qw/hqdefault.jpg",
+            "visual_alt": "Semantic Experiences in Action video thumbnail"
+          },
+          "detail": {
+            "meta": "Ecommerce Search",
+            "action_label": "Watch",
+            "action_url": "https://www.youtube-nocookie.com/embed/onkyYxTB7qw?start=921"
+          }
         }
       ]
     }

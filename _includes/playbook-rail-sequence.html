@@ -1,0 +1,5 @@
+<div class="experience-playbook__rail-sequence" aria-hidden="true">
+    {% for card in include.experience.cards %}
+    {% include playbook-rail-card.html card=card playbook_section=include.playbook_section %}
+    {% endfor %}
+</div>

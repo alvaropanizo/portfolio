@@ -1,9 +1,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/ScrollTrigger.min.js"></script>
-<script src="{{ '/assets/js/scrolltext.js' | relative_url }}"></script>
-<script src="{{ '/assets/js/scrollimage.js' | relative_url }}"></script>
-<script src="{{ '/assets/js/summaryblend.js' | relative_url }}"></script>
-<script src="{{ '/assets/js/projects-accordion.js' | relative_url }}"></script>
-<script src="{{ '/assets/js/project-details-carousel.js' | relative_url }}"></script>
-<script src="{{ '/assets/js/live-status.js' | relative_url }}"></script>
-<script src="{{ '/assets/js/hero-video.js' | relative_url }}"></script>
+{% assign asset_version = site.time | date: '%s' %}
+<script src="{{ '/assets/js/live-status.js' | relative_url }}?v={{ asset_version }}"></script>
+<script src="{{ '/assets/js/hero-video.js' | relative_url }}?v={{ asset_version }}"></script>
+<script src="{{ '/assets/js/hero-scroll.js' | relative_url }}?v={{ asset_version }}"></script>
+<script src="{{ '/assets/js/section-wave.js' | relative_url }}?v={{ asset_version }}"></script>
+<script src="{{ '/assets/js/about-reveal.js' | relative_url }}?v={{ asset_version }}"></script>
+<script src="{{ '/assets/js/experience-playbook.js' | relative_url }}?v={{ asset_version }}"></script>

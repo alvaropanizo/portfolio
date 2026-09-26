@@ -154,11 +154,20 @@
 
     function sizeCanvas() {
       var dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
-      var rect = (clip || media).getBoundingClientRect();
-      if (!rect.width || !rect.height) return false;
+      var target = clip || media;
+      var widthCss = target.clientWidth;
+      var heightCss = target.clientHeight;
 
-      var width = Math.min(MAX_CANVAS_PX, Math.max(1, Math.round(rect.width * dpr)));
-      var height = Math.min(MAX_CANVAS_PX, Math.max(1, Math.round(rect.height * dpr)));
+      if (!widthCss || !heightCss) {
+        var rect = target.getBoundingClientRect();
+        widthCss = rect.width;
+        heightCss = rect.height;
+      }
+
+      if (!widthCss || !heightCss) return false;
+
+      var width = Math.min(MAX_CANVAS_PX, Math.max(1, Math.round(widthCss * dpr)));
+      var height = Math.min(MAX_CANVAS_PX, Math.max(1, Math.round(heightCss * dpr)));
 
       if (width === lastCanvasWidth && height === lastCanvasHeight) {
         return false;
@@ -174,7 +183,9 @@
     function render() {
       if (video.readyState < 2) return;
 
-      sizeCanvas();
+      if (!lastCanvasWidth || !lastCanvasHeight) {
+        sizeCanvas();
+      }
       gl.viewport(0, 0, canvas.width, canvas.height);
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
@@ -192,6 +203,7 @@
       gl.vertexAttribPointer(texCoordLoc, 2, gl.FLOAT, false, 0, 0);
 
       gl.drawArrays(gl.TRIANGLES, 0, 6);
+      media.classList.add("hero-media--composited");
     }
 
     function stopRenderLoop() {
@@ -255,6 +267,7 @@
       if (resizeRaf) return;
       resizeRaf = window.requestAnimationFrame(function () {
         resizeRaf = null;
+        sizeCanvas();
         render();
       });
     }

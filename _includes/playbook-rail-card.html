@@ -1,0 +1,116 @@
+{% assign card = include.card %}
+{% assign _topic_class = 'experience-playbook__card--topic-' | append: card.topic_id %}
+{% assign _section_class = 'experience-playbook__card--section-' | append: include.playbook_section %}
+{% assign _badge_icon = card.badge_icon %}
+{% if _badge_icon == nil or _badge_icon == '' %}
+{% case card.type %}
+{% when 'quote' %}
+{% assign _badge_icon = '/assets/images/playbook/icons/quote.svg' %}
+{% when 'article' %}
+{% assign _badge_icon = '/assets/images/playbook/icons/article.svg' %}
+{% when 'video' %}
+{% assign _badge_icon = '/assets/images/playbook/icons/video.svg' %}
+{% when 'certificate' %}
+{% assign _badge_icon = '/assets/images/playbook/icons/certificate.svg' %}
+{% when 'photo' %}
+{% assign _badge_icon = '/assets/images/playbook/icons/photo.svg' %}
+{% endcase %}
+{% endif %}
+{% assign _type_label = card.type_label %}
+{% if _type_label == nil or _type_label == '' %}
+{% case card.type %}
+{% when 'quote' %}
+{% assign _type_label = 'Quote' %}
+{% when 'article' %}
+{% assign _type_label = 'Article' %}
+{% when 'video' %}
+{% assign _type_label = 'Video' %}
+{% when 'certificate' %}
+{% assign _type_label = 'Certification' %}
+{% when 'photo' %}
+{% assign _type_label = 'Highlight' %}
+{% endcase %}
+{% endif %}
+{% assign _short_title = card.short.title %}
+{% assign _short_caption = card.short.caption %}
+{% assign _visual_src = card.short.visual_image %}
+{% assign _visual_alt = card.short.visual_alt | default: '' %}
+{% case card.type %}
+{% when 'photo' %}
+{% if _visual_src == nil or _visual_src == '' %}
+{% assign _visual_src = card.image %}
+{% endif %}
+{% if _visual_alt == '' %}
+{% assign _visual_alt = card.image_alt %}
+{% endif %}
+{% if _short_title == nil or _short_title == '' %}
+{% assign _short_title = card.caption_html | strip_html | truncate: 72 %}
+{% endif %}
+{% when 'article' %}
+{% if _visual_src == nil or _visual_src == '' %}
+{% assign _visual_src = card.thumbnail %}
+{% endif %}
+{% if _short_title == nil or _short_title == '' %}
+{% assign _short_title = card.title %}
+{% endif %}
+{% if _short_caption == nil or _short_caption == '' %}
+{% assign _short_caption = card.label %}
+{% endif %}
+{% when 'quote' %}
+{% if _visual_src == nil or _visual_src == '' %}
+{% assign _visual_src = '/assets/images/playbook/quote-avatar.svg' %}
+{% endif %}
+{% if _short_title == nil or _short_title == '' %}
+{% assign _short_title = card.quote_html | strip_html | truncate: 64 %}
+{% endif %}
+{% when 'certificate' %}
+{% if _visual_src == nil or _visual_src == '' %}
+{% assign _visual_src = card.mark_image %}
+{% endif %}
+{% if _visual_alt == '' %}
+{% assign _visual_alt = card.mark_alt %}
+{% endif %}
+{% if _short_title == nil or _short_title == '' %}
+{% assign _short_title = card.title_html | strip_html %}
+{% endif %}
+{% if _short_caption == nil or _short_caption == '' %}
+{% assign _short_caption = card.issuer_html | strip_html %}
+{% endif %}
+{% when 'video' %}
+{% if _short_title == nil or _short_title == '' %}
+{% assign _short_title = card.iframe_title %}
+{% endif %}
+{% if _short_caption == nil or _short_caption == '' %}
+{% assign _short_caption = card.caption_html | strip_html %}
+{% endif %}
+{% endcase %}
+<figure
+    class="experience-playbook__card experience-playbook__card--{{ card.type }} {{ _topic_class }} {{ _section_class }}"
+    data-playbook-card
+    data-playbook-card-type="{{ card.type }}"
+    {% if card.id %}data-playbook-card-id="{{ card.id }}"{% endif %}
+    data-experience-topic="{{ card.topic_id }}"
+    {% if card.category_label %}data-playbook-category="{{ card.category_label | escape }}"{% endif %}
+>
+    <div class="experience-playbook__card-hero">
+        <span class="experience-playbook__card-badge" aria-hidden="true">
+            <img src="{{ _badge_icon | relative_url }}" alt="">
+        </span>
+        {% if _visual_src %}
+        <div class="experience-playbook__card-visual{% if card.type == 'photo' or card.type == 'video' %} experience-playbook__card-visual--cover{% elsif card.type == 'certificate' %} experience-playbook__card-visual--contain{% elsif card.type == 'quote' %} experience-playbook__card-visual--avatar{% elsif card.type == 'article' %} experience-playbook__card-visual--contain{% endif %}">
+            <img src="{{ _visual_src | relative_url }}" alt="{{ _visual_alt }}" loading="lazy" decoding="async">
+        </div>
+        {% endif %}
+    </div>
+    <figcaption class="experience-playbook__card-body">
+        <p class="experience-playbook__card-kind">{{ _type_label | upcase }}</p>
+        {% if _short_title %}
+        <p class="experience-playbook__card-title">
+            {% if card.type == 'quote' %}&ldquo;{{ _short_title }}&rdquo;{% else %}{{ _short_title }}{% endif %}
+        </p>
+        {% endif %}
+        {% if _short_caption and card.type != 'quote' %}
+        <p class="experience-playbook__card-caption">{{ _short_caption }}</p>
+        {% endif %}
+    </figcaption>
+</figure>
