@@ -1,0 +1,17 @@
+<div class="experience-playbook__rail-sequence" aria-hidden="true">
+    {% for card in include.experience.cards %}
+    {% if card.image %}
+    <figure class="experience-playbook__thumbnail">
+        <img src="{{ card.image | relative_url }}" alt="" loading="lazy" decoding="async">
+    </figure>
+    {% elsif card.mark_image %}
+    <figure class="experience-playbook__thumbnail experience-playbook__thumbnail--contain">
+        <img src="{{ card.mark_image | relative_url }}" alt="" loading="lazy" decoding="async">
+    </figure>
+    {% elsif card.thumbnail %}
+    <figure class="experience-playbook__thumbnail experience-playbook__thumbnail--contain">
+        <img src="{{ card.thumbnail | relative_url }}" alt="" loading="lazy" decoding="async">
+    </figure>
+    {% endif %}
+    {% endfor %}
+</div>

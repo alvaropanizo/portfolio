@@ -300,8 +300,8 @@ footer {
 
 .jumbotron\:home .hero-media {
   position: absolute;
-  left: 50%;
-  bottom: clamp(-3rem, -5vh, -1.5rem);
+  left: 48%;
+  bottom: clamp(0.25rem, 3vh, 2.25rem);
   z-index: 3;
   width: min(44rem, 40vw, 78cqi);
   max-width: none;
@@ -476,15 +476,15 @@ footer {
   position: relative;
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   min-width: 0;
-  padding: clamp(7rem, 20vh, 13rem) clamp(0.5rem, 1vw, 1rem) clamp(1.5rem, 3vw, 3rem);
+  padding: clamp(5.5rem, 14vh, 9.5rem) 0.5rem clamp(1.5rem, 3vw, 3rem) 0;
   box-sizing: border-box;
 }
 
 .jumbotron\:home .hero-card-motion {
   width: 100%;
-  max-width: min(21.5rem, 17vw, 42cqi);
+  max-width: min(22rem, 48cqi);
 }
 
 .jumbotron\:home .hero-pills {
@@ -493,7 +493,7 @@ footer {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: min(21.5rem, 17vw, 42cqi);
+  max-width: min(22rem, 48cqi);
   padding: 0;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.4);
@@ -508,7 +508,7 @@ footer {
     inset -1px -1px 0 rgba(74, 86, 255, 0.08);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  transform: translateX(clamp(-3rem, -3vw, -1.25rem)) rotate(4deg);
+  transform: translateX(clamp(-5.5rem, -10cqi, -2.75rem)) rotate(4deg);
   transform-origin: center;
   box-sizing: border-box;
 }
