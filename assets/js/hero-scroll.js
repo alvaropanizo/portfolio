@@ -12,53 +12,52 @@
 
     var media = window.gsap.matchMedia();
     media.add("(prefers-reduced-motion: no-preference)", function () {
-      function createTrigger(scrub) {
-        return {
+      window.gsap.set(portrait, {
+        xPercent: -54,
+        force3D: true
+      });
+
+      var timeline = window.gsap.timeline({
+        defaults: {
+          ease: "none",
+          force3D: true
+        },
+        scrollTrigger: {
           trigger: hero,
           start: "top top",
           end: "bottom top",
-          scrub: scrub,
-          invalidateOnRefresh: true
-        };
-      }
-
-      var copyTween = window.gsap.to(copy, {
-        y: function () {
-          return -window.innerHeight * 0.24;
-        },
-        ease: "none",
-        scrollTrigger: createTrigger(0.3)
+          scrub: 0.35,
+          invalidateOnRefresh: false
+        }
       });
 
-      var cardTween = window.gsap.to(card, {
+      timeline.to(copy, {
         y: function () {
-          return window.innerHeight * 0.18;
-        },
-        ease: "none",
-        scrollTrigger: createTrigger(0.45)
-      });
+          return -window.innerHeight * 0.22;
+        }
+      }, 0);
 
-      var backdropTween = window.gsap.to(backdrop, {
+      timeline.to(card, {
         y: function () {
-          return window.innerHeight * 0.06;
-        },
-        ease: "none",
-        scrollTrigger: createTrigger(0.8)
-      });
+          return window.innerHeight * 0.16;
+        }
+      }, 0);
 
-      var portraitTween = window.gsap.to(portrait, {
+      timeline.to(backdrop, {
         y: function () {
-          return window.innerHeight * 0.1;
-        },
-        ease: "none",
-        scrollTrigger: createTrigger(0.65)
-      });
+          return window.innerHeight * 0.05;
+        }
+      }, 0);
+
+      timeline.to(portrait, {
+        xPercent: -54,
+        y: function () {
+          return window.innerHeight * 0.08;
+        }
+      }, 0);
 
       return function () {
-        copyTween.kill();
-        cardTween.kill();
-        backdropTween.kill();
-        portraitTween.kill();
+        timeline.kill();
         window.gsap.set([copy, card, backdrop, portrait], { clearProps: "transform" });
       };
     });
