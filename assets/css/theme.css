@@ -671,8 +671,27 @@ footer {
   transform-origin: center;
 }
 
-.section-wave--footer path {
+.section-wave--footer path,
+.section-wave--about-end path {
   fill: #ffffff;
+}
+
+.section-wave--about-end {
+  display: none;
+  margin-top: -3px;
+  transform: scaleY(-1);
+  transform-origin: center;
+  z-index: 7;
+}
+
+@media screen and (max-width: 767px) {
+  .section-wave--about-end {
+    display: block;
+  }
+}
+
+.footer-end-space {
+  display: none;
 }
 
 .footer-transition {
@@ -779,7 +798,8 @@ footer {
 .about-reveal__word {
   color: #171717;
   opacity: 0.2;
-  will-change: opacity;
+  font-weight: 500;
+  will-change: opacity, font-weight;
 }
 
 .about-reveal__word--emphasis {
@@ -788,30 +808,72 @@ footer {
 
 @media screen and (max-width: 767px) {
   .about-reveal {
-    min-height: 100svh;
-    padding: 1.25rem;
+    flex: 1 1 auto;
+    display: flex;
+    min-height: 0;
+    padding: 0.35rem 2rem 0.5rem;
+    overflow: visible;
   }
 
   .about-reveal__layout {
-    min-height: calc(100svh - 2.5rem);
+    display: flex;
+    width: 100%;
+    min-height: 0;
+    align-items: flex-start;
   }
 
   .about-reveal__copy {
-    font-size: clamp(2.25rem, 9vw, 3.75rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.9rem;
+    min-height: 0;
+    width: 100%;
+    max-width: 100%;
+    font-size: clamp(1.45rem, 6.2vw, 1.95rem);
+    line-height: 1.02;
+  }
+
+  .about-reveal__copy p,
+  .about-reveal__copy p:nth-child(1),
+  .about-reveal__copy p:nth-child(2),
+  .about-reveal__copy p:nth-child(3) {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    width: auto;
+    max-width: 100%;
+    transform: none;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
   }
 
   .about-reveal__copy p:nth-child(1) {
-    width: min(72%, 18ch);
+    width: min(86%, 13ch);
+    align-self: flex-start;
   }
 
   .about-reveal__copy p:nth-child(2) {
-    top: 29%;
-    width: min(72%, 17ch);
+    width: min(84%, 12ch);
+    margin-left: auto;
+    margin-right: 0;
+    padding-right: 0;
+    text-align: right;
   }
 
   .about-reveal__copy p:nth-child(3) {
-    width: 100%;
-    font-size: clamp(2.85rem, 11vw, 4.5rem);
+    width: min(92%, 15ch);
+    margin-inline: auto;
+    font-size: clamp(1.65rem, 7vw, 2.15rem);
+    text-align: center;
+  }
+
+  .about-reveal__rule {
+    left: 10%;
+    width: 80%;
+    overflow: visible;
   }
 }
 
@@ -1459,52 +1521,80 @@ footer {
 }
 
 @media screen and (max-width: 767px) {
+  .experience-playbook-track {
+    height: auto !important;
+  }
+
   .experience-playbook {
-    grid-template-columns: 1fr;
+    display: block;
     min-height: 0;
     overflow: visible;
   }
 
-  .experience-playbook__features {
-    min-height: 58svh;
+  .experience-playbook__features,
+  .experience-playbook__header,
+  .experience-playbook__rail {
+    display: none;
   }
 
   .experience-playbook__panel {
-    padding: 1.25rem;
+    display: block;
+    padding: 1.5rem 1.25rem 2.5rem;
   }
 
-  .experience-playbook__header {
-    justify-content: center;
+  .experience-playbook__copy-viewport {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
 
-  .experience-playbook__progress {
-    right: auto;
-    left: 50%;
-    width: clamp(11.5rem, 15vw, 16rem);
-    transform: translate(-50%, -1.25rem);
-  }
-
-  .experience-playbook__content {
+  .experience-playbook__content,
+  .experience-playbook__content.is-active {
+    position: relative;
+    inset: auto;
+    display: block;
     width: 100%;
-    padding-block: 3rem;
-    border-bottom: 1px solid rgba(20, 20, 20, 0.2);
+    opacity: 1;
+    pointer-events: auto;
+    padding-block: 2rem 1.75rem;
+    border-bottom: 1px solid rgba(20, 20, 20, 0.12);
+    transform: none;
+  }
+
+  .experience-playbook__content:last-child {
+    border-bottom: 0;
+  }
+
+  .experience-playbook__heading,
+  .experience-playbook__description,
+  .experience-playbook__note {
+    position: relative;
+    top: auto;
+    left: auto;
+    bottom: auto;
+    width: 100%;
+    max-width: 100%;
+    transform: none;
+    opacity: 1;
   }
 
   .experience-playbook__content h2 {
-    font-size: clamp(3rem, 14vw, 4.75rem);
+    font-size: clamp(2.4rem, 11vw, 3.4rem);
   }
 
   .experience-playbook__description {
+    display: grid;
     grid-template-columns: 1fr;
-    margin-top: 2rem;
+    margin-top: 1.25rem;
+    opacity: 1;
   }
 
   .experience-playbook__description p {
     min-height: 0;
   }
 
-  .experience-playbook__rail {
-    display: none;
+  .experience-playbook__note {
+    margin-top: 1.35rem;
   }
 }
 
@@ -1544,6 +1634,50 @@ section#home-footer-cta {
     padding-bottom: 0;
 }
 
+@media screen and (max-width: 767px) {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: visible;
+  }
+
+  main.bg\:white,
+  main {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    overflow: visible;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  #home-about,
+  #home-about.padding\:vertical\:4,
+  #home-about .pin-spacer {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  #home-about {
+    --section-wave-height: clamp(5.5rem, 22vw, 7.5rem);
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+    margin-top: -1.75rem;
+    padding: 0;
+    overflow: visible;
+    background-color: transparent;
+  }
+
+  .section-wave {
+    overflow: visible;
+    flex: 0 0 auto;
+  }
+}
+
 #home-about .pin-spacer {
     background: var(--color-blue);
 }
@@ -1558,7 +1692,9 @@ section#home-footer-cta {
 /* Tablet + phone (max-width: 1280px): no horizontal scroll, hero type, layout */
 /* -------------------------------------------------------------------------- */
 @media screen and (max-width: 1280px) {
-  html {
+  html,
+  body {
+    max-width: 100%;
     overflow-x: clip;
   }
 
@@ -1575,113 +1711,252 @@ section#home-footer-cta {
   }
 
   @media screen and (max-width: 767px) {
+    html,
+    body {
+      overflow-x: visible;
+      max-width: 100%;
+    }
+
     main.bg\:white,
     main {
       width: 100%;
       margin-left: 0;
       margin-right: 0;
-    }
-
-    .jumbotron\:home {
-      min-height: auto;
       overflow: visible;
     }
 
-    .jumbotron\:home .hero-layout {
-      grid-template-columns: minmax(0, 1fr);
-      min-height: auto;
+    footer {
+      position: relative;
+      top: auto;
+      right: auto;
+      bottom: auto;
+      left: auto;
+      z-index: 2;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      overflow: visible;
     }
 
-    .jumbotron\:home .hero-stage {
-      --hero-gutter: clamp(1rem, 5vw, 1.5rem);
-      grid-template-rows: 18% 50% 32%;
-      min-height: 36rem;
-      border-right: 0;
+    .footer-transition {
+      --section-wave-height: clamp(5.5rem, 22vw, 7.5rem);
+      width: 100%;
+      max-width: 100%;
+      min-height: 0;
+      height: var(--section-wave-height);
+      margin-bottom: calc(0px - var(--section-wave-height));
+      overflow: visible;
+      background: transparent;
+      z-index: 3;
     }
 
+    .section-wave--footer {
+      background: transparent;
+      max-width: 100%;
+      overflow: visible;
+    }
+
+    .section-wave--footer svg {
+      max-width: 100%;
+      overflow: visible;
+    }
+
+    footer.padding\:vertical\:10 {
+      padding-top: calc(clamp(5.5rem, 22vw, 7.5rem) + 2.5rem);
+      padding-bottom: 3.25rem;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    #home-about .section-wave,
+    #home-about .section-wave svg {
+      overflow: visible;
+    }
+
+    .jumbotron\:home {
+      --hero-page-gutter: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 0;
+      max-height: none;
+      overflow: visible;
+      padding: 1.35rem 1rem 2.75rem;
+    }
+
+    .jumbotron\:home .hero-layout,
+    .jumbotron\:home .hero-stage,
+    .jumbotron\:home .hero-aside,
     .jumbotron\:home .hero-copy-motion {
-      grid-template-rows: 18% 50% 32%;
+      display: contents;
     }
 
     .jumbotron\:home .hero-intro {
-      top: auto;
-      width: auto;
-      padding-bottom: 1rem;
+      order: 1;
+      align-self: center;
+      width: 100%;
+      padding: 0 0.25rem 0.55rem;
+      text-align: center;
     }
 
     .jumbotron\:home .hero-intro .hero-tagline__line {
-      font-size: clamp(0.9rem, 4.2vw, 1.15rem);
+      font-size: clamp(0.7rem, 3.2vw, 0.88rem);
+      letter-spacing: 0.045em;
     }
 
     .jumbotron\:home .hero-name {
-      --hero-name-indent: clamp(2rem, 11vw, 4.5rem);
-      top: auto;
-      max-width: 100%;
+      --hero-name-indent: clamp(1rem, 5.5vw, 1.7rem);
+      order: 2;
+      position: relative;
+      align-self: center;
+      align-items: center;
+      width: 100%;
+      margin-top: 0.15rem;
+      padding: 0;
+      text-align: center;
     }
 
     .jumbotron\:home .hero-name__vertical,
     .jumbotron\:home .hero-name__primary {
-      font-size: clamp(5rem, 23vw, 7.5rem);
+      font-size: clamp(3.2rem, 15vw, 4.35rem);
     }
 
     .jumbotron\:home .hero-name__primary {
       margin-inline-start: var(--hero-name-indent);
     }
 
-    .jumbotron\:home .hero-media {
-      left: 50%;
-      bottom: -2rem;
-      width: min(38rem, 125vw);
-      max-width: none;
-      transform: translateX(-52%);
-    }
-
-    .jumbotron\:home .hero-roles {
-      bottom: auto;
-      gap: 0.75rem;
-      width: fit-content;
-      max-width: 100%;
-      margin: 0.75rem 0 0;
-      padding: 0.6rem 0.8rem;
-      overflow: hidden;
-    }
-
-    .jumbotron\:home .hero-role {
-      font-size: clamp(0.72rem, 3.5vw, 0.95rem);
-    }
-
-    .jumbotron\:home .hero-aside {
-      grid-template-columns: minmax(0, 1fr);
-      grid-template-rows: 28rem auto;
-      min-height: auto;
+    .jumbotron\:home .hero-name-arrow {
+      position: relative;
+      order: 3;
+      left: auto;
+      top: auto;
+      z-index: 6;
+      width: clamp(2.2rem, 10vw, 2.85rem);
+      margin: -0.35rem auto -1.6rem 15%;
+      transform: rotate(-18deg);
     }
 
     .jumbotron\:home .hero-media-cell {
-      min-height: 28rem;
-      overflow: hidden;
+      order: 4;
+      display: flex;
+      width: 100%;
+      min-height: 0;
+      flex: 0 0 auto;
+      align-items: flex-start;
+      justify-content: center;
+      overflow: visible;
+    }
+
+    .jumbotron\:home .hero-media {
+      position: relative;
+      left: auto;
+      bottom: auto;
+      width: min(26rem, 92vw);
+      margin: -0.4rem auto 0;
+      transform: none;
+    }
+
+    .jumbotron\:home .hero-roles {
+      order: 5;
+      position: relative;
+      z-index: 6;
+      justify-self: center;
+      width: fit-content;
+      max-width: calc(100% - 0.5rem);
+      margin: -4.25rem auto 0.35rem;
+      padding: 0.5rem 0.8rem;
+      overflow: visible;
+    }
+
+    .jumbotron\:home .hero-role {
+      font-size: clamp(0.68rem, 3.1vw, 0.84rem);
     }
 
     .jumbotron\:home .hero-status-column {
-      min-height: 30rem;
-      border-left: 0;
+      display: none;
     }
 
-    .jumbotron\:home .hero-dashboard {
-      min-height: 24rem;
-      padding: 2.5rem 1.25rem 4.5rem;
+    .grid,
+    .grid\:row,
+    .column\:md\:auto {
+      max-width: 100%;
     }
 
-    .jumbotron\:home .hero-pills {
-      width: min(100%, 22rem);
-      max-width: 22rem;
-      padding: 0;
-      border-radius: 2rem;
-      transform: rotate(2deg);
+    footer .grid {
+      width: 100%;
+      max-width: 100%;
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
 
-    .jumbotron\:home .hero-card-motion {
-      max-width: 22rem;
+    footer .grid\:row {
+      margin-left: 0;
+      margin-right: 0;
+      max-width: 100%;
     }
 
+    footer .button {
+      max-width: 100%;
+      white-space: normal;
+    }
+
+    section#home-footer-cta {
+      padding-top: 0.5rem;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  html,
+  body {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  body > footer,
+  body > footer.bg\:primary,
+  body > footer.padding\:vertical\:10 {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    z-index: 2;
+    display: block;
+    width: 100%;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    padding-top: calc(clamp(5.5rem, 22vw, 7.5rem) + 2.25rem);
+    padding-bottom: 0;
+  }
+
+  .footer-transition {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    min-height: 0 !important;
+    height: var(--section-wave-height) !important;
+    margin-bottom: calc(0px - var(--section-wave-height));
+  }
+
+  .footer-about {
+    padding-bottom: 0;
+  }
+
+  .footer-about p {
+    overflow: visible;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .footer-end-space {
+    display: block;
+    width: 100%;
+    height: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+    pointer-events: none;
   }
 }
