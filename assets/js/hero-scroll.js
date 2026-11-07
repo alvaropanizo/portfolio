@@ -11,7 +11,7 @@
     window.gsap.registerPlugin(window.ScrollTrigger);
 
     var media = window.gsap.matchMedia();
-    media.add("(prefers-reduced-motion: no-preference)", function () {
+    media.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", function () {
       window.gsap.set(portrait, {
         xPercent: -54,
         force3D: true
